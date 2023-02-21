@@ -34,6 +34,18 @@ Button = Page1:CreateButton("Rejoin", "Click here to rejoin!", function()
             game:GetService("TeleportService"):TeleportToPlaceInstance(placeId, jobId, player)  
         end
 end)
+Button = Page1:CreateButton("Serverhop", "Joins a different serrver.", function()
+    local value = true
+        if value == true then
+            local PlaceID = game.PlaceId
+            local Servers = game.HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/" .. PlaceID .. "/servers/Public?sortOrder=Asc&limit=100"))
+            for i,v in pairs(Servers.data) do
+                if v.playing ~= v.maxPlayers then
+                game:GetService('TeleportService'):TeleportToPlaceInstance(game.PlaceId, v.id)
+                end
+            end
+        end
+end)
 
 Button = Page1:CreateButton("Tiny", "R15 ONLY! Make your scale values the lowest", function()
     local value = true
@@ -168,7 +180,7 @@ Button = Page9:CreateButton("Ball", "Makes you be a ball. | Normal speed is 30",
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/Ball"))()
         end
 end)
-Label = Page3:CreateLabel("")
+Label = Page9:CreateLabel("")
 
 Label = Page10:CreateLabel("Dev: Lvs_y")
 Label = Page10:CreateLabel("Tester: Lvs_y | INXANITTY")
