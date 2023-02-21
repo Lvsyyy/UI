@@ -1,0 +1,96 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Library/main/Library"))()
+local Window = Library:CreateWindow("Obby Master 😎 ", "Version: 1", 10044538000)
+local Tab = Window:CreateTab("Functions")
+local Page1 = Tab:CreateFrame("Player")
+local Page2 = Tab:CreateFrame("Dollhouse")
+local Page3 = Tab:CreateFrame("Rate My Avatar")
+local Page10 = Tab:CreateFrame("Credits")
+
+Page1:CreateSlider("Walkspeed", 1, 100, function(value)
+    game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = value
+end)
+Page1:CreateSlider("Jumppower", 1, 500, function(value2)
+    game:GetService("Players").LocalPlayer.Character.Humanoid.JumpPower = value2
+end)
+Page1:CreateSlider("Gravity", 0, 500, function(value3)
+    game.Workspace.Gravity = value3
+end)
+
+Button = Page1:CreateButton("Reset Stats", "Makes all your values reset to normal", function()
+    local value = true
+        if value == true then
+            game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = 16
+            game:GetService("Players").LocalPlayer.Character.Humanoid.JumpPower = 50
+            game.Workspace.Gravity = 196.19999694824
+        end
+end)
+
+Button = Page1:CreateButton("Rejoin", "Click here to rejoin!", function()
+    local value = true
+        if value == true then
+        local placeId = game.PlaceId
+        local jobId = game.JobId
+            game:GetService("TeleportService"):TeleportToPlaceInstance(placeId, jobId, player)  
+        end
+end)
+
+Button = Page1:CreateButton("Tiny", "R15 ONLY! Make your scale values the lowest", function()
+    local value = true
+        if value == true then
+        local LocalPlayer = game:GetService("Players").LocalPlayer
+        local Character = LocalPlayer.Character
+        local Humanoid = Character:FindFirstChildOfClass("Humanoid")
+
+        local function rm()
+            for i,v in pairs(Character:GetDescendants()) do
+                if v:IsA("BasePart") then
+                if v.Name ~= "Head" then
+            for i,cav in pairs(v:GetDescendants()) do
+                if cav:IsA("Attachment") then
+                if cav:FindFirstChild("OriginalPosition") then
+            cav.OriginalPosition:Destroy()
+                end
+            end
+        end
+                v:FindFirstChild("OriginalSize"):Destroy()
+                    if v:FindFirstChild("AvatarPartScaleType") then
+                        v:FindFirstChild("AvatarPartScaleType"):Destroy()
+                        end
+                    end
+                end
+            end
+        end
+    wait(0.5)
+        Humanoid:FindFirstChild("HeadScale"):Destroy()
+    wait(1)
+    rm()
+    wait(0.5)
+        Humanoid:FindFirstChild("BodyTypeScale"):Destroy()
+    wait(1)
+    rm()
+    wait(0.5)
+        Humanoid:FindFirstChild("BodyWidthScale"):Destroy()
+    wait(1)
+    rm()
+    wait(0.5)
+        Humanoid:FindFirstChild("BodyDepthScale"):Destroy()
+    wait(1)
+end
+end)
+
+Button = Page2:CreateButton("Anti-Bots", "Removes current known bots", function()
+    local value = true
+        if value == true then
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/DH-Bots/main/Anti-Bots"))()
+        end
+end)
+
+Button = Page3:CreateButton("Fast Refresh", "Press R to refresh your character", function()
+    local value = true
+        if value == true then
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/RMA/main/Reset"))()
+        end
+end)
+
+Label = Page10:CreateLabel("Dev: Lvs_y")
+Label = Page10:CreateLabel("Tester: Lvs_y | INXANITTY")
