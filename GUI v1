@@ -1,9 +1,10 @@
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Library/main/Library"))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/UI/main/Library"))()
 local Window = Library:CreateWindow("Obby Master 😎 ", "Version: 1", 10044538000)
 local Tab = Window:CreateTab("Functions")
-local Page1 = Tab:CreateFrame("Player")
+local Page1 = Tab:CreateFrame("Universal")
 local Page2 = Tab:CreateFrame("Dollhouse")
 local Page3 = Tab:CreateFrame("Rate My Avatar")
+local Page9 = Tab:CreateFrame("Fun")
 local Page10 = Tab:CreateFrame("Credits")
 
 Page1:CreateSlider("Walkspeed", 1, 100, function(value)
@@ -78,12 +79,19 @@ Button = Page1:CreateButton("Tiny", "R15 ONLY! Make your scale values the lowest
 end
 end)
 
-Button = Page2:CreateButton("Anti-Bots", "Removes current known bots", function()
+Button = Page2:CreateButton("Anti-Bots", "Removes current known bots. Press only once!", function()
     local value = true
         if value == true then
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/DH-Bots/main/Anti-Bots"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/DH/main/Anti-Bots"))()
         end
 end)
+Button = Page2:CreateButton("Earrape", "Plays an ID in a loop", function()
+    local value = true
+        if value == true then
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/DH/main/Earrape"))()
+        end
+end)
+Label = Page2:CreateLabel("")
 
 Button = Page3:CreateButton("Fast Refresh", "Press R to refresh your character", function()
     local value = true
@@ -91,6 +99,76 @@ Button = Page3:CreateButton("Fast Refresh", "Press R to refresh your character",
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/RMA/main/Reset"))()
         end
 end)
+Label = Page3:CreateLabel("Ratings! Cooldown: 1 minute")
+Page3:CreateSlider("Rated Stars", 1, 5, function(value4)
+    g = value4
+end)
+Button = Page3:CreateButton("Rate Everyone", "Rates everyone! Using the Slider!", function()
+    local value = true
+        if value == true then
+            local players = game:GetService("Players"):GetPlayers()
+            for _, player in ipairs(players) do
+                game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(player, g)
+            end
+        end
+end)
+Label = Page3:CreateLabel("For accurate ratings use this.")
+Button = Page3:CreateButton("Rate Everyone 1 Star", "Rates everyone with 1 star", function()
+    local players = game:GetService("Players"):GetPlayers()
+    for _, player in ipairs(players) do
+        game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(player, 1)
+    end
+end)
+
+Button = Page3:CreateButton("Rate Everyone 2 Stars", "Rates everyone with 2 stars", function()
+    local players = game:GetService("Players"):GetPlayers()
+    for _, player in ipairs(players) do
+        game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(player, 2)
+    end
+end)
+
+Button = Page3:CreateButton("Rate Everyone 3 Stars", "Rates everyone with 3 stars", function()
+    local players = game:GetService("Players"):GetPlayers()
+    for _, player in ipairs(players) do
+        game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(player, 3)
+    end
+end)
+
+Button = Page3:CreateButton("Rate Everyone 4 Stars", "Rates everyone with 4 stars", function()
+    local players = game:GetService("Players"):GetPlayers()
+    for _, player in ipairs(players) do
+        game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(player, 4)
+    end
+end)
+
+Button = Page3:CreateButton("Rate Everyone 5 Stars", "Rates everyone with 5 stars", function()
+    local players = game:GetService("Players"):GetPlayers()
+    for _, player in ipairs(players) do
+        game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(player, 5)
+    end
+end)
+Label = Page3:CreateLabel("")
+Button = Page3:CreateButton("Rating Bomber", "Makes everyones last rating weird", function()
+    local value = true
+        if value == true then
+            local players = game:GetService("Players"):GetPlayers()
+            for _, player in ipairs(players) do
+                game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(player, 4.69696969696969)
+            end
+        end
+end)
+Label = Page3:CreateLabel("")
+Page9:CreateSlider("Speed Changer", 15, 150, function(value5)
+    g1 = value5
+end)
+Button = Page9:CreateButton("Ball", "Makes you be a ball. | Normal speed is 30", function()
+    local value = true
+        if value == true then
+            SPEED_MULTIPLIER = g1
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/Ball"))()
+        end
+end)
+Label = Page3:CreateLabel("")
 
 Label = Page10:CreateLabel("Dev: Lvs_y")
 Label = Page10:CreateLabel("Tester: Lvs_y | INXANITTY")
