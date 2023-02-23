@@ -1,5 +1,5 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/UI/main/Library"))()
-local Window = Library:CreateWindow("Obby Master 😎 ", "Version: 1", 10044538000)
+local Window = Library:CreateWindow("Vyxen ", "Version: 2", 10044538000)
 local Tab = Window:CreateTab("Functions")
 local Page1 = Tab:CreateFrame("Universal")
 local Page2 = Tab:CreateFrame("Dollhouse")
