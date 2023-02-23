@@ -240,11 +240,35 @@ Button = Page9:CreateButton("Ball", "Makes you be a ball. | Normal speed is 30",
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/Ball"))()
         end
 end)
-Label = Page9:CreateLabel("")
-Button = Page9:CreateButton("NPC", "Talk like a NPC.", function()
+Label = Page9:CreateLabel("NPC | Talk like a NPC")
+Button = Page9:CreateButton("Greetings", "Gives out NPC greetings.", function()
     value = true
     if value == true then
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/NPC"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/NPC%20Greetings"))()
+    end
+end)
+Button = Page9:CreateButton("Quests", "Gives out NPC quests.", function()
+    value = true
+    if value == true then
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/NPC%20Quests"))()
+    end
+end)
+Button = Page9:CreateButton("Questions", "Gives out NPC questions.", function()
+    value = true
+    if value == true then
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/NPC%20Questions"))()
+    end
+end)
+Button = Page9:CreateButton("Help requests", "Gives out NPC help requests.", function()
+    value = true
+    if value == true then
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/NPC%20Help"))()
+    end
+end)
+Button = Page9:CreateButton("Goodbyes", "Gives out NPC goodbyes.", function()
+    value = true
+    if value == true then
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/NPC%20Goodbyes"))()
     end
 end)
 Label = Page9:CreateLabel("")
