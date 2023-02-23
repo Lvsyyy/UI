@@ -104,11 +104,16 @@ Button = Page2:CreateButton("Earrape", "Plays an ID in a loop", function()
         end
 end)
 Label = Page2:CreateLabel("")
-
 Button = Page3:CreateButton("Fast Refresh", "Press R to refresh your character", function()
     local value = true
         if value == true then
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/RMA/main/Reset"))()
+        end
+end)
+Button = Page3:CreateButton("Image Sign", "Press to get an Image Sign (gamepass required)", function()
+    local value = true
+        if value == true then
+        game:GetService("ReplicatedStorage"):WaitForChild("RequestGamepassTool"):FireServer(17291427)
         end
 end)
 Label = Page3:CreateLabel("Ratings! Cooldown: 1 minute")
@@ -157,6 +162,37 @@ Button = Page3:CreateButton("Rate Everyone 5 Stars", "Rates everyone with 5 star
     local players = game:GetService("Players"):GetPlayers()
     for _, player in ipairs(players) do
         game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(player, 5)
+    end
+end)
+Label = Page3:CreateLabel("Doesn't need the full user or display name!")
+TextBox = Page3:CreateBox("Type in target here.", 10044538000, function(arg)
+    local players = game:GetService("Players"):GetPlayers()
+    for _, player in ipairs(players) do
+        if string.lower(arg) == string.lower(player.Name) or string.find(string.lower(player.Name), string.lower(arg)) or string.lower(arg) == string.lower(player.DisplayName) or string.find(string.lower(player.DisplayName), string.lower(arg)) then
+            playerName = player.Name
+            break
+        end
+    end
+end)
+playerName = ""
+Button = Page3:CreateButton("Auto Rater", "Click to auto rate the target.", function()
+    if buttonActive and playerName ~= "" then
+        while _G. test == true do
+            wait(10)
+            print(playerName)
+            game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(game:GetService("Players"):WaitForChild(playerName), 5)
+        end
+    end
+end)
+Toggle = Page3:CreateToggle("Auto Rater toggler", "Switch the auto rater on and off.", function(state)
+    if state == true then
+        buttonActive = true
+        print("Button activated")
+        _G.test = true
+    else
+        buttonActive = false
+        print("Button deactivated")
+        _G.test = false
     end
 end)
 Label = Page3:CreateLabel("")
