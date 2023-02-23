@@ -47,50 +47,6 @@ Button = Page1:CreateButton("Serverhop", "Joins a different serrver.", function(
         end
 end)
 
-Button = Page1:CreateButton("Tiny", "R15 ONLY! Make your scale values the lowest", function()
-    local value = true
-        if value == true then
-        local LocalPlayer = game:GetService("Players").LocalPlayer
-        local Character = LocalPlayer.Character
-        local Humanoid = Character:FindFirstChildOfClass("Humanoid")
-
-        local function rm()
-            for i,v in pairs(Character:GetDescendants()) do
-                if v:IsA("BasePart") then
-                if v.Name ~= "Head" then
-            for i,cav in pairs(v:GetDescendants()) do
-                if cav:IsA("Attachment") then
-                if cav:FindFirstChild("OriginalPosition") then
-            cav.OriginalPosition:Destroy()
-                end
-            end
-        end
-                v:FindFirstChild("OriginalSize"):Destroy()
-                    if v:FindFirstChild("AvatarPartScaleType") then
-                        v:FindFirstChild("AvatarPartScaleType"):Destroy()
-                        end
-                    end
-                end
-            end
-        end
-    wait(0.5)
-        Humanoid:FindFirstChild("HeadScale"):Destroy()
-    wait(1)
-    rm()
-    wait(0.5)
-        Humanoid:FindFirstChild("BodyTypeScale"):Destroy()
-    wait(1)
-    rm()
-    wait(0.5)
-        Humanoid:FindFirstChild("BodyWidthScale"):Destroy()
-    wait(1)
-    rm()
-    wait(0.5)
-        Humanoid:FindFirstChild("BodyDepthScale"):Destroy()
-    wait(1)
-end
-end)
-
 Button = Page2:CreateButton("Anti-Bots", "Removes current known bots. Press only once!", function()
     local value = true
         if value == true then
@@ -206,6 +162,50 @@ Button = Page3:CreateButton("Rating Bomber", "Makes everyones last rating weird"
         end
 end)
 Label = Page3:CreateLabel("")
+Button = Page9:CreateButton("Tiny", "R15 ONLY! Make your scale values the lowest", function()
+    local value = true
+        if value == true then
+        local LocalPlayer = game:GetService("Players").LocalPlayer
+        local Character = LocalPlayer.Character
+        local Humanoid = Character:FindFirstChildOfClass("Humanoid")
+
+        local function rm()
+            for i,v in pairs(Character:GetDescendants()) do
+                if v:IsA("BasePart") then
+                if v.Name ~= "Head" then
+            for i,cav in pairs(v:GetDescendants()) do
+                if cav:IsA("Attachment") then
+                if cav:FindFirstChild("OriginalPosition") then
+            cav.OriginalPosition:Destroy()
+                end
+            end
+        end
+                v:FindFirstChild("OriginalSize"):Destroy()
+                    if v:FindFirstChild("AvatarPartScaleType") then
+                        v:FindFirstChild("AvatarPartScaleType"):Destroy()
+                        end
+                    end
+                end
+            end
+        end
+    wait(0.5)
+        Humanoid:FindFirstChild("HeadScale"):Destroy()
+    wait(1)
+    rm()
+    wait(0.5)
+        Humanoid:FindFirstChild("BodyTypeScale"):Destroy()
+    wait(1)
+    rm()
+    wait(0.5)
+        Humanoid:FindFirstChild("BodyWidthScale"):Destroy()
+    wait(1)
+    rm()
+    wait(0.5)
+        Humanoid:FindFirstChild("BodyDepthScale"):Destroy()
+    wait(1)
+end
+end)
+Label = Page9:CreateLabel("")
 Page9:CreateSlider("Speed Changer", 15, 150, function(value5)
     g1 = value5
 end)
