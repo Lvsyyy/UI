@@ -60,7 +60,6 @@ playerName = ""
 Button = Page1:CreateButton("Move to player", "Will make you move to the target.", function()
     local value = true
     if value == true and playerName ~= "" then
-        print(playerName)
         local targetPlayer = game:GetService("Players"):FindFirstChild(playerName)
         if targetPlayer then
             local player = game:GetService("Players").LocalPlayer
@@ -160,7 +159,6 @@ Button = Page3:CreateButton("Auto Rater", "Click to auto rate the target.", func
     if buttonActive and playerName ~= "" then
         while _G. test == true do
             wait(10)
-            print(playerName)
             game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(game:GetService("Players"):WaitForChild(playerName), 5)
         end
     end
