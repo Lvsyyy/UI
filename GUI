@@ -25,7 +25,7 @@ Button = Page1:CreateButton("Reset Stats", "Makes all your values reset to norma
             game.Workspace.Gravity = 196.19999694824
         end
 end)
-
+Label = Page1:CreateLabel("")
 Button = Page1:CreateButton("Rejoin", "Click here to rejoin!", function()
     local value = true
         if value == true then
@@ -46,7 +46,32 @@ Button = Page1:CreateButton("Serverhop", "Joins a different serrver.", function(
             end
         end
 end)
-
+Label = Page1:CreateLabel("")
+TextBox = Page1:CreateBox("Type in target here.", 10044538000, function(arg)
+    local players = game:GetService("Players"):GetPlayers()
+    for _, player in ipairs(players) do
+        if string.lower(arg) == string.lower(player.Name) or string.find(string.lower(player.Name), string.lower(arg)) or string.lower(arg) == string.lower(player.DisplayName) or string.find(string.lower(player.DisplayName), string.lower(arg)) then
+            playerName = player.Name
+            break
+        end
+    end
+end)
+playerName = ""
+Button = Page1:CreateButton("Move to player", "Will make you move to the target.", function()
+    local value = true
+    if value == true and playerName ~= "" then
+        print(playerName)
+        local targetPlayer = game:GetService("Players"):FindFirstChild(playerName)
+        if targetPlayer then
+            local player = game:GetService("Players").LocalPlayer
+            local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
+            if humanoid and humanoid:IsA("Humanoid") then
+                humanoid:MoveTo(targetPlayer.Character.HumanoidRootPart.Position)
+            end
+        end
+    end
+end)
+Label = Page1:CreateLabel("")
 Button = Page2:CreateButton("Anti-Bots", "Removes current known bots. Press only once!", function()
     local value = true
         if value == true then
