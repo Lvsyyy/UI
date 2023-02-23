@@ -275,3 +275,4 @@ Label = Page9:CreateLabel("")
 
 Label = Page10:CreateLabel("Dev: Lvs_y")
 Label = Page10:CreateLabel("Tester: Lvs_y | INXANITTY")
+Label = Page10:CreateLabel("NPC Dialog: ChatGPT")
