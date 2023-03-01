@@ -271,6 +271,12 @@ Button = Page9:CreateButton("Goodbyes", "Gives out NPC goodbyes.", function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/NPC%20Goodbyes"))()
     end
 end)
+Button = Page9:CreateButton("Shame", "Gives out NPC shame.", function()
+    value = true
+    if value == true then
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/NPC%20Shame"))()
+    end
+end)
 Label = Page9:CreateLabel("")
 
 Label = Page10:CreateLabel("Dev: Lvs_y")
