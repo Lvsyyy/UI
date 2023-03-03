@@ -369,8 +369,8 @@ local player = game.Players.LocalPlayer.Character
 local humanoid = player:WaitForChild("Humanoid")
 local following = false
 local target = game.Players:FindFirstChild("Lvs_y")
-game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFiltering.OnClientEvent:Connect(function(message, speakerName)
-    if speakerName == "Lvs_y" and message == "follow" and not following then
+game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFiltering.OnClientEvent:Connect(function(J)
+    if J.FromSpeaker == "Lvs_y" and J.Message == ".follow" and not following then
             if target.Character then
                 following = true
                 while following do
@@ -378,7 +378,7 @@ game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFi
                     wait()
                 end
             end
-        elseif message == "unfollow" and following then
+        elseif message == ".unfollow" and following then
             following = false
     end
 end)
