@@ -381,6 +381,5 @@ game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFi
             end
         elseif message == "unfollow" and following then
             following = false
-        end
     end
 end)
