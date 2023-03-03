@@ -295,7 +295,7 @@ Button = Page9:CreateButton("Ball", "Makes you be a ball. | Normal speed is 30",
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/Ball"))()
         end
 end)
-Label = Page9:CreateLabel("NPC | Talk like a NPC")
+Label = Page9:CreateLabel("NPC | Functions")
 Toggle = Page9:CreateToggle("NPC Walk toggler", "Toggles if you walk like an NPC", function(state)
     if state == true then
         buttonActive = true
@@ -316,6 +316,7 @@ Button = Page9:CreateButton("NPC Walk", "Makes you walk like an NPC", function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/NPC%20Walk"))()
     end
 end)
+Label = Page9:CreateLabel("NPC | Diaog")
 Button = Page9:CreateButton("Greetings", "Gives out NPC greetings", function()
     value = true
     if value == true then
