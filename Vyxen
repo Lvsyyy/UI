@@ -291,7 +291,7 @@ end)
 Button = Page9:CreateButton("Ball", "Makes you be a ball. | Normal speed is 30", function()
     local value = true
         if value == true then
-            SPEED_MULTIPLIER = value5
+            SPEED_MULTIPLIER = value5 or 15
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/Ball"))()
         end
 end)
@@ -306,10 +306,10 @@ Toggle = Page9:CreateToggle("NPC Walk toggler", "Toggles if you walk like an NPC
     end
 end)
 Page9:CreateSlider("Radius", 5, 250, function(value6)
-    SEARCH_RADIUS = value6
+    SEARCH_RADIUS = value6 or 15
 end)
 Page9:CreateSlider("Walk Cooldown", 1, 10, function(value7)
-    WALK_COOLDOWN = value7
+    WALK_COOLDOWN = value7 or 1
 end)
 Button = Page9:CreateButton("NPC Walk", "Makes you walk like an NPC", function()
     if buttonActive == true then
