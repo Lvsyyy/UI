@@ -107,7 +107,8 @@ TextBox = Page3:CreateBox("Booth text changer", 10044538000, function(arg)
     mms[2]["DescriptionText"] = arg
     game:GetService("ReplicatedStorage"):WaitForChild("CustomiseBooth"):FireServer(unpack(mms))
 end)
-local toggleValue = false
+Label = Page3:CreateLabel("Blacklist")
+toggleValue = false
 local stopLoop = false
 Toggle = Page3:CreateToggle("Anti Blacklist toggler", "Toggles the anti blacklist!", function(value)
     toggleValue = value
@@ -127,6 +128,28 @@ Button = Page3:CreateButton("Loop Anti Blacklist", "loops anti blacklist!", func
         if stopLoop then
             break
         end
+    end
+end)
+local searchString = ""
+TextBox = Page3:CreateBox("Type in target here", 10044538000, function(arg)
+    searchString = arg
+end)
+Button = Page3:CreateButton("Blacklist Target", "Blacklists the target given!", function()
+    for _, player in ipairs(game.Players:GetPlayers()) do
+        if string.find(player.Name:lower(), searchString:lower()) or 
+           string.find(player.DisplayName:lower(), searchString:lower()) then
+            game:GetService("ReplicatedStorage"):WaitForChild("CustomiseBooth"):FireServer("AddBlacklist", player.Name)
+        end
+    end
+end)
+Button = Page3:CreateButton("Blacklist All", "Blacklists everyone", function()
+    for _, player in ipairs(game.Players:GetPlayers()) do
+        game:GetService("ReplicatedStorage"):WaitForChild("CustomiseBooth"):FireServer("AddBlacklist", player.Name)
+    end
+end)
+Button = Page3:CreateButton("Unblacklist All", "Unblacklists everyone", function()
+    for _, player in ipairs(game.Players:GetPlayers()) do
+        game:GetService("ReplicatedStorage"):WaitForChild("CustomiseBooth"):FireServer("RemoveBlacklist", player.Name)
     end
 end)
 Label = Page3:CreateLabel("Ratings! Cooldown: 1 minute")
