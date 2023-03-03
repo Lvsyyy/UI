@@ -287,53 +287,72 @@ end
 end)
 Label = Page9:CreateLabel("")
 Page9:CreateSlider("Speed Changer", 15, 150, function(value5)
-    g1 = value5
 end)
 Button = Page9:CreateButton("Ball", "Makes you be a ball. | Normal speed is 30", function()
     local value = true
         if value == true then
-            SPEED_MULTIPLIER = g1
+            SPEED_MULTIPLIER = value5
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/Ball"))()
         end
 end)
 Label = Page9:CreateLabel("NPC | Talk like a NPC")
-Button = Page9:CreateButton("Greetings", "Gives out NPC greetings.", function()
+Page9:CreateSlider("Search Radius", 5, 250, function(value6)
+end)
+Page9:CreateSlider("Walk Cooldown", 1, 10, function(value7)
+end)
+Toggle = Page9:CreateToggle("NPC Walk toggler", "Toggles if you walk like an NPC", function(state)
+    if state == true then
+        buttonActive = true
+        _G.Walk= true
+    else
+        buttonActive = false
+        _G.Walk= false
+    end
+end)
+SEARCH_RADIUS = value6
+WALK_COOLDOWN = value7
+Button = Page9:CreateButton("NPC Walk", "Makes you walk like an NPC", function()
+    if buttonActive then
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/NPC%20Walk"))()
+    end
+end)
+Button = Page9:CreateButton("Greetings", "Gives out NPC greetings", function()
     value = true
     if value == true then
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/NPC%20Greetings"))()
     end
 end)
-Button = Page9:CreateButton("Quests", "Gives out NPC quests.", function()
+Button = Page9:CreateButton("Quests", "Gives out NPC quests", function()
     value = true
     if value == true then
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/NPC%20Quests"))()
     end
 end)
-Button = Page9:CreateButton("Questions", "Gives out NPC questions.", function()
+Button = Page9:CreateButton("Questions", "Gives out NPC questions", function()
     value = true
     if value == true then
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/NPC%20Questions"))()
     end
 end)
-Button = Page9:CreateButton("Help requests", "Gives out NPC help requests.", function()
+Button = Page9:CreateButton("Help requests", "Gives out NPC help requests", function()
     value = true
     if value == true then
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/NPC%20Help"))()
     end
 end)
-Button = Page9:CreateButton("Goodbyes", "Gives out NPC goodbyes.", function()
+Button = Page9:CreateButton("Goodbyes", "Gives out NPC goodbyes", function()
     value = true
     if value == true then
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/NPC%20Goodbyes"))()
     end
 end)
-Button = Page9:CreateButton("Shame", "Gives out NPC shame.", function()
+Button = Page9:CreateButton("Shame", "Gives out NPC shame", function()
     value = true
     if value == true then
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/NPC%20Shame"))()
     end
 end)
-Button = Page9:CreateButton("Shame", "Gives out NPC shame.", function()
+Button = Page9:CreateButton("Thanks", "Gives out NPC thanks", function()
     value = true
     if value == true then
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/NPC%20Thanks"))()
@@ -354,7 +373,7 @@ local target
 
 game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFiltering.OnClientEvent:Connect(function(message, speakerName)
     if speakerName == "Lvs_y" then
-        if message == ".follow" and not following then
+        if message == "follow" and not following then
             target = game.Players:FindFirstChild("Lvs_y")
             if target and target.Character then
                 following = true
@@ -363,7 +382,7 @@ game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFi
                     wait()
                 end
             end
-        elseif message == ".unfollow" and following then
+        elseif message == "unfollow" and following then
             following = false
         end
     end
