@@ -96,6 +96,39 @@ Button = Page3:CreateButton("Image Sign", "Press to get an Image Sign (gamepass 
         game:GetService("ReplicatedStorage"):WaitForChild("RequestGamepassTool"):FireServer(17291427)
         end
 end)
+Label = Page3:CreateLabel("Booths")
+local mms = {
+    [1] = "Update",
+    [2] = {
+        ["DescriptionText"] = "",
+        ["ImageId"] = 0}
+}
+TextBox = Page3:CreateBox("Booth text changer", 10044538000, function(arg)
+    mms[2]["DescriptionText"] = arg
+    game:GetService("ReplicatedStorage"):WaitForChild("CustomiseBooth"):FireServer(unpack(mms))
+end)
+local toggleValue = false
+local stopLoop = false
+Toggle = Page3:CreateToggle("Anti Blacklist toggler", "Toggles the anti blacklist!", function(value)
+    toggleValue = value
+    if not toggleValue then
+        stopLoop = true
+    end
+end)
+Button = Page3:CreateButton("Loop Anti Blacklist", "loops anti blacklist!", function()
+    while toggleValue do
+        local searchString = "BarrierFor"
+        for _, child in ipairs(workspace:GetDescendants()) do
+            if string.find(child.Name, searchString) then
+                child:Destroy()
+            end
+        end
+        wait(0.1)
+        if stopLoop then
+            break
+        end
+    end
+end)
 Label = Page3:CreateLabel("Ratings! Cooldown: 1 minute")
 Page3:CreateSlider("Rated Stars", 1, 5, function(value4)
     g = value4
