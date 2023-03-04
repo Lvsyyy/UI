@@ -45,6 +45,24 @@ Button = Page1:CreateButton("Serverhop", "Joins a different server", function()
             end
         end
 end)
+Lavel = Page1:CreateLabel("")
+Players = game:GetService("Players")
+playerName = ""
+TextBox = Page1:CreateBox("Type in target here", 10044538000, function(arg)
+    local players = Players:GetPlayers()
+    for _, player in ipairs(players) do
+        if string.lower(arg) == string.lower(player.Name) or string.find(string.lower(player.Name), string.lower(arg)) or string.lower(arg) == string.lower(player.DisplayName) or string.find(string.lower(player.DisplayName), string.lower(arg)) then
+            playerName = player.Name
+            break
+        end
+    end
+end)
+Button = Page1:CreateButton("Ignore", "Ignores / Deletes the target player", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/Ignore"))()
+end)
+Button = Page1:CreateButton("Unignore", "Unignores / Undeletes the target player", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/Unignore"))()
+end)
 Label = Page1:CreateLabel("")
 TextBox = Page1:CreateBox("Type in target here", 10044538000, function(arg)
     local players = game:GetService("Players"):GetPlayers()
@@ -81,24 +99,6 @@ Button = Page1:CreateButton("Tp to player", "Will tp you to the target", functio
             end
         end
     end
-end)
-Label = Page1:CreateLabel("")
-Players = game:GetService("Players")
-playerName = ""
-TextBox = Page1:CreateBox("Type in target here", 10044538000, function(arg)
-    local players = Players:GetPlayers()
-    for _, player in ipairs(players) do
-        if string.lower(arg) == string.lower(player.Name) or string.find(string.lower(player.Name), string.lower(arg)) or string.lower(arg) == string.lower(player.DisplayName) or string.find(string.lower(player.DisplayName), string.lower(arg)) then
-            playerName = player.Name
-            break
-        end
-    end
-end)
-Button = Page1:CreateButton("Ignore", "Ignores / Deletes the target player", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/Ignore"))()
-end)
-Button = Page1:CreateButton("Unignore", "Unignores / Undeletes the target player", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/Unignore"))()
 end)
 Label = Page1:CreateLabel("")
 Button = Page2:CreateButton("Anti-Bots", "Removes current known bots | Press only once!", function()
