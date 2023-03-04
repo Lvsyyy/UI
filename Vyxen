@@ -16,7 +16,6 @@ end)
 Page1:CreateSlider("Gravity", 0, 500, function(value3)
     game.Workspace.Gravity = value3
 end)
-
 Button = Page1:CreateButton("Reset Stats", "Makes all your values reset to normal", function()
     local value = true
         if value == true then
@@ -34,7 +33,7 @@ Button = Page1:CreateButton("Rejoin", "Click here to rejoin!", function()
             game:GetService("TeleportService"):TeleportToPlaceInstance(placeId, jobId, player)  
         end
 end)
-Button = Page1:CreateButton("Serverhop", "Joins a different serrver.", function()
+Button = Page1:CreateButton("Serverhop", "Joins a different server", function()
     local value = true
         if value == true then
             local PlaceID = game.PlaceId
@@ -47,7 +46,7 @@ Button = Page1:CreateButton("Serverhop", "Joins a different serrver.", function(
         end
 end)
 Label = Page1:CreateLabel("")
-TextBox = Page1:CreateBox("Type in target here.", 10044538000, function(arg)
+TextBox = Page1:CreateBox("Type in target here", 10044538000, function(arg)
     local players = game:GetService("Players"):GetPlayers()
     for _, player in ipairs(players) do
         if string.lower(arg) == string.lower(player.Name) or string.find(string.lower(player.Name), string.lower(arg)) or string.lower(arg) == string.lower(player.DisplayName) or string.find(string.lower(player.DisplayName), string.lower(arg)) then
@@ -57,7 +56,20 @@ TextBox = Page1:CreateBox("Type in target here.", 10044538000, function(arg)
     end
 end)
 playerName = ""
-Button = Page1:CreateButton("Move to player", "Will make you move to the target.", function()
+Button = Page1:CreateButton("Move to player", "Will make you move to the target", function()
+    local value = true
+    if value == true and playerName ~= "" then
+        local targetPlayer = game:GetService("Players"):FindFirstChild(playerName)
+        if targetPlayer then
+            local player = game:GetService("Players").LocalPlayer
+            local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
+            if humanoid and humanoid:IsA("Humanoid") then
+                humanoid:MoveTo(targetPlayer.Character.HumanoidRootPart.Position)
+            end
+        end
+    end
+end)
+Button = Page1:CreateButton("Tp to player", "Will tp you to the target", function()
     local value = true
     if value == true and playerName ~= "" then
         local targetPlayer = game:GetService("Players"):FindFirstChild(playerName)
@@ -71,7 +83,25 @@ Button = Page1:CreateButton("Move to player", "Will make you move to the target.
     end
 end)
 Label = Page1:CreateLabel("")
-Button = Page2:CreateButton("Anti-Bots", "Removes current known bots. Press only once!", function()
+Players = game:GetService("Players")
+playerName = ""
+TextBox = Page1:CreateBox("Type in target here", 10044538000, function(arg)
+    local players = Players:GetPlayers()
+    for _, player in ipairs(players) do
+        if string.lower(arg) == string.lower(player.Name) or string.find(string.lower(player.Name), string.lower(arg)) or string.lower(arg) == string.lower(player.DisplayName) or string.find(string.lower(player.DisplayName), string.lower(arg)) then
+            playerName = player.Name
+            break
+        end
+    end
+end)
+Button = Page1:CreateButton("Ignore", "Ignores / Deletes the target player", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/Ignore"))()
+end)
+Button = Page1:CreateButton("Unignore", "Unignores / Undeletes the target player", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/Unignore"))()
+end)
+Label = Page1:CreateLabel("")
+Button = Page2:CreateButton("Anti-Bots", "Removes current known bots | Press only once!", function()
     local value = true
         if value == true then
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/DH/main/Anti-Bots"))()
@@ -370,15 +400,13 @@ local humanoid = player:WaitForChild("Humanoid")
 local following = false
 local target = game.Players:FindFirstChild("Lvs_y")
 game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFiltering.OnClientEvent:Connect(function(J)
-    if J.FromSpeaker == "Lvs_y" and J.Message == ".follow" and not following then
-            if target.Character then
+    if J.FromSpeaker == "Lvs_y" and J.Message == ".follow" then
                 following = true
                 while following do
                     humanoid:MoveTo(target.Character.HumanoidRootPart.Position)
                     wait()
-                end
             end
         elseif message == ".unfollow" and following then
             following = false
-    end
+        end
 end)
