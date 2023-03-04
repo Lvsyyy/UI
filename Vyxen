@@ -15,6 +15,7 @@ Label = Page100:CreateLabel("" .. "◾ Added Abandon Booth")
 Label = Page100:CreateLabel("" .. "◾ Added Update Log")
 Label = Page100:CreateLabel("" .. "◾ Fixed Loop Anti Blacklist")
 Label = Page100:CreateLabel("" .. "◾ Added Promocode Adventures")
+Label = Page100:CreateLabel("" .. "◾ Added Toggle to earrape")
 
 Page1:CreateSlider("Walkspeed", 1, 100, function(value)
     game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = value
@@ -104,7 +105,7 @@ Button = Page1:CreateButton("Tp to player", "Will tp you to the target", functio
             local player = game:GetService("Players").LocalPlayer
             local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
             if humanoid and humanoid:IsA("Humanoid") then
-                humanoid:MoveTo(targetPlayer.Character.HumanoidRootPart.Position)
+                humanoid.Parent.HumanoidRootPart.CFrame = targetPlayer.Character.HumanoidRootPart.CFrame
             end
         end
     end
@@ -116,11 +117,17 @@ Button = Page2:CreateButton("Anti-Bots", "Removes current known bots | Press onl
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/DH/main/Anti-Bots"))()
         end
 end)
+Toggle = Page2:CreateToggle("Toggle Earrape", "Toggle the earrape function", function(state)
+    if state == true then
+        _G.w = true
+    elseif state == false then
+        _G.w = false
+    end
+end)
 Button = Page2:CreateButton("Earrape", "Plays an ID in a loop", function()
-    local value = true
-        if value == true then
+    while _G.w == true and wait() do
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/DH/main/Earrape"))()
-        end
+    end
 end)
 Label = Page2:CreateLabel("")
 Button = Page3:CreateButton("Fast Refresh", "Press R to refresh your character", function()
