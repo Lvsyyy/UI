@@ -1,10 +1,11 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/UI/main/Library"))()
-local Window = Library:CreateWindow("Vyxen ", "Version: 2", 10044538000)
+local Window = Library:CreateWindow("Vyxen ", "Version: 2.1", 10044538000)
 local Tab = Window:CreateTab("Functions")
 local Page100 = Tab:CreateFrame("Update Log")
 local Page1 = Tab:CreateFrame("Universal")
 local Page2 = Tab:CreateFrame("Dollhouse")
 local Page3 = Tab:CreateFrame("Rate My Avatar")
+local Page4 = Tab:CreateFrame("Promocode Adv.")
 local Page9 = Tab:CreateFrame("Fun")
 local Page10 = Tab:CreateFrame("Credits")
 
@@ -12,7 +13,8 @@ Label = Page100:CreateLabel("Added new RMA features")
 Label = Page100:CreateLabel("" .. "◾ Added Booth Sniper")
 Label = Page100:CreateLabel("" .. "◾ Added Abandon Booth")
 Label = Page100:CreateLabel("" .. "◾ Added Update Log")
-Label = Page100:CreateLabel("" .. "◾ Added Blacklist Lightshow")
+Label = Page100:CreateLabel("" .. "◾ Fixed Loop Anti Blacklist")
+Label = Page100:CreateLabel("" .. "◾ Added Promocode Adventures")
 
 Page1:CreateSlider("Walkspeed", 1, 100, function(value)
     game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = value
@@ -212,18 +214,6 @@ Button = Page3:CreateButton("Unblacklist All", "Unblacklists everyone", function
         game:GetService("ReplicatedStorage"):WaitForChild("CustomiseBooth"):FireServer("RemoveBlacklist", player.Name)
     end
 end)
-Button = Page3:CreateButton("Blacklist Lightshow", "Loop blacklists and unblacklists! (click multiple times)", function()
-    local function listunlist()
-        for _, player in ipairs(game.Players:GetPlayers()) do
-            game:GetService("ReplicatedStorage"):WaitForChild("CustomiseBooth"):FireServer("AddBlacklist", player.Name)
-            wait(0.15)
-            game:GetService("ReplicatedStorage"):WaitForChild("CustomiseBooth"):FireServer("RemoveBlacklist", player.Name)
-        end
-    end
-    while wait() do
-        listunlist()
-    end
-end)
 Label = Page3:CreateLabel("Ratings! Cooldown: 1 minute")
 Page3:CreateSlider("Rated Stars", 1, 5, function(value4)
     g = value4
@@ -314,6 +304,20 @@ Button = Page3:CreateButton("Rating Bomber", "Makes everyones last rating weird"
         end
 end)
 Label = Page3:CreateLabel("")
+Toggle = Page4:CreateToggle("Toggle Auto Attack & Mine", "Toggles auto attacking and mining", function(state)
+    if state == true then
+        autotool = true
+    elseif state == false then
+        autotool = false
+    end
+end)
+Button = Page4:CreateButton("Auto Attack & Mine", "Auto attacks and mines!", function()
+    while autotool == true do
+        wait()
+        workspace.Remotes.UseItem:FireServer()
+    end
+end)
+Label = Page4:CreateLabel("")
 Button = Page9:CreateButton("Tiny", "R15 ONLY! Make your scale values the lowest", function()
     local value = true
         if value == true then
