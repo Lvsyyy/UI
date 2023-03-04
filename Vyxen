@@ -138,6 +138,12 @@ Toggle = Page3:CreateToggle("Loop Image Sign", "Gives an Image Sign in a loop (g
     end
 end)
 Label = Page3:CreateLabel("Booths")
+Button = Page3:CreateButton("Booth Sniper", "Makes you claim a free booth", function()
+    local value = true
+    if value == true then
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/RMA/main/Booth%20Sniper"))()
+    end
+end)
 local mms = {
     [1] = "Update",
     [2] = {
