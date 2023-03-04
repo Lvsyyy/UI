@@ -126,6 +126,17 @@ Button = Page3:CreateButton("Image Sign", "Press to get an Image Sign (gamepass 
         game:GetService("ReplicatedStorage"):WaitForChild("RequestGamepassTool"):FireServer(17291427)
         end
 end)
+Toggle = Page3:CreateToggle("Loop Image Sign", "Gives an Image Sign in a loop (gamepass required)", function(state)
+    if state == true then
+    _G.Img = true
+    while _G.Img == true do
+        wait(0.1)
+        game:GetService("ReplicatedStorage"):WaitForChild("RequestGamepassTool"):FireServer(17291427)
+    end
+    elseif state == false then
+        _G.Img = false
+    end
+end)
 Label = Page3:CreateLabel("Booths")
 local mms = {
     [1] = "Update",
