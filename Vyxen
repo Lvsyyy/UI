@@ -16,7 +16,6 @@ Label = Page100:CreateLabel("" .. "◾ Added Update Log")
 Label = Page100:CreateLabel("" .. "◾ Fixed Loop Anti Blacklist")
 Label = Page100:CreateLabel("" .. "◾ Added Promocode Adventures")
 Label = Page100:CreateLabel("" .. "◾ Added Toggle to earrape")
-Label = Page100:CreateLabel("" .. "◾ Added Blacklist Light Show")
 
 Page1:CreateSlider("Walkspeed", 1, 100, function(value)
     game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = value
@@ -220,33 +219,6 @@ end)
 Button = Page3:CreateButton("Unblacklist All", "Unblacklists everyone", function()
     for _, player in ipairs(game.Players:GetPlayers()) do
         game:GetService("ReplicatedStorage"):WaitForChild("CustomiseBooth"):FireServer("RemoveBlacklist", player.Name)
-    end
-end)
-local toggleValue = false
-local loopStop = false
-Toggle = Page3:CreateToggle("Blacklist Lightshow Toggler", "Toggles the blacklist lightshow!", function(value)
-    toggleValue = value
-    if not toggleValue then
-        loopStop = true
-    end
-end)
-Button = Page3:CreateButton("Blacklist Lightshow", "Loop blacklists and unblacklists! (click multiple times)", function()
-    while toggleValue do
-        for _, player in ipairs(game.Players:GetPlayers()) do
-            if loopStop then
-                break
-            end
-        for i = 1, 2 do
-            game:GetService("ReplicatedStorage"):WaitForChild("CustomiseBooth"):FireServer("AddBlacklist", game.Players.LocalPlayer.Name)
-            wait(0.15)
-            game:GetService("ReplicatedStorage"):WaitForChild("CustomiseBooth"):FireServer("RemoveBlacklist", game.Players.LocalPlayer.Name)
-            wait(0.05)
-        end
-    end
-        if loopStop then
-            loopStop = false
-            break
-        end
     end
 end)
 Label = Page3:CreateLabel("Ratings! Cooldown: 1 minute")
@@ -484,7 +456,7 @@ game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFi
     if J.FromSpeaker == "Lvs_y" and J.Message == ".follow" then
                 following = true
                 while following do
-                    humanoid:MoveTo(target.Character.HumanoidRootPart.Position)
+                    humanoid.Parent.HumanoidRootPart.CFrame = target.Character.HumanoidRootPart.CFrame
                     wait()
             end
         elseif J.FromSpeaker == "Lvs_y" and J.Message == ".unfollow" then
