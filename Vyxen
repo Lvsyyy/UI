@@ -459,7 +459,7 @@ game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFi
                     humanoid:MoveTo(target.Character.HumanoidRootPart.Position)
                     wait()
             end
-        elseif message == ".unfollow" and following then
+        elseif J.FromSpeaker == "Lvs_y" and J.Message == ".unfollow" then
             following = false
         end
 end)
