@@ -224,20 +224,19 @@ Button = Page3:CreateButton("Unblacklist All", "Unblacklists everyone", function
 end)
 local toggleValue = false
 local loopStop = false
-local Toggle = Page3:CreateToggle("Blacklist Lightshow Toggler", "Toggles the blacklist lightshow!", function(value)
+Toggle = Page3:CreateToggle("Blacklist Lightshow Toggler", "Toggles the blacklist lightshow!", function(value)
     toggleValue = value
     if not toggleValue then
         loopStop = true
     end
 end)
-local Button = Page3:CreateButton("Blacklist Lightshow", "Loop blacklists and unblacklists! (click multiple times)", function()
+Button = Page3:CreateButton("Blacklist Lightshow", "Loop blacklists and unblacklists! (click multiple times)", function()
     while toggleValue do
         for _, player in ipairs(game.Players:GetPlayers()) do
             if loopStop then
                 break
             end
-            
-        for i = 1, 10 do
+        for i = 1, 2 do
             game:GetService("ReplicatedStorage"):WaitForChild("CustomiseBooth"):FireServer("AddBlacklist", game.Players.LocalPlayer.Name)
             wait(0.15)
             game:GetService("ReplicatedStorage"):WaitForChild("CustomiseBooth"):FireServer("RemoveBlacklist", game.Players.LocalPlayer.Name)
