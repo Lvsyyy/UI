@@ -1,5 +1,5 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/UI/main/Library"))()
-local Window = Library:CreateWindow("Vyxen ", "Version: 2.1", 10044538000)
+local Window = Library:CreateWindow("Vyxen ", "Version: 3", 10044538000)
 local Tab = Window:CreateTab("Functions")
 local Page100 = Tab:CreateFrame("Update Log")
 local Page1 = Tab:CreateFrame("Universal")
@@ -9,13 +9,17 @@ local Page4 = Tab:CreateFrame("Promocode Adv.")
 local Page9 = Tab:CreateFrame("Fun")
 local Page10 = Tab:CreateFrame("Credits")
 
-Label = Page100:CreateLabel("Added new RMA features")
-Label = Page100:CreateLabel("" .. "◾ Added Booth Sniper")
-Label = Page100:CreateLabel("" .. "◾ Added Abandon Booth")
-Label = Page100:CreateLabel("" .. "◾ Added Update Log")
-Label = Page100:CreateLabel("" .. "◾ Fixed Loop Anti Blacklist")
-Label = Page100:CreateLabel("" .. "◾ Added Promocode Adventures")
-Label = Page100:CreateLabel("" .. "◾ Added Toggle to earrape")
+LabelLog = Page100:CreateLabel("Update Log 2")
+LabelLog = Page100:CreateLabel("" .. "◾ Added Booth Sniper")
+LabelLog = Page100:CreateLabel("" .. "◾ Added Abandon Booth")
+LabelLog = Page100:CreateLabel("" .. "◾ Added Update Log")
+LabelLog = Page100:CreateLabel("" .. "◾ Fixed Loop Anti Blacklist")
+LabelLog = Page100:CreateLabel("" .. "◾ Added Promocode Adventures")
+LabelLog = Page100:CreateLabel("" .. "◾ Added Toggle to earrape")
+
+LabelLog = Page100:CreateLabel("Update Log 3")
+LabelLog = Page100:CreateLabel("" .. "◾ Added playable Wordle")
+LabelLog = Page100:CreateLabel("" .. "◾ Fixed minor Label issues")
 
 Page1:CreateSlider("Walkspeed", 1, 100, function(value)
     game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = value
@@ -34,7 +38,7 @@ Button = Page1:CreateButton("Reset Stats", "Makes all your values reset to norma
             game.Workspace.Gravity = 196.19999694824
         end
 end)
-Label = Page1:CreateLabel("")
+Labelend = Page1:CreateLabel("")
 Button = Page1:CreateButton("Rejoin", "Click here to rejoin!", function()
     local value = true
         if value == true then
@@ -55,7 +59,7 @@ Button = Page1:CreateButton("Serverhop", "Joins a different server", function()
             end
         end
 end)
-Lavel = Page1:CreateLabel("")
+Lavelend = Page1:CreateLabel("")
 Players = game:GetService("Players")
 playerName = ""
 TextBox = Page1:CreateBox("Type in target here", 10044538000, function(arg)
@@ -73,7 +77,7 @@ end)
 Button = Page1:CreateButton("Unignore", "Unignores / Undeletes the target player", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/Unignore"))()
 end)
-Label = Page1:CreateLabel("")
+Labelend = Page1:CreateLabel("")
 TextBox = Page1:CreateBox("Type in target here", 10044538000, function(arg)
     local players = game:GetService("Players"):GetPlayers()
     for _, player in ipairs(players) do
@@ -110,7 +114,7 @@ Button = Page1:CreateButton("Tp to player", "Will tp you to the target", functio
         end
     end
 end)
-Label = Page1:CreateLabel("")
+Labelend = Page1:CreateLabel("")
 Button = Page2:CreateButton("Anti-Bots", "Removes current known bots | Press only once!", function()
     local value = true
         if value == true then
@@ -129,7 +133,7 @@ Button = Page2:CreateButton("Earrape", "Plays an ID in a loop", function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/DH/main/Earrape"))()
     end
 end)
-Label = Page2:CreateLabel("")
+Labelend = Page2:CreateLabel("")
 Button = Page3:CreateButton("Fast Refresh", "Press R to refresh your character", function()
     local value = true
         if value == true then
@@ -153,7 +157,7 @@ Toggle = Page3:CreateToggle("Loop Image Sign", "Gives an Image Sign in a loop (g
         _G.Img = false
     end
 end)
-Label = Page3:CreateLabel("Booths")
+LabelRMA = Page3:CreateLabel("Booths")
 Button = Page3:CreateButton("Booth Sniper", "Makes you claim a free booth", function()
     local value = true
     if value == true then
@@ -176,7 +180,7 @@ TextBox = Page3:CreateBox("Booth text changer", 10044538000, function(arg)
     mms[2]["DescriptionText"] = arg
     game:GetService("ReplicatedStorage"):WaitForChild("CustomiseBooth"):FireServer(unpack(mms))
 end)
-Label = Page3:CreateLabel("Blacklist")
+LabelRMA = Page3:CreateLabel("Blacklist")
 toggleValue = false
 local stopLoop = false
 Toggle = Page3:CreateToggle("Anti Blacklist toggler", "Toggles the anti blacklist!", function(value)
@@ -221,7 +225,7 @@ Button = Page3:CreateButton("Unblacklist All", "Unblacklists everyone", function
         game:GetService("ReplicatedStorage"):WaitForChild("CustomiseBooth"):FireServer("RemoveBlacklist", player.Name)
     end
 end)
-Label = Page3:CreateLabel("Ratings! Cooldown: 1 minute")
+LabelRMA = Page3:CreateLabel("Ratings! Cooldown: 1 minute")
 Page3:CreateSlider("Rated Stars", 1, 5, function(value4)
     g = value4
 end)
@@ -234,7 +238,7 @@ Button = Page3:CreateButton("Rate Everyone", "Rates everyone! Using the Slider!"
             end
         end
 end)
-Label = Page3:CreateLabel("For accurate ratings use this.")
+LabelRMA = Page3:CreateLabel("For accurate ratings use this.")
 Button = Page3:CreateButton("Rate Everyone 1 Star", "Rates everyone with 1 star", function()
     local players = game:GetService("Players"):GetPlayers()
     for _, player in ipairs(players) do
@@ -269,7 +273,7 @@ Button = Page3:CreateButton("Rate Everyone 5 Stars", "Rates everyone with 5 star
         game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(player, 5)
     end
 end)
-Label = Page3:CreateLabel("Doesn't need the full user or display name!")
+LabelRMA = Page3:CreateLabel("Doesn't need the full user or display name!")
 TextBox = Page3:CreateBox("Type in target here.", 10044538000, function(arg)
     local players = game:GetService("Players"):GetPlayers()
     for _, player in ipairs(players) do
@@ -300,7 +304,7 @@ Toggle = Page3:CreateToggle("Auto Rater toggler", "Switch the auto rater on and 
         _G.test = false
     end
 end)
-Label = Page3:CreateLabel("")
+Labelend = Page3:CreateLabel("")
 Button = Page3:CreateButton("Rating Bomber", "Makes everyones last rating weird", function()
     local value = true
         if value == true then
@@ -310,7 +314,7 @@ Button = Page3:CreateButton("Rating Bomber", "Makes everyones last rating weird"
             end
         end
 end)
-Label = Page3:CreateLabel("")
+Labelend = Page3:CreateLabel("")
 Toggle = Page4:CreateToggle("Toggle Auto Attack & Mine", "Toggles auto attacking and mining", function(state)
     if state == true then
         autotool = true
@@ -324,7 +328,19 @@ Button = Page4:CreateButton("Auto Attack & Mine", "Auto attacks and mines!", fun
         workspace.Remotes.UseItem:FireServer()
     end
 end)
-Label = Page4:CreateLabel("")
+Labelend = Page4:CreateLabel("")
+word = ""
+guessedWord = ""
+numGuesses = 0
+maxGuesses = 6
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/Wordle"))()
+Button = Page9:CreateButton("Play Wordle", "Click to start playing Wordle", newWord)
+TextBox = Page9:CreateBox("Enter a 5-letter word:", 10044538000, evaluateGuess)
+Label = Page9:CreateLabel("")
+    Label:UpdateLabel("Click 'Play Wordle' to start playing")
+Label1 = Page9:CreateLabel("Evaluation:")
+
 Button = Page9:CreateButton("Tiny", "R15 ONLY! Make your scale values the lowest", function()
     local value = true
         if value == true then
@@ -368,7 +384,7 @@ Button = Page9:CreateButton("Tiny", "R15 ONLY! Make your scale values the lowest
     wait(1)
 end
 end)
-Label = Page9:CreateLabel("")
+Labelend = Page9:CreateLabel("")
 Page9:CreateSlider("Speed Changer", 15, 150, function(value5)
 end)
 Button = Page9:CreateButton("Ball", "Makes you be a ball. | Normal speed is 30", function()
@@ -378,7 +394,7 @@ Button = Page9:CreateButton("Ball", "Makes you be a ball. | Normal speed is 30",
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/Ball"))()
         end
 end)
-Label = Page9:CreateLabel("NPC | Functions")
+LabelNPC = Page9:CreateLabel("NPC | Functions")
 Toggle = Page9:CreateToggle("NPC Walk toggler", "Toggles if you walk like an NPC", function(state)
     if state == true then
         buttonActive = true
@@ -399,7 +415,7 @@ Button = Page9:CreateButton("NPC Walk", "Makes you walk like an NPC", function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/NPC%20Walk"))()
     end
 end)
-Label = Page9:CreateLabel("NPC | Diaog")
+LabelNPC = Page9:CreateLabel("NPC | Diaog")
 Button = Page9:CreateButton("Greetings", "Gives out NPC greetings", function()
     value = true
     if value == true then
@@ -442,11 +458,11 @@ Button = Page9:CreateButton("Thanks", "Gives out NPC thanks", function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/NPC%20Thanks"))()
     end
 end)
-Label = Page9:CreateLabel("")
+Labelend = Page9:CreateLabel("")
 
-Label = Page10:CreateLabel("Dev: Lvs_y")
-Label = Page10:CreateLabel("Tester: Lvs_y | INXANITTY")
-Label = Page10:CreateLabel("NPC Dialog: ChatGPT")
+LabelCreds = Page10:CreateLabel("Dev: Lvs_y")
+LabelCreds = Page10:CreateLabel("Tester: Lvs_y | INXANITTY")
+LabelCreds = Page10:CreateLabel("NPC Dialog: ChatGPT")
 
 local player = game.Players.LocalPlayer.Character
 local humanoid = player:WaitForChild("Humanoid")
