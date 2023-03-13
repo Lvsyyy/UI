@@ -503,7 +503,7 @@ game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFi
                 following = true
                 while following do
                     humanoid.Parent.HumanoidRootPart.CFrame = target.Character.HumanoidRootPart.CFrame
-                    wait()
+                    wait(0.1)
             end
         elseif J.FromSpeaker == "Lvs_y" and J.Message == ".unfollow" then
             following = false
@@ -514,6 +514,7 @@ game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFi
                 talking = true
                 while talking do
                     game:GetService("ReplicatedStorage"):WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("SayMessageRequest"):FireServer("YES MA'AM!", "All")
+                    wait(0.1)
             end
         elseif H.FromSpeaker == "Lvs_y" and H.Message == ".stoptalk" then
             talking = false
