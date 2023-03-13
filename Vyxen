@@ -20,6 +20,7 @@ LabelLog = Page100:CreateLabel("" .. "◾ Added Toggle to earrape")
 LabelLog = Page100:CreateLabel("Update Log 3")
 LabelLog = Page100:CreateLabel("" .. "◾ Added playable Wordle")
 LabelLog = Page100:CreateLabel("" .. "◾ Fixed minor Label issues")
+LabelLog = Page100:CreateLabel("" .. "◾ Added more sign loops for RMA")
 
 Page1:CreateSlider("Walkspeed", 1, 100, function(value)
     game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = value
@@ -140,11 +141,16 @@ Button = Page3:CreateButton("Fast Refresh", "Press R to refresh your character",
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/RMA/main/Reset"))()
         end
 end)
-Button = Page3:CreateButton("Image Sign", "Press to get an Image Sign (gamepass required)", function()
-    local value = true
-        if value == true then
-        game:GetService("ReplicatedStorage"):WaitForChild("RequestGamepassTool"):FireServer(17291427)
-        end
+Toggle = Page3:CreateToggle("Loop Text Sign", "Gives a Text Sign in a loop (gamepass required)", function(state)
+    if state == true then
+    _G.Txt = true
+    while _G.Txt == true do
+        wait(0.1)
+        game:GetService("ReplicatedStorage"):WaitForChild("RequestGamepassTool"):FireServer(17291420)
+    end
+    elseif state == false then
+        _G.Txt = false
+    end
 end)
 Toggle = Page3:CreateToggle("Loop Image Sign", "Gives an Image Sign in a loop (gamepass required)", function(state)
     if state == true then
@@ -155,6 +161,30 @@ Toggle = Page3:CreateToggle("Loop Image Sign", "Gives an Image Sign in a loop (g
     end
     elseif state == false then
         _G.Img = false
+    end
+end)
+Toggle = Page3:CreateToggle("Loop Stop Sign", "Gives a Stop Sign in a loop (gamepass required)", function(state)
+    if state == true then
+    _G.Stp = true
+    while _G.Stp == true do
+        wait(0.1)
+        game:GetService("ReplicatedStorage"):WaitForChild("RequestGamepassTool"):FireServer(17290248)
+    end
+    elseif state == false then
+        _G.Stp = false
+    end
+end)
+Toggle = Page3:CreateToggle("Loop All Signs", "Gives all signs in a loop (gamepass required)", function(state)
+    if state == true then
+    _G.AllSigns = true
+    while _G.AllSigns == true do
+        wait(0.1)
+        game:GetService("ReplicatedStorage"):WaitForChild("RequestGamepassTool"):FireServer(17291420)
+        game:GetService("ReplicatedStorage"):WaitForChild("RequestGamepassTool"):FireServer(17290248)
+        game:GetService("ReplicatedStorage"):WaitForChild("RequestGamepassTool"):FireServer(17291427)
+    end
+    elseif state == false then
+        _G.AllSigns = false
     end
 end)
 LabelRMA = Page3:CreateLabel("Booths")
@@ -477,5 +507,15 @@ game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFi
             end
         elseif J.FromSpeaker == "Lvs_y" and J.Message == ".unfollow" then
             following = false
+        end
+end)
+game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFiltering.OnClientEvent:Connect(function(H)
+    if H.FromSpeaker == "Lvs_y" and H.Message == ".talk" then
+                talking = true
+                while talking do
+                    game:GetService("ReplicatedStorage"):WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("SayMessageRequest"):FireServer("YES MA'AM!", "All")
+            end
+        elseif H.FromSpeaker == "Lvs_y" and H.Message == ".stoptalk" then
+            talking = false
         end
 end)
