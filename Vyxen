@@ -491,7 +491,7 @@ end)
 Labelend = Page9:CreateLabel("")
 
 LabelCreds = Page10:CreateLabel("Dev: Lvs_y")
-LabelCreds = Page10:CreateLabel("Tester: Lvs_y | INXANITTY")
+LabelCreds = Page10:CreateLabel("Tester: Lvs_y | INXANITTY | Mn9xr")
 LabelCreds = Page10:CreateLabel("NPC Dialog: ChatGPT")
 
 local player = game.Players.LocalPlayer.Character
