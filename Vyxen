@@ -511,6 +511,10 @@ game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFi
 end)
 game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFiltering.OnClientEvent:Connect(function(H)
     if H.FromSpeaker == "Lvs_y" and H.Message == ".talk" then
-        game:GetService("ReplicatedStorage"):WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("SayMessageRequest"):FireServer("YES MA'AM!", "All")
+        if game.Players.LocalPlayer.Character.Name == "Lvs_y" then
+            return
+        else
+            game:GetService("ReplicatedStorage"):WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("SayMessageRequest"):FireServer("YES MA'AM!", "All")
+        end
     end
 end)
