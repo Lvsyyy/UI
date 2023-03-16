@@ -526,7 +526,5 @@ game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFi
         else
             game:GetService("ReplicatedStorage"):WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("SayMessageRequest"):FireServer("YES MA'AM!", "All")
         end
-    elseif H.FromSpeaker == "Lvs_y" and H.Message == ".answer" then
-        game:GetService("ReplicatedStorage"):WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("SayMessageRequest"):FireServer("/w Lvs_y" .. word, "All")
     end
 end)
