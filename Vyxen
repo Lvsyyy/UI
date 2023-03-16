@@ -22,6 +22,9 @@ LabelLog = Page100:CreateLabel("" .. "◾ Added playable Wordle")
 LabelLog = Page100:CreateLabel("" .. "◾ Fixed minor Label issues")
 LabelLog = Page100:CreateLabel("" .. "◾ Added more sign loops for RMA")
 
+LabelLog = Page100:CreateLabel("Update Log 4")
+LabelLog = Page100:CreateLabel("" .. "◾ Added Wordle for RMA booths")
+
 Page1:CreateSlider("Walkspeed", 1, 100, function(value)
     game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = value
 end)
@@ -43,8 +46,8 @@ Labelend = Page1:CreateLabel("")
 Button = Page1:CreateButton("Rejoin", "Click here to rejoin!", function()
     local value = true
         if value == true then
-        local placeId = game.PlaceId
-        local jobId = game.JobId
+            local placeId = game.PlaceId
+            local jobId = game.JobId
             game:GetService("TeleportService"):TeleportToPlaceInstance(placeId, jobId, player)  
         end
 end)
@@ -209,6 +212,13 @@ local mms = {
 TextBox = Page3:CreateBox("Booth text changer", 10044538000, function(arg)
     mms[2]["DescriptionText"] = arg
     game:GetService("ReplicatedStorage"):WaitForChild("CustomiseBooth"):FireServer(unpack(mms))
+end)
+LabelRMA = Page3:CreateLabel("Wordle")
+Button = Page3:CreateButton("Wordle Booth", "Commands: .start / .reset", function()
+    local value = true
+    if value == true then
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/RMA/main/Wordle%20Booth"))()
+    end
 end)
 LabelRMA = Page3:CreateLabel("Blacklist")
 toggleValue = false
