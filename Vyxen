@@ -24,6 +24,7 @@ LabelLog = Page100:CreateLabel("" .. "◾ Added more sign loops for RMA")
 
 LabelLog = Page100:CreateLabel("Update Log 4")
 LabelLog = Page100:CreateLabel("" .. "◾ Added Wordle for RMA booths")
+LabelLog = Page100:CreateLabel("" .. "◾ Added Custom Rating and Auto Toggle for RMA")
 
 Page1:CreateSlider("Walkspeed", 1, 100, function(value)
     game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = value
@@ -265,7 +266,7 @@ Button = Page3:CreateButton("Unblacklist All", "Unblacklists everyone", function
         game:GetService("ReplicatedStorage"):WaitForChild("CustomiseBooth"):FireServer("RemoveBlacklist", player.Name)
     end
 end)
-LabelRMA = Page3:CreateLabel("Ratings! Cooldown: 1 minute")
+LabelRMA = Page3:CreateLabel("Ratings! Cooldown: ca. 1 minute")
 Page3:CreateSlider("Rated Stars", 1, 5, function(value4)
     g = value4
 end)
@@ -325,34 +326,60 @@ TextBox = Page3:CreateBox("Type in target here.", 10044538000, function(arg)
 end)
 playerName = ""
 Button = Page3:CreateButton("Auto Rater", "Click to auto rate the target.", function()
-    if buttonActive and playerName ~= "" then
-        while _G. test == true do
+    if autoRaterToggle and playerName ~= "" then
+        while _G.autoRater == true do
             wait(10)
-            print(playerName)
             game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(game:GetService("Players"):WaitForChild(playerName), 5)
         end
     end
 end)
 Toggle = Page3:CreateToggle("Auto Rater toggler", "Switch the auto rater on and off.", function(state)
     if state == true then
-        buttonActive = true
-        print("Button activated")
-        _G.test = true
+        autoRaterToggle = true
+        _G.autoRater = true
     else
-        buttonActive = false
-        print("Button deactivated")
-        _G.test = false
+        autoRaterToggle = false
+        _G.autoRater = false
     end
 end)
 Labelend = Page3:CreateLabel("")
+Toggle = Page3:CreateToggle("Auto Rate toggler", "Loop activates 'Rating Bomber' and 'Custom Rating'", function(state)
+    if state == true then
+        bombAndCustom = true
+        _G.bombCustom = true
+    else
+        bombAndCustom = false
+        _G.bombCustom = false
+    end
+end)
 Button = Page3:CreateButton("Rating Bomber", "Makes everyones last rating weird", function()
-    local value = true
-        if value == true then
+    if bombAndCustom then
+        while _G.bombCustom == true do
+            wait(10)
             local players = game:GetService("Players"):GetPlayers()
             for _, player in ipairs(players) do
                 game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(player, 4.69696969696969)
             end
         end
+    end
+end)
+local baseNumber
+local stringNumber
+TextBox = Page3:CreateBox("Type in number here (1 - 5)", 10044538000, function(arg)
+    local split = string.split(arg, ".")
+    baseNumber = tonumber(split[1])
+    stringNumber = split[2] or ""
+end)
+Button = Page3:CreateButton("Custom Rating", "Must be between 1 - 5 and 14 digits after '.'", function()
+    if baseNumber and baseNumber >= 1 and baseNumber <= 5 and string.len(stringNumber) <= 14 and bombAndCustom then
+        while _G.bombCustom == true do
+            wait(10)
+            local players = game:GetService("Players"):GetPlayers()
+            for _, player in ipairs(players) do
+                game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(player, baseNumber + (stringNumber / (10 ^ string.len(stringNumber))))
+            end
+        end
+    end
 end)
 Labelend = Page3:CreateLabel("")
 Toggle = Page4:CreateToggle("Toggle Auto Attack & Mine", "Toggles auto attacking and mining", function(state)
