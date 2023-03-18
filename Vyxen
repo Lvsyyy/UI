@@ -1,5 +1,5 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/UI/main/Library"))()
-local Window = Library:CreateWindow("Vyxen ", "Version: 3", 10044538000)
+local Window = Library:CreateWindow("Vyxen ", "Version: 4 | Welcome! " .. game.Players.LocalPlayer.DisplayName .. " (@" .. game.Players.LocalPlayer.Name .. ")", 10044538000)
 local Tab = Window:CreateTab("Functions")
 local Page100 = Tab:CreateFrame("Update Log")
 local Page1 = Tab:CreateFrame("Universal")
@@ -25,6 +25,8 @@ LabelLog = Page100:CreateLabel("" .. "◾ Added more sign loops for RMA")
 LabelLog = Page100:CreateLabel("Update Log 4")
 LabelLog = Page100:CreateLabel("" .. "◾ Added Wordle for RMA booths")
 LabelLog = Page100:CreateLabel("" .. "◾ Added Custom Rating and Auto Toggle for RMA")
+LabelLog = Page100:CreateLabel("" .. "◾ Fixed a few Wordle logs")
+LabelLog = Page100:CreateLabel("" .. "◾ Added user's name to UI overlay")
 
 Page1:CreateSlider("Walkspeed", 1, 100, function(value)
     game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = value
