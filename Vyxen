@@ -27,6 +27,7 @@ LabelLog = Page100:CreateLabel("" .. "◾ Added Wordle for RMA booths")
 LabelLog = Page100:CreateLabel("" .. "◾ Added Custom Rating and Auto Toggle for RMA")
 LabelLog = Page100:CreateLabel("" .. "◾ Fixed a few Wordle logs")
 LabelLog = Page100:CreateLabel("" .. "◾ Added user's name to UI overlay")
+LabelLog = Page100:CreateLabel("" .. "◾ Completely debugged Wordle for RMA")
 
 Page1:CreateSlider("Walkspeed", 1, 100, function(value)
     game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = value
