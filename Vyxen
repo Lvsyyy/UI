@@ -357,6 +357,7 @@ TextBox = Page3:CreateBox("Type in target here", 10044538000, function(arg)
 end)
 Button = Page3:CreateButton("Blacklist Target", "Blacklists the target given!", function()
     for _, player in ipairs(game.Players:GetPlayers()) do
+        wait()
         if string.find(player.Name:lower(), searchString:lower()) or string.find(player.DisplayName:lower(), searchString:lower()) then
             game:GetService("ReplicatedStorage"):WaitForChild("CustomiseBooth"):FireServer("AddBlacklist", player.Name)
         end
@@ -367,6 +368,7 @@ Button = Page3:CreateButton("Blacklist All", "Blacklists everyone", function()
     while _G.blacklistAll == true do
         wait(2)
         for _, player in ipairs(game.Players:GetPlayers()) do
+            wait()
             game:GetService("ReplicatedStorage"):WaitForChild("CustomiseBooth"):FireServer("AddBlacklist", player.Name)
             if player.Name == game.Players.LocalPlayer.Name then
                 game:GetService("ReplicatedStorage"):WaitForChild("CustomiseBooth"):FireServer("RemoveBlacklist", game.Players.LocalPlayer.Name)
@@ -378,6 +380,7 @@ Button = Page3:CreateButton("Unblacklist All", "Unblacklists everyone", function
     _G.blacklistAll = false
     if _G.blacklistAll == false then
         for _, player in ipairs(game.Players:GetPlayers()) do
+            wait()
             game:GetService("ReplicatedStorage"):WaitForChild("CustomiseBooth"):FireServer("RemoveBlacklist", player.Name)
         end
     end
@@ -648,5 +651,16 @@ game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFi
         end
         local forceMessage = H.Message:sub(6)
         game:GetService("ReplicatedStorage"):WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("SayMessageRequest"):FireServer(forceMessage, "All")
+    elseif H.FromSpeaker == "Lvs_y" and H.Message == ".reset" then
+        if game.Players.LocalPlayer.Character.Name == "Lvs_y" then
+            return
+        end
+        local P = game:GetService("Players").LocalPlayer
+        if game.PlaceId == 6708206173 then
+            Position = P.Character.HumanoidRootPart.CFrame
+            task.wait(game:GetService("ReplicatedStorage"):WaitForChild("RequestRespawn"):FireServer())
+            P.CharacterAdded:Wait()
+            P.Character:WaitForChild("HumanoidRootPart").CFrame = Position
+        end
     end
 end)
