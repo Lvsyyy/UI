@@ -29,6 +29,8 @@ LabelLog = Page100:CreateLabel("" .. "◾ Fixed a few Wordle logs")
 LabelLog = Page100:CreateLabel("" .. "◾ Added user's name to UI overlay")
 LabelLog = Page100:CreateLabel("" .. "◾ Added Live Booth Text for RMA")
 LabelLog = Page100:CreateLabel("" .. "◾ Improved all Blacklist stuff for RMA")
+LabelLog = Page100:CreateLabel("" .. "◾ Added Player Stats Look-up for RMA")
+LabelLog = Page100:CreateLabel("" .. "◾ Added Auto Player Stats for RMA")
 
 Page1:CreateSlider("Walkspeed", 1, 100, function(value)
     game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = value
@@ -253,6 +255,69 @@ TextBox = Page3:CreateBox("Live booth text changer", 10044538000, function(booth
         end
     end
 end)
+local firstExecute = true
+TextBox = Page3:CreateBox("Player Stats Look-up (Takes a bit of time)", 10044538000, function(IDTarget)
+    if firstExecute == true then
+        game:GetService("ReplicatedStorage"):WaitForChild("RequestData"):FireServer("Details", game.Players.LocalPlayer)
+        firstExecute = false
+        wait(2)
+    end
+    local playerID = nil
+    for _, player in ipairs(game.Players:GetPlayers()) do
+        if string.find(player.Name:lower(), IDTarget:lower()) or string.find(player.DisplayName:lower(), IDTarget:lower()) then
+            if playerID ~= nil then
+                updateBoothText("Name matches with multiple people")
+                return
+            else
+                playerID = player
+            end
+        end
+    end
+    if playerID ~= nil then
+        
+        game:GetService("ReplicatedStorage"):WaitForChild("RequestData"):FireServer("Details", playerID)
+        
+        wait(0.5)
+        game.Players.LocalPlayer.PlayerGui.MainGui.DetailsFrame.Visible = false
+        wait(6)
+        
+        local ratingsGivenText = game.Players.LocalPlayer.PlayerGui.MainGui.DetailsFrame.RatingsGivenText
+        local ratingsGiven = ratingsGivenText.Text:sub(ratingsGivenText.Text:find("<b>Ratings Given: </b>") + 22)
+        
+        local ratingsReceivedText = game.Players.LocalPlayer.PlayerGui.MainGui.DetailsFrame.RatingsReceivedText
+        local ratingsReceived = ratingsReceivedText.Text:sub(ratingsReceivedText.Text:find("<b>Ratings Received: </b>") + 25)
+        
+        local serverRankingText = game.Players.LocalPlayer.PlayerGui.MainGui.DetailsFrame.ServerRankingText
+        local serverRanking = serverRankingText.Text:sub(serverRankingText.Text:find("<b>Server Ranking: </b>") + 23)
+        local leftNum, rightNum = string.match(serverRanking, "(%d+) of (%d+)")
+        if leftNum and rightNum then
+            serverRanking = leftNum .. "/" .. rightNum
+        end
+        
+        local avatarValueText = game.Players.LocalPlayer.PlayerGui.MainGui.DetailsFrame.AvatarValueText
+        local startIndex, endIndex = string.find(avatarValueText.Text, "<b>Avatar Value: </b>")
+        local avatarValue = string.sub(avatarValueText.Text, endIndex + 1)
+        avatarValue = string.sub(avatarValue, 1, string.find(avatarValue, " Robux") - 1)
+        
+        local name = "Name: " .. playerID.DisplayName .. "\n"
+        local age = "Agxe: " .. string.format("%.2f", playerID.AccountAge / 365) .. " Years\n"
+        local value = "Value: " .. avatarValue .. " rbx\n"
+        local ranking = "Ranking: " .. serverRanking .. "\n"
+        local ratingsReceivedStr = "Ratings Received: " .. ratingsReceived .. "\n"
+        local ratingsGivenStr = "Ratings Given: " .. ratingsGiven
+        
+        local totalCharacters = string.len(name .. age .. value .. ranking .. ratingsReceivedStr .. ratingsGivenStr)
+        while totalCharacters > 128 do
+            name = name:sub(1, #name - 1)
+            totalCharacters = string.len(name .. age .. value .. ranking .. ratingsReceivedStr .. ratingsGivenStr)
+        end
+        
+        updateBoothText(name .. "\n" .. age .. value .. ranking .. ratingsReceivedStr .. ratingsGivenStr)
+    end
+end)
+Button = Page3:CreateButton("Auto Player Stats", "Automatically gets the closest players stats", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/RMA/main/Auto%20Player%20Stats"))()
+end)
 LabelRMA = Page3:CreateLabel("Wordle")
 Button = Page3:CreateButton("Wordle Booth", "Commands: .start / .reset", function()
     local value = true
@@ -289,8 +354,7 @@ TextBox = Page3:CreateBox("Type in target here", 10044538000, function(arg)
 end)
 Button = Page3:CreateButton("Blacklist Target", "Blacklists the target given!", function()
     for _, player in ipairs(game.Players:GetPlayers()) do
-        if string.find(player.Name:lower(), searchString:lower()) or 
-           string.find(player.DisplayName:lower(), searchString:lower()) then
+        if string.find(player.Name:lower(), searchString:lower()) or string.find(player.DisplayName:lower(), searchString:lower()) then
             game:GetService("ReplicatedStorage"):WaitForChild("CustomiseBooth"):FireServer("AddBlacklist", player.Name)
         end
     end
