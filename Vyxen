@@ -1,5 +1,5 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/UI/main/Library"))()
-local Window = Library:CreateWindow("Vyxen ", "Version: 4 | Welcome! " .. game.Players.LocalPlayer.DisplayName .. " (@" .. game.Players.LocalPlayer.Name .. ")", 10044538000)
+local Window = Library:CreateWindow("Vyxen ", "Version: 4.1 | Welcome! " .. game.Players.LocalPlayer.DisplayName .. " (@" .. game.Players.LocalPlayer.Name .. ")", 10044538000)
 local Tab = Window:CreateTab("Functions")
 local Page100 = Tab:CreateFrame("Update Log")
 local Page1 = Tab:CreateFrame("Universal")
@@ -10,27 +10,29 @@ local Page9 = Tab:CreateFrame("Fun")
 local Page10 = Tab:CreateFrame("Credits")
 
 LabelLog = Page100:CreateLabel("Update Log 2")
-LabelLog = Page100:CreateLabel("" .. "◾ Added Booth Sniper")
-LabelLog = Page100:CreateLabel("" .. "◾ Added Abandon Booth")
-LabelLog = Page100:CreateLabel("" .. "◾ Added Update Log")
-LabelLog = Page100:CreateLabel("" .. "◾ Fixed Loop Anti Blacklist")
-LabelLog = Page100:CreateLabel("" .. "◾ Added Promocode Adventures")
-LabelLog = Page100:CreateLabel("" .. "◾ Added Toggle to earrape")
+LabelLog = Page100:CreateLabel(" ◾ Added Booth Sniper")
+LabelLog = Page100:CreateLabel(" ◾ Added Abandon Booth")
+LabelLog = Page100:CreateLabel(" ◾ Added Update Log")
+LabelLog = Page100:CreateLabel(" ◾ Fixed Loop Anti Blacklist")
+LabelLog = Page100:CreateLabel(" ◾ Added Promocode Adventures")
+LabelLog = Page100:CreateLabel(" ◾ Added Toggle to earrape")
 
 LabelLog = Page100:CreateLabel("Update Log 3")
-LabelLog = Page100:CreateLabel("" .. "◾ Added playable Wordle")
-LabelLog = Page100:CreateLabel("" .. "◾ Fixed minor Label issues")
-LabelLog = Page100:CreateLabel("" .. "◾ Added more sign loops for RMA")
+LabelLog = Page100:CreateLabel(" ◾ Added playable Wordle")
+LabelLog = Page100:CreateLabel(" ◾ Fixed minor Label issues")
+LabelLog = Page100:CreateLabel(" ◾ Added more sign loops for RMA")
 
 LabelLog = Page100:CreateLabel("Update Log 4")
-LabelLog = Page100:CreateLabel("" .. "◾ Added Wordle for RMA booths")
-LabelLog = Page100:CreateLabel("" .. "◾ Added Custom Rating and Auto Toggle for RMA")
-LabelLog = Page100:CreateLabel("" .. "◾ Fixed a few Wordle logs")
-LabelLog = Page100:CreateLabel("" .. "◾ Added user's name to UI overlay")
-LabelLog = Page100:CreateLabel("" .. "◾ Added Live Booth Text for RMA")
-LabelLog = Page100:CreateLabel("" .. "◾ Improved all Blacklist stuff for RMA")
-LabelLog = Page100:CreateLabel("" .. "◾ Added Player Stats Look-up for RMA")
-LabelLog = Page100:CreateLabel("" .. "◾ Added Auto Player Stats for RMA")
+LabelLog = Page100:CreateLabel(" ◾ Added Wordle for RMA booths")
+LabelLog = Page100:CreateLabel(" ◾ Added Custom Rating and Auto Toggle for RMA")
+LabelLog = Page100:CreateLabel(" ◾ Fixed a few Wordle logs")
+LabelLog = Page100:CreateLabel(" ◾ Added user's name to UI overlay")
+LabelLog = Page100:CreateLabel(" ◾ Added Live Booth Text for RMA")
+LabelLog = Page100:CreateLabel(" ◾ Improved all Blacklist stuff for RMA")
+LabelLog = Page100:CreateLabel(" ◾ Added Player Stats Look-up for RMA")
+LabelLog = Page100:CreateLabel(" ◾ Added Auto Player Stats for RMA")
+LabelLog = Page100:CreateLabel(" ◾ Removed some rating stuff for RMA")
+LabelLog = Page100:CreateLabel(" ◾ Made all around improvements")
 
 Page1:CreateSlider("Walkspeed", 1, 100, function(value)
     game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = value
@@ -197,7 +199,7 @@ Toggle = Page3:CreateToggle("Loop All Signs", "Gives all signs in a loop (gamepa
         _G.AllSigns = false
     end
 end)
-LabelRMA = Page3:CreateLabel("Booths")
+LabelRMA = Page3:CreateLabel("Booths Utility")
 Button = Page3:CreateButton("Booth Sniper", "Makes you claim a free booth", function()
     local value = true
     if value == true then
@@ -210,6 +212,7 @@ Button = Page3:CreateButton("Abandon Booth", "Makes you abandon your booth", fun
         game:GetService("ReplicatedStorage"):WaitForChild("CustomiseBooth"):FireServer("Abandon")
     end
 end)
+LabelRMA = Page3:CreateLabel("Booth Customizatons")
 local function updateBoothText(text)
     local r = game:GetService("ReplicatedStorage"):WaitForChild("CustomiseBooth")
     r:FireServer("Update", {
@@ -254,6 +257,9 @@ TextBox = Page3:CreateBox("Live booth text changer", 10044538000, function(booth
             wait(0.25)
         end
     end
+end)
+Button = Page3:CreateButton("Auto Player Stats", "Automatically gets the closest players stats", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/RMA/main/Auto%20Player%20Stats"))()
 end)
 local firstExecute = true
 TextBox = Page3:CreateBox("Player Stats Look-up (Takes a bit of time)", 10044538000, function(IDTarget)
@@ -314,9 +320,6 @@ TextBox = Page3:CreateBox("Player Stats Look-up (Takes a bit of time)", 10044538
         
         updateBoothText(name .. "\n" .. age .. value .. ranking .. ratingsReceivedStr .. ratingsGivenStr)
     end
-end)
-Button = Page3:CreateButton("Auto Player Stats", "Automatically gets the closest players stats", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/RMA/main/Auto%20Player%20Stats"))()
 end)
 LabelRMA = Page3:CreateLabel("Wordle")
 Button = Page3:CreateButton("Wordle Booth", "Commands: .start / .reset", function()
@@ -391,41 +394,6 @@ Button = Page3:CreateButton("Rate Everyone", "Rates everyone! Using the Slider!"
                 game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(player, g)
             end
         end
-end)
-LabelRMA = Page3:CreateLabel("For accurate ratings use this.")
-Button = Page3:CreateButton("Rate Everyone 1 Star", "Rates everyone with 1 star", function()
-    local players = game:GetService("Players"):GetPlayers()
-    for _, player in ipairs(players) do
-        game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(player, 1)
-    end
-end)
-
-Button = Page3:CreateButton("Rate Everyone 2 Stars", "Rates everyone with 2 stars", function()
-    local players = game:GetService("Players"):GetPlayers()
-    for _, player in ipairs(players) do
-        game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(player, 2)
-    end
-end)
-
-Button = Page3:CreateButton("Rate Everyone 3 Stars", "Rates everyone with 3 stars", function()
-    local players = game:GetService("Players"):GetPlayers()
-    for _, player in ipairs(players) do
-        game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(player, 3)
-    end
-end)
-
-Button = Page3:CreateButton("Rate Everyone 4 Stars", "Rates everyone with 4 stars", function()
-    local players = game:GetService("Players"):GetPlayers()
-    for _, player in ipairs(players) do
-        game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(player, 4)
-    end
-end)
-
-Button = Page3:CreateButton("Rate Everyone 5 Stars", "Rates everyone with 5 stars", function()
-    local players = game:GetService("Players"):GetPlayers()
-    for _, player in ipairs(players) do
-        game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(player, 5)
-    end
 end)
 LabelRMA = Page3:CreateLabel("Doesn't need the full user or display name!")
 TextBox = Page3:CreateBox("Type in target here.", 10044538000, function(arg)
