@@ -33,6 +33,7 @@ LabelLog = Page100:CreateLabel(" ◾ Added Player Stats Look-up for RMA")
 LabelLog = Page100:CreateLabel(" ◾ Added Auto Player Stats for RMA")
 LabelLog = Page100:CreateLabel(" ◾ Removed some rating stuff for RMA")
 LabelLog = Page100:CreateLabel(" ◾ Made all around improvements")
+LabelLog = Page100:CreateLabel(" ◾ Added Took Kill in Universal")
 
 Page1:CreateSlider("Walkspeed", 1, 100, function(value)
     game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = value
@@ -89,6 +90,33 @@ Button = Page1:CreateButton("Ignore", "Ignores / Deletes the target player", fun
 end)
 Button = Page1:CreateButton("Unignore", "Unignores / Undeletes the target player", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/Unignore"))()
+end)
+Labelend = Page1:CreateLabel("")
+local targetName
+
+TextBox = Page1:CreateBox("Type in target here", 10044538000, function(killTarget)
+    targetName = nil
+    for _, player in pairs(game.Players:GetPlayers()) do
+        if string.find(player.Name:lower(), killTarget:lower()) or string.find(player.DisplayName:lower(), killTarget:lower()) then
+            targetName = player.Name
+        end
+    end
+end)
+
+Button = Page1:CreateButton("Tool Kill", "Kills player given (tool required)", function()
+    if game:GetService("Players")[targetName]:IsA("Player") then
+        local player = game:GetService("Players").LocalPlayer
+        local playerHum = player.Character.Humanoid
+        local target = game:GetService("Players")[targetName]
+        local tool = player.Backpack:FindFirstChildOfClass("Tool")
+        
+        player.Character.Animate.Disabled = true
+        playerHum.Parent = nil
+        playerHum.Parent = player.Character
+        tool.Parent = player.Character
+        firetouchinterest(target.Character.HumanoidRootPart, tool.Handle, 0);
+        player.Character.Humanoid.Health = 0
+    end
 end)
 Labelend = Page1:CreateLabel("")
 TextBox = Page1:CreateBox("Type in target here", 10044538000, function(arg)
