@@ -34,6 +34,7 @@ LabelLog = Page100:CreateLabel(" ◾ Added Auto Player Stats for RMA")
 LabelLog = Page100:CreateLabel(" ◾ Removed some rating stuff for RMA")
 LabelLog = Page100:CreateLabel(" ◾ Made all around improvements")
 LabelLog = Page100:CreateLabel(" ◾ Added Took Kill in Universal")
+LabelLog = Page100:CreateLabel(" ◾ Added Fake Booths for RMA")
 
 Page1:CreateSlider("Walkspeed", 1, 100, function(value)
     game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = value
@@ -239,6 +240,13 @@ Button = Page3:CreateButton("Abandon Booth", "Makes you abandon your booth", fun
     if value == true then
         game:GetService("ReplicatedStorage"):WaitForChild("CustomiseBooth"):FireServer("Abandon")
     end
+end)
+fakeText = ""
+TextBox = Page3:CreateBox("Type stuff in here", 10044538000, function(targetFakeText)
+    fakeText = targetFakeText
+end)
+Button = Page3:CreateButton("Fake Booths", "Makes a fake claimed booth with false text", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/RMA/main/Fake%20Booth"))()
 end)
 LabelRMA = Page3:CreateLabel("Booth Customizatons")
 local function updateBoothText(text)
