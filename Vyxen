@@ -38,6 +38,8 @@ LabelLog = Page100:CreateLabel(" ◾ Added Fake Booths for RMA")
 
 LabelLog = Page100:CreateLabel("Update Log 5")
 LabelLog = Page100:CreateLabel(" ◾ Added Tool Kill toggle & Loop")
+LabelLog = Page100:CreateLabel(" ◾ Fixed Auto Rater")
+LabelLog = Page100:CreateLabel(" ◾ Added customizable stars for Auto Rater")
 
 Page1:CreateSlider("Walkspeed", 1, 100, function(value)
     game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = value
@@ -485,7 +487,9 @@ Button = Page3:CreateButton("Rate Everyone", "Rates everyone! Using the Slider!"
         end
 end)
 LabelRMA = Page3:CreateLabel("Doesn't need the full user or display name!")
-TextBox = Page3:CreateBox("Type in target here.", 10044538000, function(arg)
+local playerName = ""
+local autoRateStars = 0
+TextBox = Page3:CreateBox("Type in target here", 10044538000, function(arg)
     local players = game:GetService("Players"):GetPlayers()
     for _, player in ipairs(players) do
         if string.lower(arg) == string.lower(player.Name) or string.find(string.lower(player.Name), string.lower(arg)) or string.lower(arg) == string.lower(player.DisplayName) or string.find(string.lower(player.DisplayName), string.lower(arg)) then
@@ -494,22 +498,21 @@ TextBox = Page3:CreateBox("Type in target here.", 10044538000, function(arg)
         end
     end
 end)
-playerName = ""
-Button = Page3:CreateButton("Auto Rater", "Click to auto rate the target.", function()
-    if autoRaterToggle and playerName ~= "" then
-        while _G.autoRater == true do
-            wait(10)
-            game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(game:GetService("Players"):WaitForChild(playerName), 5)
-        end
-    end
+TextBox = Page3:CreateBox("Type Auto Rated stars amount (1 - 5 stars)", 10044538000, function(arg)
+    autoRateStars = tonumber(arg) or 0
 end)
-Toggle = Page3:CreateToggle("Auto Rater toggler", "Switch the auto rater on and off.", function(state)
-    if state == true then
-        autoRaterToggle = true
-        _G.autoRater = true
-    else
-        autoRaterToggle = false
-        _G.autoRater = false
+local Toggle = Page3:CreateToggle("Auto Rater toggler", "Switch the auto rater on and off", function(state)
+    _G.autoRaterToggle = state
+end)
+Button = Page3:CreateButton("Auto Rater", "Click to auto rate the target", function()
+    while true do
+        if _G.autoRaterToggle and playerName and autoRateStars >= 1 and autoRateStars <= 5 then
+            autoRateStars = math.floor(autoRateStars)
+            game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(game:GetService("Players"):WaitForChild(playerName), autoRateStars)
+            wait(10)
+        else
+            wait()
+        end
     end
 end)
 Labelend = Page3:CreateLabel("")
