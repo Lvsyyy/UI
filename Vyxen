@@ -1,5 +1,5 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/UI/main/Library"))()
-local Window = Library:CreateWindow("Vyxen ", "Version: 4.1 | Welcome! " .. game.Players.LocalPlayer.DisplayName .. " (@" .. game.Players.LocalPlayer.Name .. ")", 10044538000)
+local Window = Library:CreateWindow("Vyxen ", "Version: 5 | Welcome! " .. game.Players.LocalPlayer.DisplayName .. " (@" .. game.Players.LocalPlayer.Name .. ")", 10044538000)
 local Tab = Window:CreateTab("Functions")
 local Page100 = Tab:CreateFrame("Update Log")
 local Page1 = Tab:CreateFrame("Universal")
@@ -35,6 +35,9 @@ LabelLog = Page100:CreateLabel(" ◾ Removed some rating stuff for RMA")
 LabelLog = Page100:CreateLabel(" ◾ Made all around improvements")
 LabelLog = Page100:CreateLabel(" ◾ Added Took Kill in Universal")
 LabelLog = Page100:CreateLabel(" ◾ Added Fake Booths for RMA")
+
+LabelLog = Page100:CreateLabel("Update Log 5")
+LabelLog = Page100:CreateLabel(" ◾ Added Tool Kill toggle & Loop")
 
 Page1:CreateSlider("Walkspeed", 1, 100, function(value)
     game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = value
@@ -103,20 +106,63 @@ TextBox = Page1:CreateBox("Type in target here", 10044538000, function(killTarge
         end
     end
 end)
-
 Button = Page1:CreateButton("Tool Kill", "Kills player given (tool required)", function()
     if game:GetService("Players")[targetName]:IsA("Player") then
         local player = game:GetService("Players").LocalPlayer
-        local playerHum = player.Character.Humanoid
+        local playerChar = player.Character
+        local playerHum = playerChar.Humanoid
         local target = game:GetService("Players")[targetName]
         local tool = player.Backpack:FindFirstChildOfClass("Tool")
+        local playerPos = playerChar.HumanoidRootPart.CFrame
         
-        player.Character.Animate.Disabled = true
+        while not player and not playerChar and not playerHum and not tool do
+            wait()
+        end
+        
+        playerChar.Animate.Disabled = true
         playerHum.Parent = nil
         playerHum.Parent = player.Character
         tool.Parent = player.Character
         firetouchinterest(target.Character.HumanoidRootPart, tool.Handle, 0);
         player.Character.Humanoid.Health = 0
+        
+        game:GetService("ReplicatedStorage"):WaitForChild("RequestRespawn"):FireServer()
+        wait(0.5)
+        game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = playerPos
+    end
+end)
+Toggle = Page1:CreateToggle("Toggle Tool Kill", "Toggles tool kill", function(state)
+    if state == true then
+        _G.toolKillToggle = true
+    elseif state == false then
+        _G.toolKillToggle = false
+    end
+end)
+Button = Page1:CreateButton("Tool Kill Loop", "Loop kills player given (tool required)", function()
+    while _G.toolKillToggle == true and wait(0.5) do
+        if game:GetService("Players")[targetName]:IsA("Player") then
+            local player = game:GetService("Players").LocalPlayer
+            local playerChar = player.Character
+            local playerHum = playerChar.Humanoid
+            local target = game:GetService("Players")[targetName]
+            local tool = player.Backpack:FindFirstChildOfClass("Tool")
+            local playerPos = playerChar.HumanoidRootPart.CFrame
+            
+            while not player and not playerChar and not playerHum and not tool do
+                wait()
+            end
+            
+            playerChar.Animate.Disabled = true
+            playerHum.Parent = nil
+            playerHum.Parent = player.Character
+            tool.Parent = player.Character
+            firetouchinterest(target.Character.HumanoidRootPart, tool.Handle, 0);
+            player.Character.Humanoid.Health = 0
+            
+            game:GetService("ReplicatedStorage"):WaitForChild("RequestRespawn"):FireServer()
+            wait(0.5)
+            game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = playerPos
+        end
     end
 end)
 Labelend = Page1:CreateLabel("")
@@ -242,8 +288,12 @@ Button = Page3:CreateButton("Abandon Booth", "Makes you abandon your booth", fun
     end
 end)
 fakeText = ""
-TextBox = Page3:CreateBox("Type stuff in here", 10044538000, function(targetFakeText)
+fakeimageID = ""
+TextBox = Page3:CreateBox("Type text in here", 10044538000, function(targetFakeText)
     fakeText = targetFakeText
+end)
+TextBox = Page3:CreateBox("Type imageID in here", 10044538000, function(targetFakeImageID)
+    fakeimageID = targetFakeImageID
 end)
 Button = Page3:CreateButton("Fake Booths", "Makes a fake claimed booth with false text", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/RMA/main/Fake%20Booth"))()
