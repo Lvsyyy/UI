@@ -40,6 +40,8 @@ LabelLog = Page100:CreateLabel("Update Log 5")
 LabelLog = Page100:CreateLabel(" ◾ Added Tool Kill toggle & Loop")
 LabelLog = Page100:CreateLabel(" ◾ Fixed Auto Rater")
 LabelLog = Page100:CreateLabel(" ◾ Added customizable stars for Auto Rater")
+LabelLog = Page100:CreateLabel(" ◾ Added rate Top Rated for RMA")
+LabelLog = Page100:CreateLabel(" ◾ Added highlight for Booth Sniper")
 
 Page1:CreateSlider("Walkspeed", 1, 100, function(value)
     game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = value
@@ -110,6 +112,8 @@ TextBox = Page1:CreateBox("Type in target here", 10044538000, function(killTarge
 end)
 Button = Page1:CreateButton("Tool Kill", "Kills player given (tool required)", function()
     if game:GetService("Players")[targetName]:IsA("Player") then
+        local savedPos
+        local savedCam
         local player = game:GetService("Players").LocalPlayer
         local playerChar = player.Character
         local playerHum = playerChar.Humanoid
@@ -127,10 +131,15 @@ Button = Page1:CreateButton("Tool Kill", "Kills player given (tool required)", f
         tool.Parent = player.Character
         firetouchinterest(target.Character.HumanoidRootPart, tool.Handle, 0);
         player.Character.Humanoid.Health = 0
-        
-        game:GetService("ReplicatedStorage"):WaitForChild("RequestRespawn"):FireServer()
+        savedPos = player.Character.HumanoidRootPart.CFrame
+        savedCam = workspace.CurrentCamera.CFrame
+        if game.PlaceId == 6708206173 then
+            game:GetService("ReplicatedStorage"):WaitForChild("RequestRespawn"):FireServer()
+        end
         wait(0.5)
         game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = playerPos
+        player.Character.HumanoidRootPart.CFrame = savedPos
+        workspace.CurrentCamera.CFrame = savedCam
     end
 end)
 Toggle = Page1:CreateToggle("Toggle Tool Kill", "Toggles tool kill", function(state)
@@ -143,6 +152,8 @@ end)
 Button = Page1:CreateButton("Tool Kill Loop", "Loop kills player given (tool required)", function()
     while _G.toolKillToggle == true and wait(0.5) do
         if game:GetService("Players")[targetName]:IsA("Player") then
+            local savedPos
+            local savedCam
             local player = game:GetService("Players").LocalPlayer
             local playerChar = player.Character
             local playerHum = playerChar.Humanoid
@@ -160,10 +171,15 @@ Button = Page1:CreateButton("Tool Kill Loop", "Loop kills player given (tool req
             tool.Parent = player.Character
             firetouchinterest(target.Character.HumanoidRootPart, tool.Handle, 0);
             player.Character.Humanoid.Health = 0
-            
-            game:GetService("ReplicatedStorage"):WaitForChild("RequestRespawn"):FireServer()
+            savedPos = player.Character.HumanoidRootPart.CFrame
+            savedCam = workspace.CurrentCamera.CFrame
+            if game.PlaceId == 6708206173 then
+                game:GetService("ReplicatedStorage"):WaitForChild("RequestRespawn"):FireServer()
+            end
             wait(0.5)
             game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = playerPos
+            player.Character.HumanoidRootPart.CFrame = savedPos
+            workspace.CurrentCamera.CFrame = savedCam
         end
     end
 end)
@@ -512,6 +528,37 @@ Button = Page3:CreateButton("Auto Rater", "Click to auto rate the target", funct
             wait(10)
         else
             wait()
+        end
+    end
+end)
+TextBox = Page3:CreateBox("Type Auto Rated stars amount (1 - 5 stars)", 10044538000, function(arg)
+    topRatedStars = arg
+end)
+Toggle = Page3:CreateToggle("Toggle Tool Kill", "Toggles tool kill", function(state)
+    if state == true then
+        _G.loopRateTopRated = true
+    elseif state == false then
+        _G.loopRateTopRated = false
+    end
+end)
+Button = Page3:CreateButton("Rate Top Rated", "Rates the top rated person", function()
+    while _G.loopRateTopRated == true and wait(10) do
+        local function searchForPlayerWithAvatarID(avatarID)
+            local players = game:GetService("Players"):GetPlayers()
+            for _, player in ipairs(players) do
+                local characterAppearance = player.CharacterAppearance
+                if characterAppearance and string.find(characterAppearance, avatarID) then
+                    game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(player, topRatedStars)
+                    return player.Name
+                end
+            end
+        end
+        local avatarImage = game.Workspace["Locked Advertisement Board"].Screen2.SurfaceGui2.Frame.AvatarImage
+        if avatarImage and avatarImage.Image and string.find(avatarImage.Image, "rbxthumb://type=AvatarBust&id=") then
+            local startIndex = string.find(avatarImage.Image, "rbxthumb://type=AvatarBust&id=") + #"rbxthumb://type=AvatarBust&id="
+            local endIndex = string.find(avatarImage.Image, "&w=180&h=180") - 1
+            local avatarID = string.sub(avatarImage.Image, startIndex, endIndex)
+            searchForPlayerWithAvatarID(avatarID)
         end
     end
 end)
