@@ -42,6 +42,9 @@ LabelLog = Page100:CreateLabel(" ◾ Fixed Auto Rater")
 LabelLog = Page100:CreateLabel(" ◾ Added customizable stars for Auto Rater")
 LabelLog = Page100:CreateLabel(" ◾ Added rate Top Rated for RMA")
 LabelLog = Page100:CreateLabel(" ◾ Added highlight for Booth Sniper")
+LabelLog = Page100:CreateLabel(" ◾ Made the rescale for Tiny faster")
+LabelLog = Page100:CreateLabel(" ◾ Fixed some minor label mistakes")
+LabelLog = Page100:CreateLabel(" ◾ Added automatic rescale to tool kill")
 
 Page1:CreateSlider("Walkspeed", 1, 100, function(value)
     game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = value
@@ -100,8 +103,7 @@ Button = Page1:CreateButton("Unignore", "Unignores / Undeletes the target player
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/Unignore"))()
 end)
 Labelend = Page1:CreateLabel("")
-local targetName
-
+targetName = ""
 TextBox = Page1:CreateBox("Type in target here", 10044538000, function(killTarget)
     targetName = nil
     for _, player in pairs(game.Players:GetPlayers()) do
@@ -112,34 +114,7 @@ TextBox = Page1:CreateBox("Type in target here", 10044538000, function(killTarge
 end)
 Button = Page1:CreateButton("Tool Kill", "Kills player given (tool required)", function()
     if game:GetService("Players")[targetName]:IsA("Player") then
-        local savedPos
-        local savedCam
-        local player = game:GetService("Players").LocalPlayer
-        local playerChar = player.Character
-        local playerHum = playerChar.Humanoid
-        local target = game:GetService("Players")[targetName]
-        local tool = player.Backpack:FindFirstChildOfClass("Tool")
-        local playerPos = playerChar.HumanoidRootPart.CFrame
-        
-        while not player and not playerChar and not playerHum and not tool do
-            wait()
-        end
-        
-        playerChar.Animate.Disabled = true
-        playerHum.Parent = nil
-        playerHum.Parent = player.Character
-        tool.Parent = player.Character
-        firetouchinterest(target.Character.HumanoidRootPart, tool.Handle, 0);
-        player.Character.Humanoid.Health = 0
-        savedPos = player.Character.HumanoidRootPart.CFrame
-        savedCam = workspace.CurrentCamera.CFrame
-        if game.PlaceId == 6708206173 then
-            game:GetService("ReplicatedStorage"):WaitForChild("RequestRespawn"):FireServer()
-        end
-        wait(0.5)
-        game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = playerPos
-        player.Character.HumanoidRootPart.CFrame = savedPos
-        workspace.CurrentCamera.CFrame = savedCam
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/Tkill"))()
     end
 end)
 Toggle = Page1:CreateToggle("Toggle Tool Kill", "Toggles tool kill", function(state)
@@ -152,34 +127,7 @@ end)
 Button = Page1:CreateButton("Tool Kill Loop", "Loop kills player given (tool required)", function()
     while _G.toolKillToggle == true and wait(0.5) do
         if game:GetService("Players")[targetName]:IsA("Player") then
-            local savedPos
-            local savedCam
-            local player = game:GetService("Players").LocalPlayer
-            local playerChar = player.Character
-            local playerHum = playerChar.Humanoid
-            local target = game:GetService("Players")[targetName]
-            local tool = player.Backpack:FindFirstChildOfClass("Tool")
-            local playerPos = playerChar.HumanoidRootPart.CFrame
-            
-            while not player and not playerChar and not playerHum and not tool do
-                wait()
-            end
-            
-            playerChar.Animate.Disabled = true
-            playerHum.Parent = nil
-            playerHum.Parent = player.Character
-            tool.Parent = player.Character
-            firetouchinterest(target.Character.HumanoidRootPart, tool.Handle, 0);
-            player.Character.Humanoid.Health = 0
-            savedPos = player.Character.HumanoidRootPart.CFrame
-            savedCam = workspace.CurrentCamera.CFrame
-            if game.PlaceId == 6708206173 then
-                game:GetService("ReplicatedStorage"):WaitForChild("RequestRespawn"):FireServer()
-            end
-            wait(0.5)
-            game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = playerPos
-            player.Character.HumanoidRootPart.CFrame = savedPos
-            workspace.CurrentCamera.CFrame = savedCam
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/Tkill"))()
         end
     end
 end)
@@ -534,7 +482,7 @@ end)
 TextBox = Page3:CreateBox("Type Auto Rated stars amount (1 - 5 stars)", 10044538000, function(arg)
     topRatedStars = arg
 end)
-Toggle = Page3:CreateToggle("Toggle Tool Kill", "Toggles tool kill", function(state)
+Toggle = Page3:CreateToggle("Toggle Rate Top Rated", "Toggle rates the top rated person in server", function(state)
     if state == true then
         _G.loopRateTopRated = true
     elseif state == false then
@@ -620,7 +568,6 @@ word = ""
 guessedWord = ""
 numGuesses = 0
 maxGuesses = 6
-
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/Wordle"))()
 Button = Page9:CreateButton("Play Wordle", "Click to start playing Wordle", newWord)
 TextBox = Page9:CreateBox("Enter a 5-letter word:", 10044538000, evaluateGuess)
@@ -629,47 +576,7 @@ Label = Page9:CreateLabel("")
 Label1 = Page9:CreateLabel("Evaluation:")
 
 Button = Page9:CreateButton("Tiny", "R15 ONLY! Make your scale values the lowest", function()
-    local value = true
-        if value == true then
-        local LocalPlayer = game:GetService("Players").LocalPlayer
-        local Character = LocalPlayer.Character
-        local Humanoid = Character:FindFirstChildOfClass("Humanoid")
-
-        local function rm()
-            for i,v in pairs(Character:GetDescendants()) do
-                if v:IsA("BasePart") then
-                if v.Name ~= "Head" then
-            for i,cav in pairs(v:GetDescendants()) do
-                if cav:IsA("Attachment") then
-                if cav:FindFirstChild("OriginalPosition") then
-            cav.OriginalPosition:Destroy()
-                end
-            end
-        end
-                v:FindFirstChild("OriginalSize"):Destroy()
-                    if v:FindFirstChild("AvatarPartScaleType") then
-                        v:FindFirstChild("AvatarPartScaleType"):Destroy()
-                        end
-                    end
-                end
-            end
-        end
-    wait(0.5)
-        Humanoid:FindFirstChild("HeadScale"):Destroy()
-    wait(1)
-    rm()
-    wait(0.5)
-        Humanoid:FindFirstChild("BodyTypeScale"):Destroy()
-    wait(1)
-    rm()
-    wait(0.5)
-        Humanoid:FindFirstChild("BodyWidthScale"):Destroy()
-    wait(1)
-    rm()
-    wait(0.5)
-        Humanoid:FindFirstChild("BodyDepthScale"):Destroy()
-    wait(1)
-end
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/Tiny"))()
 end)
 Labelend = Page9:CreateLabel("")
 Page9:CreateSlider("Speed Changer", 15, 150, function(value5)
