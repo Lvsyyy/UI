@@ -46,6 +46,7 @@ LabelLog = Page100:CreateLabel(" ◾ Made the rescale for Tiny faster")
 LabelLog = Page100:CreateLabel(" ◾ Fixed some minor label mistakes")
 LabelLog = Page100:CreateLabel(" ◾ Added automatic rescale to tool kill")
 LabelLog = Page100:CreateLabel(" ◾ Made anti blacklist more reliable")
+LabelLog = Page100:CreateLabel(" ◾ Made Tool Kill more reliable")
 
 Page1:CreateSlider("Walkspeed", 1, 100, function(value)
     game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = value
@@ -117,6 +118,8 @@ Button = Page1:CreateButton("Tool Kill", "Kills player given (tool required)", f
     if game:GetService("Players")[targetName]:IsA("Player") then
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/Tkill"))()
     end
+    game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = savedPos
+    game:GetService("Workspace").CurrentCamera.CFrame = savedCam
 end)
 Toggle = Page1:CreateToggle("Toggle Tool Kill", "Toggles tool kill", function(state)
     if state == true then
@@ -130,6 +133,8 @@ Button = Page1:CreateButton("Tool Kill Loop", "Loop kills player given (tool req
         if game:GetService("Players")[targetName]:IsA("Player") then
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/Tkill"))()
         end
+        game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = savedPos
+        game:GetService("Workspace").CurrentCamera.CFrame = savedCam
     end
 end)
 Labelend = Page1:CreateLabel("")
