@@ -8,7 +8,7 @@ local request = request or http_request or (identifyexecutor() == "Synapse X" an
 loadstring(request({Url="https://raw.githubusercontent.com/cypherdh/Script-Library/main/InstanceProtect",Method="GET"}).Body)()
 local UIS = game:GetService("UserInputService")
 local TS = game:GetService("TweenService")
-function library:CreateWindow(name, version, PlayerIcon)
+function library:CreateWindow(name, version, icon, PlayerIcon)
 	name = name or "Name"
 	version = version or "Version"
 	icon = icon or math.random()
@@ -67,9 +67,9 @@ function library:CreateWindow(name, version, PlayerIcon)
 	PlayerIcon.Parent = TitleBar
 	PlayerIcon.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	PlayerIcon.BackgroundTransparency = 1.000
-	PlayerIcon.Position = UDim2.new(0, 6, 0, 6)
+	PlayerIcon.Position = UDim2.new(0, 7.5, 0, 6)
 	PlayerIcon.Size = UDim2.new(0, 20, 0, 20)
-	PlayerIcon.Image = "https://www.roblox.com/headshot-thumbnail/image?userId=" .. tostring(game.Players.LocalPlayer.UserId) .. "&width=420&height=420"
+	PlayerIcon.Image = "https://www.roblox.com/headshot-thumbnail/image?userId=" .. tostring(game.Players.LocalPlayer.UserId) .. "&width=430&height=430"
 
 	MainTitle.Name = "Title"
 	MainTitle.Parent = TitleBar
