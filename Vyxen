@@ -45,6 +45,7 @@ LabelLog = Page100:CreateLabel(" ◾ Added highlight for Booth Sniper")
 LabelLog = Page100:CreateLabel(" ◾ Made the rescale for Tiny faster")
 LabelLog = Page100:CreateLabel(" ◾ Fixed some minor label mistakes")
 LabelLog = Page100:CreateLabel(" ◾ Added automatic rescale to tool kill")
+LabelLog = Page100:CreateLabel(" ◾ Made anti blacklist more reliable")
 
 Page1:CreateSlider("Walkspeed", 1, 100, function(value)
     game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = value
@@ -381,26 +382,22 @@ Button = Page3:CreateButton("Wordle Booth", "Commands: .start / .reset", functio
     end
 end)
 LabelRMA = Page3:CreateLabel("Blacklist")
-toggleValue = false
-local stopLoop = false
-Toggle = Page3:CreateToggle("Anti Blacklist toggler", "Toggles the anti blacklist!", function(value)
-    toggleValue = value
-    if not toggleValue then
-        stopLoop = true
+Toggle = Page3:CreateToggle("Anti Blacklist toggler", "Toggles the anti blacklist!", function(state)
+    if state == true then
+        _G.AntiBlacklistLoop = true
+    elseif state == false then
+        _G.AntiBlacklistLoop = false
     end
 end)
 Button = Page3:CreateButton("Loop Anti Blacklist", "loops anti blacklist!", function()
-    while toggleValue do
+    while _G.AntiBlacklistLoop == true do
         local Barrier = "BarrierFor"
         for _, child in ipairs(workspace:GetDescendants()) do
             if string.find(child.Name, Barrier) then
                 child:Destroy()
             end
         end
-        wait(0.1)
-        if stopLoop then
-            break
-        end
+        wait(0.6)
     end
 end)
 local searchString = ""
