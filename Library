@@ -74,9 +74,8 @@ function library:CreateWindow(name, version, PlayerIcon)
 	PlayerIcon.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	PlayerIcon.BackgroundTransparency = 1.000
 	PlayerIcon.Position = UDim2.new(0, 6, 0, 6)
-	PlayerIcon.Size = UDim2.new(0, 18, 0, 18)
+	PlayerIcon.Size = UDim2.new(0, 20, 0, 20)
 	PlayerIcon.Image = content
-	PlayerIcon.ImageColor3 = Color3.fromRGB(135, 255, 135)
 
 	MainTitle.Name = "Title"
 	MainTitle.Parent = TitleBar
