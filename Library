@@ -67,7 +67,7 @@ function library:CreateWindow(name, version, icon, PlayerIcon)
 	PlayerIcon.Parent = TitleBar
 	PlayerIcon.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	PlayerIcon.BackgroundTransparency = 1.000
-	PlayerIcon.Position = UDim2.new(0, 20, 0, 6)
+	PlayerIcon.Position = UDim2.new(0, 500, 0, 6)
 	PlayerIcon.Size = UDim2.new(0, 20, 0, 20)
 	PlayerIcon.Image = "https://www.roblox.com/headshot-thumbnail/image?userId=" .. tostring(game.Players.LocalPlayer.UserId) .. "&width=430&height=430"
 
