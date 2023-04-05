@@ -8,7 +8,7 @@ local request = request or http_request or (identifyexecutor() == "Synapse X" an
 loadstring(request({Url="https://raw.githubusercontent.com/cypherdh/Script-Library/main/InstanceProtect",Method="GET"}).Body)()
 local UIS = game:GetService("UserInputService")
 local TS = game:GetService("TweenService")
-function library:CreateWindow(name, version, icon)
+function library:CreateWindow(name, version, PlayerIcon)
 	name = name or "Name"
 	version = version or "Version"
 	icon = icon or math.random()
@@ -61,6 +61,22 @@ function library:CreateWindow(name, version, icon)
 	Icon.Size = UDim2.new(0, 18, 0, 18)
 	Icon.Image = "rbxassetid://"..icon
 	Icon.ImageColor3 = Color3.fromRGB(135, 255, 135)
+
+	local Players = game:GetService("Players")
+	local player = Players.LocalPlayer
+	local userId = player.UserId
+	local thumbType = Enum.ThumbnailType.HeadShot
+	local thumbSize = Enum.ThumbnailSize.Size420x420
+	local content, isReady = Players:GetUserThumbnailAsync(userId, thumbType, thumbSize)
+
+	PlayerIcon.Name = "PlayerIcon"
+	PlayerIcon.Parent = TitleBar
+	PlayerIcon.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	PlayerIcon.BackgroundTransparency = 1.000
+	PlayerIcon.Position = UDim2.new(0, 6, 0, 6)
+	PlayerIcon.Size = UDim2.new(0, 18, 0, 18)
+	PlayerIcon.Image = content
+	PlayerIcon.ImageColor3 = Color3.fromRGB(135, 255, 135)
 
 	MainTitle.Name = "Title"
 	MainTitle.Parent = TitleBar
