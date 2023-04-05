@@ -69,7 +69,7 @@ function library:CreateWindow(name, version, PlayerIcon)
 	local thumbSize = Enum.ThumbnailSize.Size420x420
 	local content, isReady = Players:GetUserThumbnailAsync(userId, thumbType, thumbSize)
 
-	PlayerIcon.Name = "PlayerIcon"
+	PlayerIcon.Name = "Icon"
 	PlayerIcon.Parent = TitleBar
 	PlayerIcon.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	PlayerIcon.BackgroundTransparency = 1.000
