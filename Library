@@ -17,6 +17,7 @@ function library:CreateWindow(name, version, PlayerIcon)
 	local UICorner = Instance.new("UICorner")
 	local TitleBar = Instance.new("Frame")
 	local Icon = Instance.new("ImageLabel")
+	local PlayerIcon = Instance.new("ImageLabel")
 	local MainTitle = Instance.new("TextLabel")
 	local TitleUnderline = Instance.new("Frame")
 	local UIGradient = Instance.new("UIGradient")
@@ -63,13 +64,12 @@ function library:CreateWindow(name, version, PlayerIcon)
 	Icon.ImageColor3 = Color3.fromRGB(135, 255, 135)
 
 	local Players = game:GetService("Players")
-	local player = Players.LocalPlayer
-	local userId = player.UserId
+	local userId = Players.LocalPlayer.UserId
 	local thumbType = Enum.ThumbnailType.HeadShot
 	local thumbSize = Enum.ThumbnailSize.Size420x420
 	local content, isReady = Players:GetUserThumbnailAsync(userId, thumbType, thumbSize)
 
-	PlayerIcon.Name = "Icon"
+	PlayerIcon.Name = "PlayerIcon"
 	PlayerIcon.Parent = TitleBar
 	PlayerIcon.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	PlayerIcon.BackgroundTransparency = 1.000
