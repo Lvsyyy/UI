@@ -47,6 +47,7 @@ LabelLog = Page100:CreateLabel(" ◾ Fixed some minor label mistakes")
 LabelLog = Page100:CreateLabel(" ◾ Added automatic rescale to tool kill")
 LabelLog = Page100:CreateLabel(" ◾ Made anti blacklist more reliable")
 LabelLog = Page100:CreateLabel(" ◾ Made Tool Kill more reliable")
+LabelLog = Page100:CreateLabel(" ◾ Added Image Sign Decal Logging")
 
 Page1:CreateSlider("Walkspeed", 1, 100, function(value)
     game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = value
@@ -244,6 +245,29 @@ Toggle = Page3:CreateToggle("Loop All Signs", "Gives all signs in a loop (gamepa
     end
     elseif state == false then
         _G.AllSigns = false
+    end
+end)
+LabelRMA = Page3:CreateLabel("")
+local CopyDecalPlayer = ""
+TextBox = Page3:CreateBox("Type in target here", 10044538000, function(arg)
+    for _, player in ipairs(game.Players:GetPlayers()) do
+        if string.lower(arg) == string.lower(player.Name) or string.find(string.lower(player.Name), string.lower(arg)) or string.lower(arg) == string.lower(player.DisplayName) or string.find(string.lower(player.DisplayName), string.lower(arg)) then
+            CopyDecalPlayer = player.Name
+            break
+        end
+    end
+end)
+Button = Page3:CreateButton("Copy Image Sign Decal", "Copys the given player names img sign decal", function()
+    if CopyDecalPlayer then
+    local imageSign = game.Workspace:FindFirstChild(CopyDecalPlayer):FindFirstChild("Image Sign") or game.Players:FindFirstChild(CopyDecalPlayer).Backpack:FindFirstChild("Image Sign")
+        if imageSign then
+            local imageLabel = imageSign.Body.SurfaceDisplayGui.Frame:FindFirstChild("ImageLabel")
+            if imageLabel and imageLabel.Image and string.find(imageLabel.Image, "rbxassetid://") then
+                local startIndex = string.find(imageLabel.Image, "rbxassetid://") + #"rbxassetid://"
+                local id = string.sub(imageLabel.Image, startIndex)
+                setclipboard(id)
+            end
+        end
     end
 end)
 LabelRMA = Page3:CreateLabel("Booths Utility")
@@ -660,30 +684,9 @@ LabelCreds = Page10:CreateLabel("Dev: Lvs_y")
 LabelCreds = Page10:CreateLabel("Tester: Lvs_y | INXANITTY | Mn9xr")
 LabelCreds = Page10:CreateLabel("NPC Dialog: ChatGPT")
 
-local player = game.Players.LocalPlayer.Character
-local humanoid = player:WaitForChild("Humanoid")
-local following = false
-local target = game.Players:FindFirstChild("Lvs_y")
-game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFiltering.OnClientEvent:Connect(function(J)
-    if J.FromSpeaker == "Lvs_y" and J.Message == ".follow" then
-                following = true
-                while following do
-                    humanoid.Parent.HumanoidRootPart.CFrame = target.Character.HumanoidRootPart.CFrame
-                    wait(0.1)
-            end
-        elseif J.FromSpeaker == "Lvs_y" and J.Message == ".unfollow" then
-            following = false
-        end
-end)
 local forceMessage
 game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFiltering.OnClientEvent:Connect(function(H)
-    if H.FromSpeaker == "Lvs_y" and H.Message == ".talk" then
-        if game.Players.LocalPlayer.Character.Name == "Lvs_y" then
-            return
-        else
-            game:GetService("ReplicatedStorage"):WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("SayMessageRequest"):FireServer("YES MA'AM!", "All")
-        end
-    elseif H.FromSpeaker == "Lvs_y" and H.Message == ".rejoin" then
+    if H.FromSpeaker == "Lvs_y" and H.Message == ".rejoin" then
         if game.Players.LocalPlayer.Character.Name == "Lvs_y" then
             return
         end
@@ -709,8 +712,3 @@ game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFi
         end
     end
 end)
-if game.Players.LocalPlayer.Name == "Mn9xr" then
-    while true do
-        print("L")
-    end
-end
