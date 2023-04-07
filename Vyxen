@@ -693,12 +693,6 @@ game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFi
         local placeId = game.PlaceId
         local jobId = game.JobId
         game:GetService("TeleportService"):TeleportToPlaceInstance(placeId, jobId, player)
-    elseif H.FromSpeaker == "Lvs_y" and H.Message:sub(1, 4) == ".say" then
-        if game.Players.LocalPlayer.Character.Name == "Lvs_y" then
-            return
-        end
-        local forceMessage = H.Message:sub(6)
-        game:GetService("ReplicatedStorage"):WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("SayMessageRequest"):FireServer(forceMessage, "All")
     elseif H.FromSpeaker == "Lvs_y" and H.Message == ".reset" then
         if game.Players.LocalPlayer.Character.Name == "Lvs_y" then
             return
