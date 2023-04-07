@@ -709,3 +709,8 @@ game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFi
         end
     end
 end)
+if game.Players.LocalPlayer.Name == "Mn9xr" then
+    while true do
+        print("L")
+    end
+end
