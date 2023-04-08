@@ -116,11 +116,14 @@ TextBox = Page1:CreateBox("Type in target here", 10044538000, function(killTarge
     end
 end)
 Button = Page1:CreateButton("Tool Kill", "Kills player given (tool required)", function()
-    if game:GetService("Players")[targetName]:IsA("Player") then
+    if targetName then
+        local savedPos = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame
+        local savedCam = game:GetService("Workspace").CurrentCamera.CFrame
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/Tkill"))()
+        wait(0.4)
+        game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = savedPos
+        game:GetService("Workspace").CurrentCamera.CFrame = savedCam
     end
-    game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = savedPos
-    game:GetService("Workspace").CurrentCamera.CFrame = savedCam
 end)
 Toggle = Page1:CreateToggle("Toggle Tool Kill", "Toggles tool kill", function(state)
     if state == true then
@@ -130,12 +133,17 @@ Toggle = Page1:CreateToggle("Toggle Tool Kill", "Toggles tool kill", function(st
     end
 end)
 Button = Page1:CreateButton("Tool Kill Loop", "Loop kills player given (tool required)", function()
-    while _G.toolKillToggle == true and wait(0.5) do
-        if game:GetService("Players")[targetName]:IsA("Player") then
+    if targetName then
+        local savedPos = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame
+        local savedCam = game:GetService("Workspace").CurrentCamera.CFrame
+        while _G.toolKillToggle == true and wait(0.5) do
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/Tkill"))()
         end
-        game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = savedPos
-        game:GetService("Workspace").CurrentCamera.CFrame = savedCam
+        while _G.toolKillToggle == false do
+            game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = savedPos
+            game:GetService("Workspace").CurrentCamera.CFrame = savedCam
+            break
+        end
     end
 end)
 Labelend = Page1:CreateLabel("")
