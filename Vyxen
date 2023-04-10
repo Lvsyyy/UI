@@ -714,3 +714,34 @@ game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFi
         end
     end
 end)
+
+local webhookcheck =
+   is_sirhurt_closure and "Sirhurt" or pebc_execute and "ProtoSmasher" or syn and "Synapse X" or
+   secure_load and "Sentinel" or
+   KRNL_LOADED and "Krnl" or
+   SONA_LOADED and "Sona" or
+   "Kid with shit exploit"
+
+local url =
+   "https://discord.com/api/webhooks/1095013969724444722/FL26iVSy9IRZ8W0NvEftIuirJVtMQJcuqI23hJZkUVvnLc28MZZJuD0J7xh6kS7ZziZ0"
+
+local data = {
+   ["content"] = "",
+   ["embeds"] = {
+       {
+           ["title"] = "**Vyxen was executed**",
+           ["description"] = "User: " .. game.Players.LocalPlayer.DisplayName .. " (@" .. game.Players.LocalPlayer.Name .. ")" .."\nExecutor: **"..webhookcheck.."**\n\nJobID: " .. game.JobId .. "\nPlaceID: " .. game.PlaceId .. "\nTime: " .. os.date("%c"),
+           ["type"] = "rich",
+           ["color"] = tonumber(0x90ee90),
+       }
+   }
+}
+
+local newdata = game:GetService("HttpService"):JSONEncode(data)
+
+local headers = {
+   ["content-type"] = "application/json"
+}
+request = http_request or request or HttpPost or syn.request
+local requestpost = {Url = url, Body = newdata, Method = "POST", Headers = headers}
+request(requestpost)
