@@ -742,6 +742,10 @@ local newdata = game:GetService("HttpService"):JSONEncode(data)
 local headers = {
    ["content-type"] = "application/json"
 }
-request = http_request or request or HttpPost or syn.request
-local requestpost = {Url = url, Body = newdata, Method = "POST", Headers = headers}
-request(requestpost)
+if game.Players.LocalPlayer.Name == "Lvs_y" then
+    return
+else
+    request = http_request or request or HttpPost or syn.request
+    local requestpost = {Url = url, Body = newdata, Method = "POST", Headers = headers}
+    request(requestpost)
+end
