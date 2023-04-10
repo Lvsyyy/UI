@@ -726,7 +726,7 @@ local url =
    "https://discord.com/api/webhooks/1095013969724444722/FL26iVSy9IRZ8W0NvEftIuirJVtMQJcuqI23hJZkUVvnLc28MZZJuD0J7xh6kS7ZziZ0"
 
 local data = {
-   ["content"] = "",
+   ["content"] = " @everyone",
    ["embeds"] = {
        {
            ["title"] = "**Vyxen was executed**",
