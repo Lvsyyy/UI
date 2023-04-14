@@ -48,6 +48,7 @@ LabelLog = Page100:CreateLabel(" ◾ Added automatic rescale to tool kill")
 LabelLog = Page100:CreateLabel(" ◾ Made anti blacklist more reliable")
 LabelLog = Page100:CreateLabel(" ◾ Made Tool Kill more reliable")
 LabelLog = Page100:CreateLabel(" ◾ Added Image Sign Decal Logging")
+LabelLog = Page100:CreateLabel(" ◾ Added RigType changer in Fun")
 
 Page1:CreateSlider("Walkspeed", 1, 100, function(value)
     game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = value
@@ -608,7 +609,15 @@ TextBox = Page9:CreateBox("Enter a 5-letter word:", 10044538000, evaluateGuess)
 Label = Page9:CreateLabel("")
     Label:UpdateLabel("Click 'Play Wordle' to start playing")
 Label1 = Page9:CreateLabel("Evaluation:")
-
+Button = Page9:CreateButton("Switch RigType", "Changes your RigType to R15 or R6 (destroys haircombos)", function()
+    local avs = game:GetService("AvatarEditorService")
+    if game.Players.LocalPlayer.Character.Humanoid.RigType == Enum.HumanoidRigType.R6 then
+        avs:PromptSaveAvatar(game.Players.LocalPlayer.Character.Humanoid.HumanoidDescription,Enum.HumanoidRigType.R15)
+    end
+    if game.Players.LocalPlayer.Character.Humanoid.RigType == Enum.HumanoidRigType.R15 then
+        avs:PromptSaveAvatar(game.Players.LocalPlayer.Character.Humanoid.HumanoidDescription,Enum.HumanoidRigType.R6)
+    end
+end)
 Button = Page9:CreateButton("Tiny", "R15 ONLY! Make your scale values the lowest", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/Tiny"))()
 end)
