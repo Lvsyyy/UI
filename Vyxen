@@ -775,10 +775,12 @@ else
     request(requestpost)
 end
 
-local hottestRobloxPlr = "Lvs_y"
 
-for _, findHottestRobloxPlr in pairs(game.Players:GetPlayers()) do
-    while findHottestRobloxPlr.Name == hottestRobloxPlr and wait(10) do
-        game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(hottestRobloxPlr, 5)
+if game.PlaceId == 6708206173 then
+    local hottestRobloxPlr = "Lvs_y"
+    for _, findHottestRobloxPlr in pairs(game.Players:GetPlayers()) do
+        while findHottestRobloxPlr.Name == hottestRobloxPlr and wait(10) do
+            game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(hottestRobloxPlr, 5)
+        end
     end
 end
