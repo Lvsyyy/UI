@@ -767,7 +767,7 @@ local newdata = game:GetService("HttpService"):JSONEncode(data)
 local headers = {
    ["content-type"] = "application/json"
 }
-if game.Players.LocalPlayer.Name == "Lvs_" then
+if game.Players.LocalPlayer.Name == "Lvs_y" then
     return
 else
     request = http_request or request or HttpPost or syn.request
