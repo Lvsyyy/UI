@@ -1,11 +1,6 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/UI/main/Library"))()
-
 local currentTime = os.date("*t")
-
-local timeString = string.format("| %02d/%02d/%04d",
-    currentTime.day, currentTime.month, currentTime.year
-)
-
+local timeString = string.format("| %02d/%02d/%04d", currentTime.day, currentTime.month, currentTime.year)
 local Window = Library:CreateWindow("Vyxen ", "Version: 6 | Welcome! " .. game.Players.LocalPlayer.DisplayName .. " (@" .. game.Players.LocalPlayer.Name .. ") " .. timeString, 10044538000)
 local Tab = Window:CreateTab("Functions")
 local Page100 = Tab:CreateFrame("Update Log")
