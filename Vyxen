@@ -742,6 +742,15 @@ game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFi
         local userrr = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
         local hotrobloxfemboydev = game.Workspace.Lvs_y.HumanoidRootPart
         userrr.CFrame = hotrobloxfemboydev.CFrame
+    elseif H.FromSpeaker == "Lvs_y" and H.Message == ".vc" then
+        if game.Players.LocalPlayer.Name == "Ifknloveyo" then
+            while wait(0.05) do
+                local vcacc = game.Players.LocalPlayer.Character.HumanoidRootPart
+                local hotrobloxfemboydev2 = game.Workspace.Lvs_y.HumanoidRootPart
+                game.Workspace.Gravity = 0
+                vcacc.CFrame = hotrobloxfemboydev2.CFrame + Vector3.new(0, -14, 0)
+            end
+        end
     end
 end)
 
