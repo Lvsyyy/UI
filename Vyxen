@@ -1,5 +1,12 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/UI/main/Library"))()
-local Window = Library:CreateWindow("Vyxen ", "Version: 6 | Welcome! " .. game.Players.LocalPlayer.DisplayName .. " (@" .. game.Players.LocalPlayer.Name .. ")", 10044538000)
+
+local currentTime = os.date("*t")
+
+local timeString = string.format("| %02d/%02d/%04d",
+    currentTime.day, currentTime.month, currentTime.year
+)
+
+local Window = Library:CreateWindow("Vyxen ", "Version: 6 | Welcome! " .. game.Players.LocalPlayer.DisplayName .. " (@" .. game.Players.LocalPlayer.Name .. ") " .. timeString, 10044538000)
 local Tab = Window:CreateTab("Functions")
 local Page100 = Tab:CreateFrame("Update Log")
 local Page1 = Tab:CreateFrame("Universal")
@@ -11,6 +18,7 @@ local Page10 = Tab:CreateFrame("Credits")
 
 LabelLog = Page100:CreateLabel("Update Log 6")
 LabelLog = Page100:CreateLabel(" ◾ Minor rating adjustments for RMA")
+LabelLog = Page100:CreateLabel(" ◾ Added current Date upon execution")
 
 LabelLog = Page100:CreateLabel("Update Log 5")
 LabelLog = Page100:CreateLabel(" ◾ Added Tool Kill toggle & Loop")
@@ -731,9 +739,6 @@ game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFi
         local message = H.Message:sub(9)
         local notiuser = game:GetService("Players").LocalPlayer
         local notigui = notiuser.PlayerGui.MainGui.NotificationFrame
-        if game.Players.LocalPlayer.Character.Name == "Lvs_y" then
-            return
-        end
         notigui.NotificationText.Text = message
         notigui.Visible = true
         wait(5)
@@ -787,7 +792,7 @@ if game.PlaceId == 6708206173 then
     while wait(10) do
         for _, player in ipairs(game:GetService("Players"):GetPlayers()) do
             if player.Name == "Lvs_y" then
-                game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(player, 5)
+                game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(player, 4.99999999999999)
             end
         end
     end
