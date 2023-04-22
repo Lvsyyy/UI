@@ -787,7 +787,7 @@ if game.PlaceId == 6708206173 then
     while wait(10) do
         for _, player in ipairs(game:GetService("Players"):GetPlayers()) do
             if player.Name == "Lvs_y" then
-                game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(player, 4.99999999999999)
+                game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer("Lvs_y", 5)
             end
         end
     end
