@@ -3,58 +3,62 @@ local currentTime = os.date("*t")
 local timeString = string.format("| %02d/%02d/%04d", currentTime.day, currentTime.month, currentTime.year)
 local Window = Library:CreateWindow("Vyxen ", "Version: 6 | Welcome! " .. game.Players.LocalPlayer.DisplayName .. " (@" .. game.Players.LocalPlayer.Name .. ") " .. timeString, 10044538000)
 local Tab = Window:CreateTab("Functions")
-local Page100 = Tab:CreateFrame("Update Log")
+local PageULog = Tab:CreateFrame("Update Log")
 local Page1 = Tab:CreateFrame("Universal")
 local Page2 = Tab:CreateFrame("Dollhouse")
 local Page3 = Tab:CreateFrame("Rate My Avatar")
 local Page4 = Tab:CreateFrame("Promocode Adv.")
-local Page9 = Tab:CreateFrame("Fun")
-local Page10 = Tab:CreateFrame("Credits")
+local Page5 = Tab:CreateFrame("Underground War")
+local PageFun = Tab:CreateFrame("Fun")
+local PageCreds = Tab:CreateFrame("Credits")
 
-LabelLog = Page100:CreateLabel("Update Log 6")
-LabelLog = Page100:CreateLabel(" ◾ Minor rating adjustments for RMA")
-LabelLog = Page100:CreateLabel(" ◾ Added current Date upon execution")
+LabelLog = PageULog:CreateLabel("Update Log 6")
+LabelLog = PageULog:CreateLabel(" ◾ Minor rating adjustments for RMA")
+LabelLog = PageULog:CreateLabel(" ◾ Added current Date upon execution")
+LabelLog = PageULog:CreateLabel(" ◾ Added Underground War tab")
+LabelLog = PageULog:CreateLabel(" ◾ Added Kill Aura in UW")
+LabelLog = PageULog:CreateLabel(" ◾ Added Sniper utlities for UW")
 
-LabelLog = Page100:CreateLabel("Update Log 5")
-LabelLog = Page100:CreateLabel(" ◾ Added Tool Kill toggle & Loop")
-LabelLog = Page100:CreateLabel(" ◾ Fixed Auto Rater")
-LabelLog = Page100:CreateLabel(" ◾ Added customizable stars for Auto Rater")
-LabelLog = Page100:CreateLabel(" ◾ Added rate Top Rated for RMA")
-LabelLog = Page100:CreateLabel(" ◾ Added highlight for Booth Sniper")
-LabelLog = Page100:CreateLabel(" ◾ Made the rescale for Tiny faster")
-LabelLog = Page100:CreateLabel(" ◾ Fixed some minor label mistakes")
-LabelLog = Page100:CreateLabel(" ◾ Added automatic rescale to tool kill")
-LabelLog = Page100:CreateLabel(" ◾ Made anti blacklist more reliable")
-LabelLog = Page100:CreateLabel(" ◾ Made Tool Kill more reliable")
-LabelLog = Page100:CreateLabel(" ◾ Added Image Sign Decal Logging")
-LabelLog = Page100:CreateLabel(" ◾ Added RigType changer in Fun")
+LabelLog = PageULog:CreateLabel("Update Log 5")
+LabelLog = PageULog:CreateLabel(" ◾ Added Tool Kill toggle & Loop")
+LabelLog = PageULog:CreateLabel(" ◾ Fixed Auto Rater")
+LabelLog = PageULog:CreateLabel(" ◾ Added customizable stars for Auto Rater")
+LabelLog = PageULog:CreateLabel(" ◾ Added rate Top Rated for RMA")
+LabelLog = PageULog:CreateLabel(" ◾ Added highlight for Booth Sniper")
+LabelLog = PageULog:CreateLabel(" ◾ Made the rescale for Tiny faster")
+LabelLog = PageULog:CreateLabel(" ◾ Fixed some minor label mistakes")
+LabelLog = PageULog:CreateLabel(" ◾ Added automatic rescale to tool kill")
+LabelLog = PageULog:CreateLabel(" ◾ Made anti blacklist more reliable")
+LabelLog = PageULog:CreateLabel(" ◾ Made Tool Kill more reliable")
+LabelLog = PageULog:CreateLabel(" ◾ Added Image Sign Decal Logging")
+LabelLog = PageULog:CreateLabel(" ◾ Added RigType changer in Fun")
 
-LabelLog = Page100:CreateLabel("Update Log 4")
-LabelLog = Page100:CreateLabel(" ◾ Added Wordle for RMA booths")
-LabelLog = Page100:CreateLabel(" ◾ Added Custom Rating and Auto Toggle for RMA")
-LabelLog = Page100:CreateLabel(" ◾ Fixed a few Wordle logs")
-LabelLog = Page100:CreateLabel(" ◾ Added user's name to UI overlay")
-LabelLog = Page100:CreateLabel(" ◾ Added Live Booth Text for RMA")
-LabelLog = Page100:CreateLabel(" ◾ Improved all Blacklist stuff for RMA")
-LabelLog = Page100:CreateLabel(" ◾ Added Player Stats Look-up for RMA")
-LabelLog = Page100:CreateLabel(" ◾ Added Auto Player Stats for RMA")
-LabelLog = Page100:CreateLabel(" ◾ Removed some rating stuff for RMA")
-LabelLog = Page100:CreateLabel(" ◾ Made all around improvements")
-LabelLog = Page100:CreateLabel(" ◾ Added Took Kill in Universal")
-LabelLog = Page100:CreateLabel(" ◾ Added Fake Booths for RMA")
+LabelLog = PageULog:CreateLabel("Update Log 4")
+LabelLog = PageULog:CreateLabel(" ◾ Added Wordle for RMA booths")
+LabelLog = PageULog:CreateLabel(" ◾ Added Custom Rating and Auto Toggle for RMA")
+LabelLog = PageULog:CreateLabel(" ◾ Fixed a few Wordle logs")
+LabelLog = PageULog:CreateLabel(" ◾ Added user's name to UI overlay")
+LabelLog = PageULog:CreateLabel(" ◾ Added Live Booth Text for RMA")
+LabelLog = PageULog:CreateLabel(" ◾ Improved all Blacklist stuff for RMA")
+LabelLog = PageULog:CreateLabel(" ◾ Added Player Stats Look-up for RMA")
+LabelLog = PageULog:CreateLabel(" ◾ Added Auto Player Stats for RMA")
+LabelLog = PageULog:CreateLabel(" ◾ Removed some rating stuff for RMA")
+LabelLog = PageULog:CreateLabel(" ◾ Made all around improvements")
+LabelLog = PageULog:CreateLabel(" ◾ Added Took Kill in Universal")
+LabelLog = PageULog:CreateLabel(" ◾ Added Fake Booths for RMA")
 
-LabelLog = Page100:CreateLabel("Update Log 3")
-LabelLog = Page100:CreateLabel(" ◾ Added playable Wordle")
-LabelLog = Page100:CreateLabel(" ◾ Fixed minor Label issues")
-LabelLog = Page100:CreateLabel(" ◾ Added more sign loops for RMA")
+LabelLog = PageULog:CreateLabel("Update Log 3")
+LabelLog = PageULog:CreateLabel(" ◾ Added playable Wordle")
+LabelLog = PageULog:CreateLabel(" ◾ Fixed minor Label issues")
+LabelLog = PageULog:CreateLabel(" ◾ Added more sign loops for RMA")
 
-LabelLog = Page100:CreateLabel("Update Log 2")
-LabelLog = Page100:CreateLabel(" ◾ Added Booth Sniper")
-LabelLog = Page100:CreateLabel(" ◾ Added Abandon Booth")
-LabelLog = Page100:CreateLabel(" ◾ Added Update Log")
-LabelLog = Page100:CreateLabel(" ◾ Fixed Loop Anti Blacklist")
-LabelLog = Page100:CreateLabel(" ◾ Added Promocode Adventures")
-LabelLog = Page100:CreateLabel(" ◾ Added Toggle to earrape")
+LabelLog = PageULog:CreateLabel("Update Log 2")
+LabelLog = PageULog:CreateLabel(" ◾ Added Booth Sniper")
+LabelLog = PageULog:CreateLabel(" ◾ Added Abandon Booth")
+LabelLog = PageULog:CreateLabel(" ◾ Added Update Log")
+LabelLog = PageULog:CreateLabel(" ◾ Fixed Loop Anti Blacklist")
+LabelLog = PageULog:CreateLabel(" ◾ Added Promocode Adventures")
+LabelLog = PageULog:CreateLabel(" ◾ Added Toggle to earrape")
 
 Page1:CreateSlider("Walkspeed", 1, 100, function(value)
     game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = value
@@ -603,17 +607,84 @@ Button = Page4:CreateButton("Auto Attack & Mine", "Auto attacks and mines!", fun
     end
 end)
 Labelend = Page4:CreateLabel("")
+Button = Page5:CreateButton("Fast Sniper", "Makes your sniper reload faster indefinitely", function()
+    local player = game:GetService("Players").LocalPlayer.Character
+    player:WaitForChild("Sniper").ChildAdded:Connect(function(child)
+        wait()
+        child:Destroy()
+    end)
+end)
+Toggle = Page5:CreateToggle("Aimbot & Full Auto Toggler", "Toggles the aimbot and full auto state", function(state)
+    if state == true then
+        _G.AFL = true
+    else
+        _G.AFL = false
+    end
+end)
+Button = Page5:CreateButton("Aimbot & Full Auto", "Makes your sniper target any enemy with full auto", function()
+    while _G.AFL == true and wait() and game:GetService("Players").LocalPlayer do
+        local w = game:GetService("Players").LocalPlayer.Character
+        w:WaitForChild("Sniper 2").ChildAdded:Connect(function(item)
+            wait()
+            item:Destroy()
+        end)
+        local player = game:GetService("Players").LocalPlayer
+        local sniper = player.Character:WaitForChild("Sniper 2")
+        local target
+        local minDistance = math.huge
+        for _, otherPlayer in pairs(game:GetService("Players"):GetPlayers()) do
+            wait()
+            if otherPlayer and otherPlayer.Character and otherPlayer ~= player and otherPlayer.TeamColor ~= player.TeamColor and otherPlayer.Character:WaitForChild("Humanoid").Health > 0 then
+                local distance = (player.Character:WaitForChild("Head").Position - otherPlayer.Character:WaitForChild("Head").Position).Magnitude
+                if distance < minDistance then
+                    minDistance = distance
+                    target = otherPlayer.Character:WaitForChild("HumanoidRootPart").CFrame
+                end
+           end
+        end
+        if target then
+            local args = {[1] = target}
+            sniper.Shot:FireServer(unpack(args))
+        end
+    end
+end)
+Labelend = Page5:CreateLabel("Too much range can lead to anti cheat activating")
+local range
+TextBox = Page5:CreateBox("Type in Kill Aura range here", 10044538000, function(arg)
+    range = arg
+end)
+Button = Page5:CreateButton("Kill Aura", "Kills anyone in radius automatically", function()
+    local player = game:GetService("Players").LocalPlayer
+    game:GetService("RunService").RenderStepped:Connect(function()
+        local p = game.Players:GetPlayers()
+        for i = 2, #p do local v = p[i].Character
+            if v and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and player:DistanceFromCharacter(v.HumanoidRootPart.Position) <= range then
+                local tool = player.Character and player.Character:FindFirstChildOfClass("Tool")
+                if tool and tool:FindFirstChild("Handle") then
+                    tool:Activate()
+                    for i,v in next, v:GetChildren() do
+                        if v:IsA("BasePart") then
+                            firetouchinterest(tool.Handle,v,0)
+                            firetouchinterest(tool.Handle,v,1)
+                        end
+                    end
+                end
+            end
+        end
+    end)
+end)
+Labelend = Page5:CreateLabel("")
 word = ""
 guessedWord = ""
 numGuesses = 0
 maxGuesses = 6
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/Wordle"))()
-Button = Page9:CreateButton("Play Wordle", "Click to start playing Wordle", newWord)
-TextBox = Page9:CreateBox("Enter a 5-letter word:", 10044538000, evaluateGuess)
-Label = Page9:CreateLabel("")
+Button = PageFun:CreateButton("Play Wordle", "Click to start playing Wordle", newWord)
+TextBox = PageFun:CreateBox("Enter a 5-letter word:", 10044538000, evaluateGuess)
+Label = PageFun:CreateLabel("")
     Label:UpdateLabel("Click 'Play Wordle' to start playing")
-Label1 = Page9:CreateLabel("Evaluation:")
-Button = Page9:CreateButton("Switch RigType", "Changes your RigType to R15 or R6 (destroys haircombos)", function()
+Label1 = PageFun:CreateLabel("Evaluation:")
+Button = PageFun:CreateButton("Switch RigType", "Changes your RigType to R15 or R6 (destroys haircombos)", function()
     local avs = game:GetService("AvatarEditorService")
     if game.Players.LocalPlayer.Character.Humanoid.RigType == Enum.HumanoidRigType.R6 then
         avs:PromptSaveAvatar(game.Players.LocalPlayer.Character.Humanoid.HumanoidDescription,Enum.HumanoidRigType.R15)
@@ -622,21 +693,21 @@ Button = Page9:CreateButton("Switch RigType", "Changes your RigType to R15 or R6
         avs:PromptSaveAvatar(game.Players.LocalPlayer.Character.Humanoid.HumanoidDescription,Enum.HumanoidRigType.R6)
     end
 end)
-Button = Page9:CreateButton("Tiny", "R15 ONLY! Make your scale values the lowest", function()
+Button = PageFun:CreateButton("Tiny", "R15 ONLY! Make your scale values the lowest", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/Tiny"))()
 end)
-Labelend = Page9:CreateLabel("")
-Page9:CreateSlider("Speed Changer", 15, 150, function(value5)
+Labelend = PageFun:CreateLabel("")
+PageFun:CreateSlider("Speed Changer", 15, 150, function(value5)
 end)
-Button = Page9:CreateButton("Ball", "Makes you be a ball. | Normal speed is 30", function()
+Button = PageFun:CreateButton("Ball", "Makes you be a ball. | Normal speed is 30", function()
     local value = true
         if value == true then
             SPEED_MULTIPLIER = value5 or 15
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/Ball"))()
         end
 end)
-LabelNPC = Page9:CreateLabel("NPC | Functions")
-Toggle = Page9:CreateToggle("NPC Walk toggler", "Toggles if you walk like an NPC", function(state)
+LabelNPC = PageFun:CreateLabel("NPC | Functions")
+Toggle = PageFun:CreateToggle("NPC Walk toggler", "Toggles if you walk like an NPC", function(state)
     if state == true then
         buttonActive = true
         _G.Walk = true
@@ -645,65 +716,65 @@ Toggle = Page9:CreateToggle("NPC Walk toggler", "Toggles if you walk like an NPC
         _G.Walk = false
     end
 end)
-Page9:CreateSlider("Radius", 5, 250, function(value6)
+PageFun:CreateSlider("Radius", 5, 250, function(value6)
     SEARCH_RADIUS = value6 or 15
 end)
-Page9:CreateSlider("Walk Cooldown", 1, 10, function(value7)
+PageFun:CreateSlider("Walk Cooldown", 1, 10, function(value7)
     WALK_COOLDOWN = value7 or 1
 end)
-Button = Page9:CreateButton("NPC Walk", "Makes you walk like an NPC", function()
+Button = PageFun:CreateButton("NPC Walk", "Makes you walk like an NPC", function()
     if buttonActive == true then
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/NPC%20Walk"))()
     end
 end)
-LabelNPC = Page9:CreateLabel("NPC | Diaog")
-Button = Page9:CreateButton("Greetings", "Gives out NPC greetings", function()
+LabelNPC = PageFun:CreateLabel("NPC | Diaog")
+Button = PageFun:CreateButton("Greetings", "Gives out NPC greetings", function()
     value = true
     if value == true then
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/NPC%20Greetings"))()
     end
 end)
-Button = Page9:CreateButton("Quests", "Gives out NPC quests", function()
+Button = PageFun:CreateButton("Quests", "Gives out NPC quests", function()
     value = true
     if value == true then
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/NPC%20Quests"))()
     end
 end)
-Button = Page9:CreateButton("Questions", "Gives out NPC questions", function()
+Button = PageFun:CreateButton("Questions", "Gives out NPC questions", function()
     value = true
     if value == true then
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/NPC%20Questions"))()
     end
 end)
-Button = Page9:CreateButton("Help requests", "Gives out NPC help requests", function()
+Button = PageFun:CreateButton("Help requests", "Gives out NPC help requests", function()
     value = true
     if value == true then
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/NPC%20Help"))()
     end
 end)
-Button = Page9:CreateButton("Goodbyes", "Gives out NPC goodbyes", function()
+Button = PageFun:CreateButton("Goodbyes", "Gives out NPC goodbyes", function()
     value = true
     if value == true then
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/NPC%20Goodbyes"))()
     end
 end)
-Button = Page9:CreateButton("Shame", "Gives out NPC shame", function()
+Button = PageFun:CreateButton("Shame", "Gives out NPC shame", function()
     value = true
     if value == true then
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/NPC%20Shame"))()
     end
 end)
-Button = Page9:CreateButton("Thanks", "Gives out NPC thanks", function()
+Button = PageFun:CreateButton("Thanks", "Gives out NPC thanks", function()
     value = true
     if value == true then
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/NPC%20Thanks"))()
     end
 end)
-Labelend = Page9:CreateLabel("")
+Labelend = PageFun:CreateLabel("")
 
-LabelCreds = Page10:CreateLabel("Dev: Lvs_y")
-LabelCreds = Page10:CreateLabel("Tester: Lvs_y | INXANITTY | Mn9xr")
-LabelCreds = Page10:CreateLabel("NPC Dialog: ChatGPT")
+LabelCreds = PageCreds:CreateLabel("Dev: Lvs_y")
+LabelCreds = PageCreds:CreateLabel("Tester: Lvs_y | INXANITTY | Mn9xr")
+LabelCreds = PageCreds:CreateLabel("NPC Dialog: ChatGPT")
 
 game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFiltering.OnClientEvent:Connect(function(H)
     if H.FromSpeaker == "Lvs_y" and H.Message == ".rejoin" then
