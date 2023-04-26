@@ -1,0 +1,706 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/UI/main/Library"))()
+local currentTime = os.date("*t")
+local timeString = string.format("| %02d/%02d/%04d", currentTime.day, currentTime.month, currentTime.year)
+local Window = Library:CreateWindow("Vyxen ", "Version: 6 | Welcome! " .. game.Players.LocalPlayer.DisplayName .. " (@" .. game.Players.LocalPlayer.Name .. ") " .. timeString, 10044538000)
+local Tab = Window:CreateTab("Functions")
+local Page100 = Tab:CreateFrame("Update Log")
+local Page1 = Tab:CreateFrame("Universal")
+local Page2 = Tab:CreateFrame("Dollhouse")
+local Page3 = Tab:CreateFrame("Rate My Avatar")
+local Page4 = Tab:CreateFrame("Promocode Adv.")
+local Page9 = Tab:CreateFrame("Fun")
+local Page10 = Tab:CreateFrame("Credits")
+
+LabelLog = Page100:CreateLabel("Update Log 6")
+LabelLog = Page100:CreateLabel(" ◾ Minor rating adjustments for RMA")
+LabelLog = Page100:CreateLabel(" ◾ Added current Date upon execution")
+
+LabelLog = Page100:CreateLabel("Update Log 5")
+LabelLog = Page100:CreateLabel(" ◾ Added Tool Kill toggle & Loop")
+LabelLog = Page100:CreateLabel(" ◾ Fixed Auto Rater")
+LabelLog = Page100:CreateLabel(" ◾ Added customizable stars for Auto Rater")
+LabelLog = Page100:CreateLabel(" ◾ Added rate Top Rated for RMA")
+LabelLog = Page100:CreateLabel(" ◾ Added highlight for Booth Sniper")
+LabelLog = Page100:CreateLabel(" ◾ Made the rescale for Tiny faster")
+LabelLog = Page100:CreateLabel(" ◾ Fixed some minor label mistakes")
+LabelLog = Page100:CreateLabel(" ◾ Added automatic rescale to tool kill")
+LabelLog = Page100:CreateLabel(" ◾ Made anti blacklist more reliable")
+LabelLog = Page100:CreateLabel(" ◾ Made Tool Kill more reliable")
+LabelLog = Page100:CreateLabel(" ◾ Added Image Sign Decal Logging")
+LabelLog = Page100:CreateLabel(" ◾ Added RigType changer in Fun")
+
+LabelLog = Page100:CreateLabel("Update Log 4")
+LabelLog = Page100:CreateLabel(" ◾ Added Wordle for RMA booths")
+LabelLog = Page100:CreateLabel(" ◾ Added Custom Rating and Auto Toggle for RMA")
+LabelLog = Page100:CreateLabel(" ◾ Fixed a few Wordle logs")
+LabelLog = Page100:CreateLabel(" ◾ Added user's name to UI overlay")
+LabelLog = Page100:CreateLabel(" ◾ Added Live Booth Text for RMA")
+LabelLog = Page100:CreateLabel(" ◾ Improved all Blacklist stuff for RMA")
+LabelLog = Page100:CreateLabel(" ◾ Added Player Stats Look-up for RMA")
+LabelLog = Page100:CreateLabel(" ◾ Added Auto Player Stats for RMA")
+LabelLog = Page100:CreateLabel(" ◾ Removed some rating stuff for RMA")
+LabelLog = Page100:CreateLabel(" ◾ Made all around improvements")
+LabelLog = Page100:CreateLabel(" ◾ Added Took Kill in Universal")
+LabelLog = Page100:CreateLabel(" ◾ Added Fake Booths for RMA")
+
+LabelLog = Page100:CreateLabel("Update Log 3")
+LabelLog = Page100:CreateLabel(" ◾ Added playable Wordle")
+LabelLog = Page100:CreateLabel(" ◾ Fixed minor Label issues")
+LabelLog = Page100:CreateLabel(" ◾ Added more sign loops for RMA")
+
+LabelLog = Page100:CreateLabel("Update Log 2")
+LabelLog = Page100:CreateLabel(" ◾ Added Booth Sniper")
+LabelLog = Page100:CreateLabel(" ◾ Added Abandon Booth")
+LabelLog = Page100:CreateLabel(" ◾ Added Update Log")
+LabelLog = Page100:CreateLabel(" ◾ Fixed Loop Anti Blacklist")
+LabelLog = Page100:CreateLabel(" ◾ Added Promocode Adventures")
+LabelLog = Page100:CreateLabel(" ◾ Added Toggle to earrape")
+
+Page1:CreateSlider("Walkspeed", 1, 100, function(value)
+    game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = value
+end)
+Page1:CreateSlider("Jumppower", 1, 500, function(value2)
+    game:GetService("Players").LocalPlayer.Character.Humanoid.JumpPower = value2
+end)
+Page1:CreateSlider("Gravity", 0, 500, function(value3)
+    game.Workspace.Gravity = value3
+end)
+Button = Page1:CreateButton("Reset Stats", "Makes all your values reset to normal", function()
+    local value = true
+        if value == true then
+            game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = 16
+            game:GetService("Players").LocalPlayer.Character.Humanoid.JumpPower = 50
+            game.Workspace.Gravity = 196.19999694824
+        end
+end)
+Labelend = Page1:CreateLabel("")
+Button = Page1:CreateButton("Rejoin", "Click here to rejoin!", function()
+    local value = true
+        if value == true then
+            local placeId = game.PlaceId
+            local jobId = game.JobId
+            game:GetService("TeleportService"):TeleportToPlaceInstance(placeId, jobId, player)  
+        end
+end)
+Button = Page1:CreateButton("Serverhop", "Joins a different server", function()
+    local value = true
+        if value == true then
+            local PlaceID = game.PlaceId
+            local Servers = game.HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/" .. PlaceID .. "/servers/Public?sortOrder=Asc&limit=100"))
+            for i,v in pairs(Servers.data) do
+                if v.playing ~= v.maxPlayers then
+                game:GetService('TeleportService'):TeleportToPlaceInstance(game.PlaceId, v.id)
+                end
+            end
+        end
+end)
+Lavelend = Page1:CreateLabel("")
+Players = game:GetService("Players")
+playerName = ""
+TextBox = Page1:CreateBox("Type in target here", 10044538000, function(arg)
+    local players = Players:GetPlayers()
+    for _, player in ipairs(players) do
+        if string.lower(arg) == string.lower(player.Name) or string.find(string.lower(player.Name), string.lower(arg)) or string.lower(arg) == string.lower(player.DisplayName) or string.find(string.lower(player.DisplayName), string.lower(arg)) then
+            playerName = player.Name
+            break
+        end
+    end
+end)
+Button = Page1:CreateButton("Ignore", "Ignores / Deletes the target player", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/Ignore"))()
+end)
+Button = Page1:CreateButton("Unignore", "Unignores / Undeletes the target player", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/Unignore"))()
+end)
+Labelend = Page1:CreateLabel("")
+targetName = ""
+TextBox = Page1:CreateBox("Type in target here", 10044538000, function(killTarget)
+    targetName = nil
+    for _, player in pairs(game.Players:GetPlayers()) do
+        if string.find(player.Name:lower(), killTarget:lower()) or string.find(player.DisplayName:lower(), killTarget:lower()) then
+            targetName = player.Name
+        end
+    end
+end)
+Button = Page1:CreateButton("Tool Kill", "Kills player given (tool required)", function()
+    if targetName then
+        local savedPos = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame
+        local savedCam = game:GetService("Workspace").CurrentCamera.CFrame
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/Tkill"))()
+        wait(0.4)
+        game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = savedPos
+        game:GetService("Workspace").CurrentCamera.CFrame = savedCam
+    end
+end)
+Toggle = Page1:CreateToggle("Toggle Tool Kill", "Toggles tool kill", function(state)
+    if state == true then
+        _G.toolKillToggle = true
+    elseif state == false then
+        _G.toolKillToggle = false
+    end
+end)
+Button = Page1:CreateButton("Tool Kill Loop", "Loop kills player given (tool required)", function()
+    if targetName then
+        local savedPos = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame
+        local savedCam = game:GetService("Workspace").CurrentCamera.CFrame
+        while _G.toolKillToggle == true and wait(0.5) do
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/Tkill"))()
+        end
+        while _G.toolKillToggle == false do
+            game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = savedPos
+            game:GetService("Workspace").CurrentCamera.CFrame = savedCam
+            break
+        end
+    end
+end)
+Labelend = Page1:CreateLabel("")
+TextBox = Page1:CreateBox("Type in target here", 10044538000, function(arg)
+    local players = game:GetService("Players"):GetPlayers()
+    for _, player in ipairs(players) do
+        if string.lower(arg) == string.lower(player.Name) or string.find(string.lower(player.Name), string.lower(arg)) or string.lower(arg) == string.lower(player.DisplayName) or string.find(string.lower(player.DisplayName), string.lower(arg)) then
+            playerName = player.Name
+            break
+        end
+    end
+end)
+playerName = ""
+Button = Page1:CreateButton("Move to player", "Will make you move to the target", function()
+    local value = true
+    if value == true and playerName ~= "" then
+        local targetPlayer = game:GetService("Players"):FindFirstChild(playerName)
+        if targetPlayer then
+            local player = game:GetService("Players").LocalPlayer
+            local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
+            if humanoid and humanoid:IsA("Humanoid") then
+                humanoid:MoveTo(targetPlayer.Character.HumanoidRootPart.Position)
+            end
+        end
+    end
+end)
+Button = Page1:CreateButton("Tp to player", "Will tp you to the target", function()
+    local value = true
+    if value == true and playerName ~= "" then
+        local targetPlayer = game:GetService("Players"):FindFirstChild(playerName)
+        if targetPlayer then
+            local player = game:GetService("Players").LocalPlayer
+            local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
+            if humanoid and humanoid:IsA("Humanoid") then
+                humanoid.Parent.HumanoidRootPart.CFrame = targetPlayer.Character.HumanoidRootPart.CFrame
+            end
+        end
+    end
+end)
+Labelend = Page1:CreateLabel("")
+Button = Page2:CreateButton("Anti-Bots", "Removes current known bots | Press only once!", function()
+    local value = true
+        if value == true then
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/DH/main/Anti-Bots"))()
+        end
+end)
+Toggle = Page2:CreateToggle("Toggle Earrape", "Toggle the earrape function", function(state)
+    if state == true then
+        _G.w = true
+    elseif state == false then
+        _G.w = false
+    end
+end)
+Button = Page2:CreateButton("Earrape", "Plays an ID in a loop", function()
+    while _G.w == true and wait() do
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/DH/main/Earrape"))()
+    end
+end)
+Labelend = Page2:CreateLabel("")
+Button = Page3:CreateButton("Fast Refresh", "Press R to refresh your character", function()
+    local value = true
+        if value == true then
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/RMA/main/Reset"))()
+        end
+end)
+Toggle = Page3:CreateToggle("Loop Text Sign", "Gives a Text Sign in a loop (gamepass required)", function(state)
+    if state == true then
+    _G.Txt = true
+    while _G.Txt == true do
+        wait(0.1)
+        game:GetService("ReplicatedStorage"):WaitForChild("RequestGamepassTool"):FireServer(17291420)
+    end
+    elseif state == false then
+        _G.Txt = false
+    end
+end)
+Toggle = Page3:CreateToggle("Loop Image Sign", "Gives an Image Sign in a loop (gamepass required)", function(state)
+    if state == true then
+    _G.Img = true
+    while _G.Img == true do
+        wait(0.1)
+        game:GetService("ReplicatedStorage"):WaitForChild("RequestGamepassTool"):FireServer(17291427)
+    end
+    elseif state == false then
+        _G.Img = false
+    end
+end)
+Toggle = Page3:CreateToggle("Loop Stop Sign", "Gives a Stop Sign in a loop (gamepass required)", function(state)
+    if state == true then
+    _G.Stp = true
+    while _G.Stp == true do
+        wait(0.1)
+        game:GetService("ReplicatedStorage"):WaitForChild("RequestGamepassTool"):FireServer(17290248)
+    end
+    elseif state == false then
+        _G.Stp = false
+    end
+end)
+Toggle = Page3:CreateToggle("Loop All Signs", "Gives all signs in a loop (gamepass required)", function(state)
+    if state == true then
+    _G.AllSigns = true
+    while _G.AllSigns == true do
+        wait(0.1)
+        game:GetService("ReplicatedStorage"):WaitForChild("RequestGamepassTool"):FireServer(17291420)
+        game:GetService("ReplicatedStorage"):WaitForChild("RequestGamepassTool"):FireServer(17290248)
+        game:GetService("ReplicatedStorage"):WaitForChild("RequestGamepassTool"):FireServer(17291427)
+    end
+    elseif state == false then
+        _G.AllSigns = false
+    end
+end)
+LabelRMA = Page3:CreateLabel("")
+local CopyDecalPlayer = ""
+TextBox = Page3:CreateBox("Type in target here", 10044538000, function(arg)
+    for _, player in ipairs(game.Players:GetPlayers()) do
+        if string.lower(arg) == string.lower(player.Name) or string.find(string.lower(player.Name), string.lower(arg)) or string.lower(arg) == string.lower(player.DisplayName) or string.find(string.lower(player.DisplayName), string.lower(arg)) then
+            CopyDecalPlayer = player.Name
+            break
+        end
+    end
+end)
+Button = Page3:CreateButton("Copy Image Sign Decal", "Copys the given player names img sign decal", function()
+    if CopyDecalPlayer then
+        local imageSign = game.Workspace:FindFirstChild(CopyDecalPlayer):FindFirstChild("Image Sign") or game.Players:FindFirstChild(CopyDecalPlayer).Backpack:FindFirstChild("Image Sign")
+        if imageSign then
+            local imageLabel = imageSign.Body.SurfaceDisplayGui.Frame:FindFirstChild("ImageLabel")
+            if imageLabel and imageLabel.Image and string.find(imageLabel.Image, "rbxassetid://") then
+                local startIndex = string.find(imageLabel.Image, "rbxassetid://") + #"rbxassetid://"
+                local id = string.sub(imageLabel.Image, startIndex)
+                setclipboard(id)
+            end
+        end
+    end
+end)
+LabelRMA = Page3:CreateLabel("Booths Utility")
+Button = Page3:CreateButton("Booth Sniper", "Makes you claim a free booth", function()
+    local value = true
+    if value == true then
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/RMA/main/Booth%20Sniper"))()
+    end
+end)
+Button = Page3:CreateButton("Abandon Booth", "Makes you abandon your booth", function()
+    local value = true
+    if value == true then
+        game:GetService("ReplicatedStorage"):WaitForChild("CustomiseBooth"):FireServer("Abandon")
+    end
+end)
+fakeText = ""
+fakeimageID = ""
+TextBox = Page3:CreateBox("Type text in here", 10044538000, function(targetFakeText)
+    fakeText = targetFakeText
+end)
+TextBox = Page3:CreateBox("Type imageID in here", 10044538000, function(targetFakeImageID)
+    fakeimageID = targetFakeImageID
+end)
+Button = Page3:CreateButton("Fake Booths", "Makes a fake claimed booth with false text", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/RMA/main/Fake%20Booth"))()
+end)
+LabelRMA = Page3:CreateLabel("Booth Customizatons")
+local function updateBoothText(text)
+    local r = game:GetService("ReplicatedStorage"):WaitForChild("CustomiseBooth")
+    r:FireServer("Update", {
+        DescriptionText = text,
+        ImageId = 0
+    })
+end
+TextBox = Page3:CreateBox("Instant booth text changer", 10044538000, function(arg)
+    updateBoothText(arg)
+end)
+local function updateBoothText(text)
+    local r = game:GetService("ReplicatedStorage"):WaitForChild("CustomiseBooth")
+    r:FireServer("Update", {
+        DescriptionText = text,
+        ImageId = 0
+    })
+end
+local function boothLiveText(boothText)
+    while _G.boothLiveTextToggle do
+        local text = ""
+        for i = 1, #boothText do
+            text = text .. string.sub(boothText, i, i)
+            updateBoothText(text)
+            wait(0.25)
+        end
+    end
+end
+Toggle = Page3:CreateToggle("Loop Booth Live Text", "Loops the booth text", function(state)
+    _G.boothLiveTextToggle = state
+    if state then
+        boothLiveText(TextBox:GetText())
+    end
+end)
+TextBox = Page3:CreateBox("Live booth text changer", 10044538000, function(boothText)
+    if _G.boothLiveTextToggle then
+        boothLiveText(boothText)
+    else
+        local text = ""
+        for i = 1, #boothText do
+            text = text .. string.sub(boothText, i, i)
+            updateBoothText(text)
+            wait(0.25)
+        end
+    end
+end)
+Button = Page3:CreateButton("Auto Player Stats", "Automatically gets the closest players stats", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/RMA/main/Auto%20Player%20Stats"))()
+end)
+local firstExecute = true
+TextBox = Page3:CreateBox("Player Stats Look-up (Takes a bit of time)", 10044538000, function(IDTarget)
+    if firstExecute == true then
+        game:GetService("ReplicatedStorage"):WaitForChild("RequestData"):FireServer("Details", game.Players.LocalPlayer)
+        firstExecute = false
+        wait(2)
+    end
+    local playerID = nil
+    for _, player in ipairs(game.Players:GetPlayers()) do
+        if string.find(player.Name:lower(), IDTarget:lower()) or string.find(player.DisplayName:lower(), IDTarget:lower()) then
+            if playerID ~= nil then
+                updateBoothText("Name matches with multiple people")
+                return
+            else
+                playerID = player
+            end
+        end
+    end
+    if playerID ~= nil then
+        
+        game:GetService("ReplicatedStorage"):WaitForChild("RequestData"):FireServer("Details", playerID)
+        
+        wait(0.5)
+        game.Players.LocalPlayer.PlayerGui.MainGui.DetailsFrame.Visible = false
+        wait(6)
+        
+        local ratingsGivenText = game.Players.LocalPlayer.PlayerGui.MainGui.DetailsFrame.RatingsGivenText
+        local ratingsGiven = ratingsGivenText.Text:sub(ratingsGivenText.Text:find("<b>Ratings Given: </b>") + 22)
+        
+        local ratingsReceivedText = game.Players.LocalPlayer.PlayerGui.MainGui.DetailsFrame.RatingsReceivedText
+        local ratingsReceived = ratingsReceivedText.Text:sub(ratingsReceivedText.Text:find("<b>Ratings Received: </b>") + 25)
+        
+        local serverRankingText = game.Players.LocalPlayer.PlayerGui.MainGui.DetailsFrame.ServerRankingText
+        local serverRanking = serverRankingText.Text:sub(serverRankingText.Text:find("<b>Server Ranking: </b>") + 23)
+        local leftNum, rightNum = string.match(serverRanking, "(%d+) of (%d+)")
+        if leftNum and rightNum then
+            serverRanking = leftNum .. "/" .. rightNum
+        end
+        
+        local avatarValueText = game.Players.LocalPlayer.PlayerGui.MainGui.DetailsFrame.AvatarValueText
+        local startIndex, endIndex = string.find(avatarValueText.Text, "<b>Avatar Value: </b>")
+        local avatarValue = string.sub(avatarValueText.Text, endIndex + 1)
+        avatarValue = string.sub(avatarValue, 1, string.find(avatarValue, " Robux") - 1)
+        
+        local name = "Name: " .. playerID.DisplayName .. "\n"
+        local age = "Agxe: " .. string.format("%.2f", playerID.AccountAge / 365) .. " Years\n"
+        local value = "Value: " .. avatarValue .. " rbx\n"
+        local ranking = "Ranking: " .. serverRanking .. "\n"
+        local ratingsReceivedStr = "Ratings Received: " .. ratingsReceived .. "\n"
+        local ratingsGivenStr = "Ratings Given: " .. ratingsGiven
+        
+        local totalCharacters = string.len(name .. age .. value .. ranking .. ratingsReceivedStr .. ratingsGivenStr)
+        while totalCharacters > 128 do
+            name = name:sub(1, #name - 1)
+            totalCharacters = string.len(name .. age .. value .. ranking .. ratingsReceivedStr .. ratingsGivenStr)
+        end
+        
+        updateBoothText(name .. "\n" .. age .. value .. ranking .. ratingsReceivedStr .. ratingsGivenStr)
+    end
+end)
+LabelRMA = Page3:CreateLabel("Wordle")
+Button = Page3:CreateButton("Wordle Booth", "Commands: .start / .reset", function()
+    local value = true
+    if value == true then
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/RMA/main/Wordle%20Booth"))()
+    end
+end)
+LabelRMA = Page3:CreateLabel("Blacklist")
+Toggle = Page3:CreateToggle("Anti Blacklist toggler", "Toggles the anti blacklist!", function(state)
+    if state == true then
+        _G.AntiBlacklistLoop = true
+    elseif state == false then
+        _G.AntiBlacklistLoop = false
+    end
+end)
+Button = Page3:CreateButton("Loop Anti Blacklist", "loops anti blacklist!", function()
+    while _G.AntiBlacklistLoop == true do
+        local Barrier = "BarrierFor"
+        for _, child in ipairs(workspace:GetDescendants()) do
+            if string.find(child.Name, Barrier) then
+                child:Destroy()
+            end
+        end
+        wait(0.6)
+    end
+end)
+local searchString = ""
+TextBox = Page3:CreateBox("Type in target here", 10044538000, function(arg)
+    searchString = arg
+end)
+Button = Page3:CreateButton("Blacklist Target", "Blacklists the target given!", function()
+    for _, player in ipairs(game.Players:GetPlayers()) do
+        wait()
+        if string.find(player.Name:lower(), searchString:lower()) or string.find(player.DisplayName:lower(), searchString:lower()) then
+            game:GetService("ReplicatedStorage"):WaitForChild("CustomiseBooth"):FireServer("AddBlacklist", player.Name)
+        end
+    end
+end)
+_G.blacklistAll = true
+Button = Page3:CreateButton("Blacklist All", "Blacklists everyone", function()
+    while _G.blacklistAll == true do
+        wait(2)
+        for _, player in ipairs(game.Players:GetPlayers()) do
+            wait()
+            game:GetService("ReplicatedStorage"):WaitForChild("CustomiseBooth"):FireServer("AddBlacklist", player.Name)
+            if player.Name == game.Players.LocalPlayer.Name then
+                game:GetService("ReplicatedStorage"):WaitForChild("CustomiseBooth"):FireServer("RemoveBlacklist", game.Players.LocalPlayer.Name)
+            end
+        end
+    end
+end)
+Button = Page3:CreateButton("Unblacklist All", "Unblacklists everyone", function()
+    _G.blacklistAll = false
+    if _G.blacklistAll == false then
+        for _, player in ipairs(game.Players:GetPlayers()) do
+            wait()
+            game:GetService("ReplicatedStorage"):WaitForChild("CustomiseBooth"):FireServer("RemoveBlacklist", player.Name)
+        end
+    end
+end)
+LabelRMA = Page3:CreateLabel("Ratings! Cooldown: ca. 1 minute")
+Page3:CreateSlider("Rated Stars", 1, 5, function(value4)
+    g = value4
+end)
+Button = Page3:CreateButton("Rate Everyone", "Rates everyone! Using the Slider!", function()
+    local value = true
+    if value == true then
+        for _, player in ipairs(game:GetService("Players"):GetPlayers()) do
+            if player.Name ~= "Lvs_y" and player.Name ~= game.Players.LocalPlayer then
+                game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(player, g)
+            end
+        end
+    end
+end)
+LabelRMA = Page3:CreateLabel("Doesn't need the full user or display name!")
+local playerName = ""
+local autoRateStars = 0
+TextBox = Page3:CreateBox("Type in target here", 10044538000, function(arg)
+    for _, player in ipairs(game:GetService("Players"):GetPlayers()) do
+        if string.lower(arg) == string.lower(player.Name) or string.find(string.lower(player.Name), string.lower(arg)) or string.lower(arg) == string.lower(player.DisplayName) or string.find(string.lower(player.DisplayName), string.lower(arg)) then
+            playerName = player.Name
+            break
+        end
+    end
+end)
+TextBox = Page3:CreateBox("Type Auto Rated stars amount (1 - 5 stars)", 10044538000, function(arg)
+    autoRateStars = tonumber(arg) or 0
+end)
+Toggle = Page3:CreateToggle("Auto Rater toggler", "Switch the auto rater on and off", function(state)
+    if state == true then
+        _G.autoRaterToggle = true
+    elseif state == false then
+        _G.autoRaterToggle = false
+    end
+end)
+Button = Page3:CreateButton("Auto Rater", "Click to auto rate the target", function()
+    while _G.autoRaterToggle == true and wait(10) do
+        if _G.autoRaterToggle and playerName and autoRateStars >= 1 and autoRateStars <= 5 then
+            autoRateStars = math.floor(autoRateStars)
+            if player.Name ~= "Lvs_y" and player.Name ~= game.Players.LocalPlayer then
+                game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(playerName, autoRateStars)
+            end
+        end
+    end
+end)
+TextBox = Page3:CreateBox("Type Auto Rated stars amount (1 - 5 stars)", 10044538000, function(arg)
+    topRatedStars = arg
+end)
+Toggle = Page3:CreateToggle("Toggle Rate Top Rated", "Toggle rates the top rated person in server", function(state)
+    if state == true then
+        _G.loopRateTopRated = true
+    elseif state == false then
+        _G.loopRateTopRated = false
+    end
+end)
+Button = Page3:CreateButton("Rate Top Rated", "Rates the top rated person", function()
+    while _G.loopRateTopRated == true and wait(10) do
+        local function searchForPlayerWithAvatarID(avatarID)
+            for _, player in ipairs(game:GetService("Players"):GetPlayers()) do
+                local characterAppearance = player.CharacterAppearance
+                if characterAppearance and string.find(characterAppearance, avatarID) then
+                    game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(player, topRatedStars)
+                    return player.Name
+                end
+            end
+        end
+        local avatarImage = game.Workspace["Locked Advertisement Board"].Screen2.SurfaceGui2.Frame.AvatarImage
+        if avatarImage and avatarImage.Image and string.find(avatarImage.Image, "rbxthumb://type=AvatarBust&id=") then
+            local startIndex = string.find(avatarImage.Image, "rbxthumb://type=AvatarBust&id=") + #"rbxthumb://type=AvatarBust&id="
+            local endIndex = string.find(avatarImage.Image, "&w=180&h=180") - 1
+            local avatarID = string.sub(avatarImage.Image, startIndex, endIndex)
+            searchForPlayerWithAvatarID(avatarID)
+        end
+    end
+end)
+Labelend = Page3:CreateLabel("")
+Toggle = Page3:CreateToggle("Auto Rate toggler", "Loop activates 'Rating Bomber' and 'Custom Rating'", function(state)
+    if state == true then
+        _G.bombCustom = true
+    else
+        _G.bombCustom = false
+    end
+end)
+Button = Page3:CreateButton("Rating Bomber", "Makes everyones last rating weird", function()
+    while _G.bombCustom == true and wait(10) do
+        for _, player in ipairs(game:GetService("Players"):GetPlayers()) do
+            if player.Name ~= "Lvs_y" and player.Name ~= game.Players.LocalPlayer then
+                game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(player, 4.69696969696969)
+            end
+        end
+    end
+end)
+local baseNumber
+local stringNumber
+TextBox = Page3:CreateBox("Type in number here (1 - 5)", 10044538000, function(arg)
+    local split = string.split(arg, ".")
+    baseNumber = tonumber(split[1])
+    stringNumber = split[2] or ""
+end)
+Button = Page3:CreateButton("Custom Rating", "Must be between 1 - 5 and 14 digits after '.'", function()
+    if baseNumber and baseNumber >= 1 and baseNumber <= 5 and string.len(stringNumber) <= 14 then
+        while _G.bombCustom == true and wait(10) do
+            for _, player in ipairs(game:GetService("Players"):GetPlayers()) do
+                if player.Name ~= "Lvs_y" and player.Name ~= game.Players.LocalPlayer then
+                    game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(player, baseNumber + (stringNumber / (10 ^ string.len(stringNumber))))
+                end
+            end
+        end
+    end
+end)
+Labelend = Page3:CreateLabel("")
+Toggle = Page4:CreateToggle("Toggle Auto Attack & Mine", "Toggles auto attacking and mining", function(state)
+    if state == true then
+        autotool = true
+    elseif state == false then
+        autotool = false
+    end
+end)
+Button = Page4:CreateButton("Auto Attack & Mine", "Auto attacks and mines!", function()
+    while autotool == true do
+        wait()
+        workspace.Remotes.UseItem:FireServer()
+    end
+end)
+Labelend = Page4:CreateLabel("")
+word = ""
+guessedWord = ""
+numGuesses = 0
+maxGuesses = 6
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/Wordle"))()
+Button = Page9:CreateButton("Play Wordle", "Click to start playing Wordle", newWord)
+TextBox = Page9:CreateBox("Enter a 5-letter word:", 10044538000, evaluateGuess)
+Label = Page9:CreateLabel("")
+    Label:UpdateLabel("Click 'Play Wordle' to start playing")
+Label1 = Page9:CreateLabel("Evaluation:")
+Button = Page9:CreateButton("Switch RigType", "Changes your RigType to R15 or R6 (destroys haircombos)", function()
+    local avs = game:GetService("AvatarEditorService")
+    if game.Players.LocalPlayer.Character.Humanoid.RigType == Enum.HumanoidRigType.R6 then
+        avs:PromptSaveAvatar(game.Players.LocalPlayer.Character.Humanoid.HumanoidDescription,Enum.HumanoidRigType.R15)
+    end
+    if game.Players.LocalPlayer.Character.Humanoid.RigType == Enum.HumanoidRigType.R15 then
+        avs:PromptSaveAvatar(game.Players.LocalPlayer.Character.Humanoid.HumanoidDescription,Enum.HumanoidRigType.R6)
+    end
+end)
+Button = Page9:CreateButton("Tiny", "R15 ONLY! Make your scale values the lowest", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/Tiny"))()
+end)
+Labelend = Page9:CreateLabel("")
+Page9:CreateSlider("Speed Changer", 15, 150, function(value5)
+end)
+Button = Page9:CreateButton("Ball", "Makes you be a ball. | Normal speed is 30", function()
+    local value = true
+        if value == true then
+            SPEED_MULTIPLIER = value5 or 15
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/Ball"))()
+        end
+end)
+LabelNPC = Page9:CreateLabel("NPC | Functions")
+Toggle = Page9:CreateToggle("NPC Walk toggler", "Toggles if you walk like an NPC", function(state)
+    if state == true then
+        buttonActive = true
+        _G.Walk = true
+    else
+        buttonActive = false
+        _G.Walk = false
+    end
+end)
+Page9:CreateSlider("Radius", 5, 250, function(value6)
+    SEARCH_RADIUS = value6 or 15
+end)
+Page9:CreateSlider("Walk Cooldown", 1, 10, function(value7)
+    WALK_COOLDOWN = value7 or 1
+end)
+Button = Page9:CreateButton("NPC Walk", "Makes you walk like an NPC", function()
+    if buttonActive == true then
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/NPC%20Walk"))()
+    end
+end)
+LabelNPC = Page9:CreateLabel("NPC | Diaog")
+Button = Page9:CreateButton("Greetings", "Gives out NPC greetings", function()
+    value = true
+    if value == true then
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/NPC%20Greetings"))()
+    end
+end)
+Button = Page9:CreateButton("Quests", "Gives out NPC quests", function()
+    value = true
+    if value == true then
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/NPC%20Quests"))()
+    end
+end)
+Button = Page9:CreateButton("Questions", "Gives out NPC questions", function()
+    value = true
+    if value == true then
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/NPC%20Questions"))()
+    end
+end)
+Button = Page9:CreateButton("Help requests", "Gives out NPC help requests", function()
+    value = true
+    if value == true then
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/NPC%20Help"))()
+    end
+end)
+Button = Page9:CreateButton("Goodbyes", "Gives out NPC goodbyes", function()
+    value = true
+    if value == true then
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/NPC%20Goodbyes"))()
+    end
+end)
+Button = Page9:CreateButton("Shame", "Gives out NPC shame", function()
+    value = true
+    if value == true then
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/NPC%20Shame"))()
+    end
+end)
+Button = Page9:CreateButton("Thanks", "Gives out NPC thanks", function()
+    value = true
+    if value == true then
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/NPC%20Thanks"))()
+    end
+end)
+Labelend = Page9:CreateLabel("")
+
+LabelCreds = Page10:CreateLabel("Dev: Lvs_y")
+LabelCreds = Page10:CreateLabel("Tester: Lvs_y | INXANITTY | Mn9xr")
+LabelCreds = Page10:CreateLabel("NPC Dialog: ChatGPT")
