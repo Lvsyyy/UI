@@ -18,6 +18,7 @@ LabelLog = PageULog:CreateLabel(" ◾ Added current Date upon execution")
 LabelLog = PageULog:CreateLabel(" ◾ Added Underground War tab")
 LabelLog = PageULog:CreateLabel(" ◾ Added Kill Aura in UW")
 LabelLog = PageULog:CreateLabel(" ◾ Added Sniper utlities for UW")
+LabelLog = PageULog:CreateLabel(" ◾ Added Time Reversal in Fun tab")
 
 LabelLog = PageULog:CreateLabel("Update Log 5")
 LabelLog = PageULog:CreateLabel(" ◾ Added Tool Kill toggle & Loop")
@@ -705,6 +706,41 @@ Button = PageFun:CreateButton("Switch RigType", "Changes your RigType to R15 or 
 end)
 Button = PageFun:CreateButton("Tiny", "R15 ONLY! Make your scale values the lowest", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/Tiny"))()
+end)
+Labelend = PageFun:CreateLabel("")
+local timeLimit
+TextBox = Page5:CreateBox("Type in Time Reversal Length", 10044538000, function(arg)
+    timeLimit = arg
+end)
+Button = PageFun:CreateButton("Reverse Time", "Reverses time itself for your character", function()
+    local positions = {}
+    local timee = 0
+    local chara = game:GetService("Players").LocalPlayer.Character
+    local hrt = chara.HumanoidRootPart
+    local grav = game.Workspace.Gravity
+    if timeLimit == 0 then
+        timeLimit = 0.05
+    end
+    if timeLimit == nil then
+        timeLimit = 3
+    end
+    while wait(0.05) do
+        timee = timee + 0.05
+        table.insert(positions, 1, hrt.CFrame)
+        if timee >= timeLimit then
+            break
+        end
+    end
+    if timee >= timeLimit then
+        for i = 1, #positions do
+            grav = 0
+            chara.Animate.Disabled = true
+            hrt.CFrame = positions[i]
+            wait(0.005)
+        end
+        chara.Animate.Disabled = false
+        grav = 196.19999694824
+    end
 end)
 Labelend = PageFun:CreateLabel("")
 PageFun:CreateSlider("Speed Changer", 15, 150, function(value5)
