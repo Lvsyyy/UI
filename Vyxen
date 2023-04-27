@@ -725,12 +725,24 @@ Button = PageFun:CreateButton("Reverse Time", "Reverses time itself for your cha
     if timeLimit == nil then
         timeLimit = 3
     end
-    while wait(timespeed) do
+    local function addPositions()
+        while wait(timespeed) do
+            if timee >= timeLimit then
+                break
+            end
+            table.insert(positions, 1, hrt.CFrame)
+        end
+    end
+    coroutine.wrap(addPositions)()
+    while wait(0.5) do
         if timee >= timeLimit then
             break
         end
-        timee = timee + timespeed
-        table.insert(positions, 1, hrt.CFrame)
+        timee = timee + 0.5
+        print(timee)
+    end
+    while #positions < 1 do
+        wait()
     end
     if timee >= timeLimit then
         for i = 1, #positions do
