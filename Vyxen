@@ -715,10 +715,11 @@ end)
 Button = PageFun:CreateButton("Reverse Time", "Reverses time itself for your character", function()
     local positions = {}
     local timee = 0
-    local timespeed = 0.05
+    local timespeed = 0.005
     local chara = game:GetService("Players").LocalPlayer.Character
     local hrt = chara.HumanoidRootPart
     local grav = game.Workspace.Gravity
+    local timeLimit = tonumber(timeLimit)
     if timeLimit < timespeed then
         timeLimit = timespeed
     end
@@ -746,11 +747,13 @@ Button = PageFun:CreateButton("Reverse Time", "Reverses time itself for your cha
     if timee >= timeLimit then
         for i = 1, #positions do
             grav = 0
+            chara.Humanoid.WalkSpeed = 0
             hrt.CFrame = positions[i]
             wait()
         end
     end
     wait(timeLimit)
+    chara.Humanoid.WalkSpeed = 16
     grav = 196.19999694824
 end)
 Labelend = PageFun:CreateLabel("")
