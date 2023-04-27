@@ -715,32 +715,32 @@ end)
 Button = PageFun:CreateButton("Reverse Time", "Reverses time itself for your character", function()
     local positions = {}
     local timee = 0
+    local timespeed = 0.05
     local chara = game:GetService("Players").LocalPlayer.Character
     local hrt = chara.HumanoidRootPart
     local grav = game.Workspace.Gravity
-    if timeLimit == 0 then
-        timeLimit = 0.05
+    if timeLimit < timespeed then
+        timeLimit = timespeed
     end
     if timeLimit == nil then
         timeLimit = 3
     end
-    while wait(0.05) do
-        timee = timee + 0.05
-        table.insert(positions, 1, hrt.CFrame)
+    while wait(timespeed) do
         if timee >= timeLimit then
             break
         end
+        timee = timee + timespeed
+        table.insert(positions, 1, hrt.CFrame)
     end
     if timee >= timeLimit then
         for i = 1, #positions do
             grav = 0
-            chara.Animate.Disabled = true
             hrt.CFrame = positions[i]
-            wait(0.005)
+            wait()
         end
-        chara.Animate.Disabled = false
-        grav = 196.19999694824
     end
+    wait(timeLimit)
+    grav = 196.19999694824
 end)
 Labelend = PageFun:CreateLabel("")
 PageFun:CreateSlider("Speed Changer", 15, 150, function(value5)
