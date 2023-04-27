@@ -739,7 +739,6 @@ Button = PageFun:CreateButton("Reverse Time", "Reverses time itself for your cha
             break
         end
         timee = timee + 0.5
-        print(timee)
     end
     while #positions < 1 do
         wait()
