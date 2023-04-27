@@ -608,11 +608,21 @@ Button = Page4:CreateButton("Auto Attack & Mine", "Auto attacks and mines!", fun
 end)
 Labelend = Page4:CreateLabel("")
 Button = Page5:CreateButton("Fast Sniper", "Makes your sniper reload faster indefinitely", function()
-    local player = game:GetService("Players").LocalPlayer.Character
-    player:WaitForChild("Sniper").ChildAdded:Connect(function(child)
-        wait()
-        child:Destroy()
-    end)
+    local localplr = game:GetService("Players").LocalPlayer
+    while wait(0.05) do
+        for _, item in pairs(localplr.Character:GetDescendants()) do
+            if item.Name == "DB" then
+                wait()
+                item:Destroy()
+            end
+        end
+        for _, item in pairs(localplr.Backpack:GetDescendants()) do
+            if item.Name == "DB" then
+                wait()
+                item:Destroy()
+            end
+        end
+    end
 end)
 Toggle = Page5:CreateToggle("Aimbot & Full Auto Toggler", "Toggles the aimbot and full auto state", function(state)
     if state == true then
