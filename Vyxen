@@ -709,7 +709,7 @@ Button = PageFun:CreateButton("Tiny", "R15 ONLY! Make your scale values the lowe
 end)
 Labelend = PageFun:CreateLabel("")
 local timeLimit
-TextBox = Page5:CreateBox("Type in Time Reversal Length", 10044538000, function(arg)
+TextBox = PageFun:CreateBox("Type in Time Reversal Length", 10044538000, function(arg)
     timeLimit = arg
 end)
 Button = PageFun:CreateButton("Reverse Time", "Reverses time itself for your character", function()
