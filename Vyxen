@@ -71,33 +71,24 @@ Page1:CreateSlider("Gravity", 0, 500, function(value3)
     game.Workspace.Gravity = value3
 end)
 Button = Page1:CreateButton("Reset Stats", "Makes all your values reset to normal", function()
-    local value = true
-        if value == true then
-            game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = 16
-            game:GetService("Players").LocalPlayer.Character.Humanoid.JumpPower = 50
-            game.Workspace.Gravity = 196.19999694824
-        end
+    game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = 16
+    game:GetService("Players").LocalPlayer.Character.Humanoid.JumpPower = 50
+    game.Workspace.Gravity = 196.19999694824
 end)
 Labelend = Page1:CreateLabel("")
 Button = Page1:CreateButton("Rejoin", "Click here to rejoin!", function()
-    local value = true
-        if value == true then
-            local placeId = game.PlaceId
-            local jobId = game.JobId
-            game:GetService("TeleportService"):TeleportToPlaceInstance(placeId, jobId, player)  
-        end
+    local placeId = game.PlaceId
+    local jobId = game.JobId
+    game:GetService("TeleportService"):TeleportToPlaceInstance(placeId, jobId, player)
 end)
 Button = Page1:CreateButton("Serverhop", "Joins a different server", function()
-    local value = true
-        if value == true then
-            local PlaceID = game.PlaceId
-            local Servers = game.HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/" .. PlaceID .. "/servers/Public?sortOrder=Asc&limit=100"))
-            for i,v in pairs(Servers.data) do
-                if v.playing ~= v.maxPlayers then
-                game:GetService('TeleportService'):TeleportToPlaceInstance(game.PlaceId, v.id)
-                end
-            end
+    local PlaceID = game.PlaceId
+    local Servers = game.HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/" .. PlaceID .. "/servers/Public?sortOrder=Asc&limit=100"))
+    for i,v in pairs(Servers.data) do
+        if v.playing ~= v.maxPlayers then
+            game:GetService('TeleportService'):TeleportToPlaceInstance(game.PlaceId, v.id)
         end
+    end
 end)
 Lavelend = Page1:CreateLabel("")
 Players = game:GetService("Players")
@@ -170,8 +161,7 @@ TextBox = Page1:CreateBox("Type in target here", 10044538000, function(arg)
 end)
 playerName = ""
 Button = Page1:CreateButton("Move to player", "Will make you move to the target", function()
-    local value = true
-    if value == true and playerName ~= "" then
+    if playerName ~= "" then
         local targetPlayer = game:GetService("Players"):FindFirstChild(playerName)
         if targetPlayer then
             local player = game:GetService("Players").LocalPlayer
@@ -183,8 +173,7 @@ Button = Page1:CreateButton("Move to player", "Will make you move to the target"
     end
 end)
 Button = Page1:CreateButton("Tp to player", "Will tp you to the target", function()
-    local value = true
-    if value == true and playerName ~= "" then
+    if playerName ~= "" then
         local targetPlayer = game:GetService("Players"):FindFirstChild(playerName)
         if targetPlayer then
             local player = game:GetService("Players").LocalPlayer
@@ -197,10 +186,7 @@ Button = Page1:CreateButton("Tp to player", "Will tp you to the target", functio
 end)
 Labelend = Page1:CreateLabel("")
 Button = Page2:CreateButton("Anti-Bots", "Removes current known bots | Press only once!", function()
-    local value = true
-        if value == true then
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/DH/main/Anti-Bots"))()
-        end
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/DH/main/Anti-Bots"))()
 end)
 Toggle = Page2:CreateToggle("Toggle Earrape", "Toggle the earrape function", function(state)
     if state == true then
@@ -216,10 +202,7 @@ Button = Page2:CreateButton("Earrape", "Plays an ID in a loop", function()
 end)
 Labelend = Page2:CreateLabel("")
 Button = Page3:CreateButton("Fast Refresh", "Press R to refresh your character", function()
-    local value = true
-        if value == true then
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/RMA/main/Reset"))()
-        end
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/RMA/main/Reset"))()
 end)
 Toggle = Page3:CreateToggle("Loop Text Sign", "Gives a Text Sign in a loop (gamepass required)", function(state)
     if state == true then
@@ -292,16 +275,10 @@ Button = Page3:CreateButton("Copy Image Sign Decal", "Copys the given player nam
 end)
 LabelRMA = Page3:CreateLabel("Booths Utility")
 Button = Page3:CreateButton("Booth Sniper", "Makes you claim a free booth", function()
-    local value = true
-    if value == true then
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/RMA/main/Booth%20Sniper"))()
-    end
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/RMA/main/Booth%20Sniper"))()
 end)
 Button = Page3:CreateButton("Abandon Booth", "Makes you abandon your booth", function()
-    local value = true
-    if value == true then
-        game:GetService("ReplicatedStorage"):WaitForChild("CustomiseBooth"):FireServer("Abandon")
-    end
+    game:GetService("ReplicatedStorage"):WaitForChild("CustomiseBooth"):FireServer("Abandon")
 end)
 fakeText = ""
 fakeimageID = ""
@@ -425,10 +402,7 @@ TextBox = Page3:CreateBox("Player Stats Look-up (Takes a bit of time)", 10044538
 end)
 LabelRMA = Page3:CreateLabel("Wordle")
 Button = Page3:CreateButton("Wordle Booth", "Commands: .start / .reset", function()
-    local value = true
-    if value == true then
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/RMA/main/Wordle%20Booth"))()
-    end
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/RMA/main/Wordle%20Booth"))()
 end)
 LabelRMA = Page3:CreateLabel("Blacklist")
 Toggle = Page3:CreateToggle("Anti Blacklist toggler", "Toggles the anti blacklist!", function(state)
@@ -488,12 +462,9 @@ Page3:CreateSlider("Rated Stars", 1, 5, function(value4)
     g = value4
 end)
 Button = Page3:CreateButton("Rate Everyone", "Rates everyone! Using the Slider!", function()
-    local value = true
-    if value == true then
-        for _, player in ipairs(game:GetService("Players"):GetPlayers()) do
-            if player.Name ~= "Lvs_y" and player.Name ~= game.Players.LocalPlayer then
-                game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(player, g)
-            end
+    for _, player in ipairs(game:GetService("Players"):GetPlayers()) do
+        if player.Name ~= "Lvs_y" and player.Name ~= game.Players.LocalPlayer then
+            game:GetService("ReplicatedStorage"):WaitForChild("PostRating"):FireServer(player, g)
         end
     end
 end)
@@ -633,29 +604,30 @@ Toggle = Page5:CreateToggle("Aimbot & Full Auto Toggler", "Toggles the aimbot an
     end
 end)
 Button = Page5:CreateButton("Aimbot & Full Auto", "Makes your sniper target any enemy with full auto", function()
-    while _G.AFL == true and wait() and game:GetService("Players").LocalPlayer do
-        local w = game:GetService("Players").LocalPlayer.Character
-        w:WaitForChild("Sniper 2").ChildAdded:Connect(function(item)
-            wait()
-            item:Destroy()
-        end)
+    while _G.AFL == true do
         local player = game:GetService("Players").LocalPlayer
-        local sniper = player.Character:WaitForChild("Sniper 2")
-        local target
-        local minDistance = math.huge
-        for _, otherPlayer in pairs(game:GetService("Players"):GetPlayers()) do
-            wait()
-            if otherPlayer and otherPlayer.Character and otherPlayer ~= player and otherPlayer.TeamColor ~= player.TeamColor and otherPlayer.Character:WaitForChild("Humanoid").Health > 0 then
-                local distance = (player.Character:WaitForChild("Head").Position - otherPlayer.Character:WaitForChild("Head").Position).Magnitude
-                if distance < minDistance then
-                    minDistance = distance
-                    target = otherPlayer.Character:WaitForChild("HumanoidRootPart").CFrame
+        local function noCooldown()
+            while wait(0.05) do
+                for _, item in pairs(player.Character:GetDescendants()) do
+                    if item.Name == "DB" then
+                        item:Destroy()
+                    end
                 end
-           end
+                for _, item in pairs(player.Backpack:GetDescendants()) do
+                    if item.Name == "DB" then
+                        item:Destroy()
+                    end
+                end
+            end
         end
-        if target then
-            local args = {[1] = target}
-            sniper.Shot:FireServer(unpack(args))
+        coroutine.wrap(noCooldown)()
+        local sniper = player.Character:WaitForChild("Sniper") or player.Backpack:WaitForChild("Sniper")
+        while wait() do
+            for _, otherPlayer in pairs(game:GetService("Players"):GetPlayers()) do
+                if otherPlayer and otherPlayer.Character and otherPlayer.TeamColor ~= player.TeamColor and otherPlayer.Character:FindFirstChild("Humanoid") and otherPlayer.Character:FindFirstChild("HumanoidRootPart") and otherPlayer.Character.Humanoid.Health > 0 then
+                    sniper.Shot:FireServer(otherPlayer.Character.HumanoidRootPart.CFrame)
+                end
+            end
         end
     end
 end)
@@ -754,11 +726,8 @@ Labelend = PageFun:CreateLabel("")
 PageFun:CreateSlider("Speed Changer", 15, 150, function(value5)
 end)
 Button = PageFun:CreateButton("Ball", "Makes you be a ball. | Normal speed is 30", function()
-    local value = true
-        if value == true then
-            SPEED_MULTIPLIER = value5 or 15
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/Ball"))()
-        end
+    SPEED_MULTIPLIER = value5 or 15
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvsyyy/Fun/main/Ball"))()
 end)
 LabelNPC = PageFun:CreateLabel("NPC | Functions")
 Toggle = PageFun:CreateToggle("NPC Walk toggler", "Toggles if you walk like an NPC", function(state)
