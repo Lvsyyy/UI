@@ -19,6 +19,8 @@ LabelLog = PageULog:CreateLabel(" ◾ Added Underground War tab")
 LabelLog = PageULog:CreateLabel(" ◾ Added Kill Aura in UW")
 LabelLog = PageULog:CreateLabel(" ◾ Added Sniper utlities for UW")
 LabelLog = PageULog:CreateLabel(" ◾ Added Time Reversal in Fun tab")
+LabelLog = PageULog:CreateLabel(" ◾ Added Show Game Name")
+LabelLog = PageULog:CreateLabel(" ◾ Added Switch Languages")
 
 LabelLog = PageULog:CreateLabel("Update Log 5")
 LabelLog = PageULog:CreateLabel(" ◾ Added Tool Kill toggle & Loop")
@@ -61,19 +63,28 @@ LabelLog = PageULog:CreateLabel(" ◾ Fixed Loop Anti Blacklist")
 LabelLog = PageULog:CreateLabel(" ◾ Added Promocode Adventures")
 LabelLog = PageULog:CreateLabel(" ◾ Added Toggle to earrape")
 
-Page1:CreateSlider("Walkspeed", 1, 100, function(value)
-    game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = value
+Toggle = Page1:CreateToggle("Show Game Name", "Toggle show the games name", function(state)
+    if state == true then
+        local shf = game:GetService("CoreGui").RobloxGui.ScreenshotHudFrame
+        local expname = shf.ScreenshotOverlay.ExperienceName
+        shf.Visible = true
+        expname.Visible = true
+        expname.AnchorPoint = Vector2.new(0, 1)
+        expname.Font = "Fantasy"
+        expname.TextStrokeTransparency = 0
+        expname.TextXAlignment = "Center"
+        expname.ZIndex = 2
+        shf.ScreenshotOverlay.ImageLabel.Visible = false
+    elseif state == false then
+        local shf = game:GetService("CoreGui").RobloxGui.ScreenshotHudFrame
+        shf.Visible = false
+    end
 end)
-Page1:CreateSlider("Jumppower", 1, 500, function(value2)
-    game:GetService("Players").LocalPlayer.Character.Humanoid.JumpPower = value2
-end)
-Page1:CreateSlider("Gravity", 0, 500, function(value3)
-    game.Workspace.Gravity = value3
-end)
-Button = Page1:CreateButton("Reset Stats", "Makes all your values reset to normal", function()
-    game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = 16
-    game:GetService("Players").LocalPlayer.Character.Humanoid.JumpPower = 50
-    game.Workspace.Gravity = 196.19999694824
+Button = Page1:CreateButton("Switch Language", "Gives you a menu to switch the language", function()
+    local rmgui = game:GetService("CoreGui").RobloxGui
+    local children = rmgui:GetChildren()
+    local lastChild = children[#children]
+    lastChild.Visible = true
 end)
 Labelend = Page1:CreateLabel("")
 Button = Page1:CreateButton("Rejoin", "Click here to rejoin!", function()
@@ -148,6 +159,21 @@ Button = Page1:CreateButton("Tool Kill Loop", "Loop kills player given (tool req
             break
         end
     end
+end)
+Labelend = Page1:CreateLabel("")
+Page1:CreateSlider("Walkspeed", 1, 100, function(value)
+    game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = value
+end)
+Page1:CreateSlider("Jumppower", 1, 500, function(value2)
+    game:GetService("Players").LocalPlayer.Character.Humanoid.JumpPower = value2
+end)
+Page1:CreateSlider("Gravity", 0, 500, function(value3)
+    game.Workspace.Gravity = value3
+end)
+Button = Page1:CreateButton("Reset Stats", "Makes all your values reset to normal", function()
+    game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = 16
+    game:GetService("Players").LocalPlayer.Character.Humanoid.JumpPower = 50
+    game.Workspace.Gravity = 196.19999694824
 end)
 Labelend = Page1:CreateLabel("")
 TextBox = Page1:CreateBox("Type in target here", 10044538000, function(arg)
