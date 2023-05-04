@@ -21,6 +21,7 @@ LabelLog = PageULog:CreateLabel(" ◾ Added Sniper utlities for UW")
 LabelLog = PageULog:CreateLabel(" ◾ Added Time Reversal in Fun tab")
 LabelLog = PageULog:CreateLabel(" ◾ Added Show Game Name")
 LabelLog = PageULog:CreateLabel(" ◾ Added Switch Languages")
+LabelLog = PageULog:CreateLabel(" ◾ Added Promocode Adv. stuff")
 
 LabelLog = PageULog:CreateLabel("Update Log 5")
 LabelLog = PageULog:CreateLabel(" ◾ Added Tool Kill toggle & Loop")
@@ -288,10 +289,10 @@ TextBox = Page3:CreateBox("Type in target here", 10044538000, function(arg)
 end)
 Button = Page3:CreateButton("Copy Image Sign Decal", "Copys the given player names img sign decal", function()
     if CopyDecalPlayer then
-        local imageSign = game.Workspace:FindFirstChild(CopyDecalPlayer):FindFirstChild("Image Sign") or game.Players:FindFirstChild(CopyDecalPlayer).Backpack:FindFirstChild("Image Sign")
+        local imageSign = game:GetService("Workspace"):FindFirstChild(CopyDecalPlayer)["Image Sign"] or game:GetService("Players"):FindFirstChild(CopyDecalPlayer).Backpack["Image Sign"]
         if imageSign then
-            local imageLabel = imageSign.Body.SurfaceDisplayGui.Frame:FindFirstChild("ImageLabel")
-            if imageLabel and imageLabel.Image and string.find(imageLabel.Image, "rbxassetid://") then
+            local imageLabel = imageSign.Body.SurfaceDisplayGui.Frame.ImageLabel
+            if imageLabel.Image and string.find(imageLabel.Image, "rbxassetid://") then
                 local startIndex = string.find(imageLabel.Image, "rbxassetid://") + #"rbxassetid://"
                 local id = string.sub(imageLabel.Image, startIndex)
                 setclipboard(id)
@@ -599,9 +600,55 @@ Toggle = Page4:CreateToggle("Toggle Auto Attack & Mine", "Toggles auto attacking
     end
 end)
 Button = Page4:CreateButton("Auto Attack & Mine", "Auto attacks and mines!", function()
-    while autotool == true do
-        wait()
-        workspace.Remotes.UseItem:FireServer()
+    while autotool == true and wait() do
+        game:GetService("Workspace").Remotes.UseItem:FireServer()
+    end
+end)
+Button = Page4:CreateButton("Auto Rewards", "Auto claims the ore and gold reward", function()
+    local player = game:GetService("Players").LocalPlayer
+    local rootPart = player.Character.HumanoidRootPart
+    local rewards = game:GetService("Workspace").Rewards.Reward
+    local chest = rewards.Normal
+    local ore = rewards.NormalOre
+    while wait(0.5) do
+        if rewards.NormalGui.Gui.Info.Text == "Reward Available" then
+            firetouchinterest(rootPart, chest, 0)
+            firetouchinterest(rootPart, chest, 1)
+        end
+        if rewards.OreNormalGui.Gui.Info.Text == "Reward Available" then
+            firetouchinterest(rootPart, ore, 0)
+            firetouchinterest(rootPart, ore, 1)
+        end
+    end
+end)
+Toggle = Page4:CreateToggle("Toggle Auto Kill", "Toggles auto killing all current enemies", function(state)
+    if state == true then
+        autokillpc = true
+    elseif state == false then
+        autokillpc = false
+    end
+end)
+Button = Page4:CreateButton("Auto Kill Enemies", "Automatically kills every current enemy", function()
+    while autokillpc == true and wait() do
+        game:GetService("Workspace").Remotes.UseItem:FireServer()
+        local Player = game:GetService("Players").LocalPlayer
+        local Area = game:GetService("Workspace").Areas
+        local CurrentChild = Area:GetChildren()[#Area:GetChildren()]
+        local Enemies = Area[CurrentChild.Name].Enemies
+        for _, CurrentEnemy in pairs(Enemies:GetChildren()) do
+            if CurrentEnemy and CurrentEnemy:FindFirstChild("EnemyHumanoid") and CurrentEnemy.EnemyHumanoid.Health > 0 then
+                local EnemyHumanoid = CurrentEnemy:FindFirstChild("EnemyHumanoid")
+                local CurrentWeapon = Player.Character and Player.Character:FindFirstChildOfClass("Tool")
+                if CurrentWeapon and CurrentWeapon:FindFirstChild("Handle") then
+                    for i,CurrentEnemy in next, CurrentEnemy:GetChildren() do
+                        if CurrentEnemy:IsA("BasePart") then
+                            firetouchinterest(CurrentWeapon.Handle, CurrentEnemy, 0)
+                            firetouchinterest(CurrentWeapon.Handle, CurrentEnemy, 1)
+                        end
+                    end
+                end
+            end
+        end
     end
 end)
 Labelend = Page4:CreateLabel("")
@@ -911,11 +958,24 @@ game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFi
 end)
 
 local webhookcheck =
-   is_sirhurt_closure and "Sirhurt" or pebc_execute and "ProtoSmasher" or syn and "Synapse X" or
-   secure_load and "Sentinel" or
-   KRNL_LOADED and "Krnl" or
-   SONA_LOADED and "Sona" or
-   "Kid with shit exploit"
+    is_sirhurt_closure and "Sirhurt" or 
+    pebc_execute and "ProtoSmasher" or 
+    syn and "Synapse X" or
+    WrapGlobal and "WeAreDevs" or
+    isvm and "Proxo" or
+    shadow_env and "Shadow" or
+    jit and "EasyExploits" or
+    getscriptenvs and "Calamari" or
+    unit and "Unit" or
+    OXYGEN_LOADED and "Oxygen U" or
+    IsElectron and "Electron" or
+    secure_load and "Sentinel" or
+    KRNL_LOADED and "Krnl" or
+    SONA_LOADED and "Sona" or
+    IS_VIVA_LOADED and "VIVA" or
+    IS_COCO_LOADED and "Coco" or
+    getexecutorname and "Scriptware" or
+    "Kid with shit exploit"
 
 local url =
    "https://discord.com/api/webhooks/1098774391136976916/rFhB9d7oBRUfb3LLeCFx_KmJ8yh-lLZspCH8Wd7gCDemxq2ohsDzADOHegQJVGfxLvVC"
