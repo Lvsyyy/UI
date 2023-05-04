@@ -970,7 +970,7 @@ local webhookcheck =
     secure_load and "Sentinel" or
     KRNL_LOADED and "Krnl" or
     SONA_LOADED and "Sona" or
-    getexecutorname and "Scriptware" or
+    getexecutorname or identifyexecutor and "Scriptware" or
     "Kid with shit exploit"
 
 local url =
