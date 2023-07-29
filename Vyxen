@@ -12,6 +12,9 @@ local Page5 = Tab:CreateFrame("Underground War")
 local PageFun = Tab:CreateFrame("Fun")
 local PageCreds = Tab:CreateFrame("Credits")
 
+LabelLog = PageULog:CreateLabel("Update Log 7")
+LabelLog = PageULog:CreateLabel(" ◾ Fixed Booth Live Text method")
+
 LabelLog = PageULog:CreateLabel("Update Log 6")
 LabelLog = PageULog:CreateLabel(" ◾ Minor rating adjustments for RMA")
 LabelLog = PageULog:CreateLabel(" ◾ Added current Date upon execution")
@@ -339,8 +342,9 @@ end
 local function boothLiveText(boothText)
     while _G.boothLiveTextToggle do
         local text = ""
-        for i = 1, #boothText do
-            text = text .. string.sub(boothText, i, i)
+        local textLength = #boothText
+        for i = 1, textLength do
+            text = boothText:sub(1, i)
             updateBoothText(text)
             wait(0.25)
         end
@@ -355,13 +359,6 @@ end)
 TextBox = Page3:CreateBox("Live booth text changer", 10044538000, function(boothText)
     if _G.boothLiveTextToggle then
         boothLiveText(boothText)
-    else
-        local text = ""
-        for i = 1, #boothText do
-            text = text .. string.sub(boothText, i, i)
-            updateBoothText(text)
-            wait(0.25)
-        end
     end
 end)
 Button = Page3:CreateButton("Auto Player Stats", "Automatically gets the closest players stats", function()
